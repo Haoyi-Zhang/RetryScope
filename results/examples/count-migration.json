@@ -1,0 +1,319 @@
+{
+  "before": {
+    "id": "migration_before",
+    "config": {
+      "stack": "boto",
+      "mode": "native",
+      "scenario": "persistent",
+      "flag": "true",
+      "intent": {
+        "max_wire_attempts": 2,
+        "retryable_statuses": [
+          503
+        ],
+        "allow_body_recovery": false,
+        "allow_transport_retry": false,
+        "expected_payload_on_success": null,
+        "required_outcome": null,
+        "budget_s": null,
+        "time_scope": "observation",
+        "boundary": "body",
+        "provenance": "researcher-authored two-wire migration probe",
+        "tolerance_s": 0.02
+      },
+      "id": "migration_before",
+      "retries": {
+        "mode": "standard",
+        "max_attempts": 2
+      }
+    },
+    "seed": 401,
+    "phase": "example",
+    "versions": {
+      "boto3": "1.43.18",
+      "botocore": "1.43.18",
+      "requests": "2.32.5",
+      "urllib3": "2.7.0",
+      "httpx": "0.28.1",
+      "retrying": "1.4.2",
+      "smart_open": "7.6.1",
+      "huggingface_hub": "1.16.1",
+      "pip": "25.1.1"
+    },
+    "read_timeout_s": 0.08,
+    "effective_retries": {
+      "mode": "standard",
+      "total_max_attempts": 3
+    },
+    "requested_flag": "true",
+    "effective_flag": true,
+    "setup_s": 0.20386765700004617,
+    "operation_start_t": 1857.315104658,
+    "outcome": "error",
+    "exception": "ClientError",
+    "error_message": "An error occurred (InternalError) when calling the GetObject operation (reached max retries: 2): local fixture",
+    "operation_end_t": 1857.393010079,
+    "elapsed_s": 0.07790542099996856,
+    "headers_elapsed_s": null,
+    "start_t": 1857.315104658,
+    "quiescence_s": 0.07805622699993364,
+    "trace_complete": true,
+    "events": [
+      {
+        "t": 1857.318355412,
+        "kind": "arrival",
+        "index": 1,
+        "status": 503,
+        "path": "/local-bucket/key",
+        "method": "GET",
+        "range": null,
+        "body_fault": false,
+        "header_delay": 0.0
+      },
+      {
+        "t": 1857.318881997,
+        "kind": "headers_sent",
+        "index": 1,
+        "status": 503
+      },
+      {
+        "t": 1857.318905692,
+        "kind": "body_end",
+        "index": 1,
+        "bytes": 73,
+        "truncated": false
+      },
+      {
+        "t": 1857.318908334,
+        "kind": "handler_end",
+        "index": 1
+      },
+      {
+        "t": 1857.34735471,
+        "kind": "arrival",
+        "index": 2,
+        "status": 503,
+        "path": "/local-bucket/key",
+        "method": "GET",
+        "range": null,
+        "body_fault": false,
+        "header_delay": 0.0
+      },
+      {
+        "t": 1857.347462667,
+        "kind": "headers_sent",
+        "index": 2,
+        "status": 503
+      },
+      {
+        "t": 1857.347471724,
+        "kind": "body_end",
+        "index": 2,
+        "bytes": 73,
+        "truncated": false
+      },
+      {
+        "t": 1857.34747318,
+        "kind": "handler_end",
+        "index": 2
+      },
+      {
+        "t": 1857.392171889,
+        "kind": "arrival",
+        "index": 3,
+        "status": 503,
+        "path": "/local-bucket/key",
+        "method": "GET",
+        "range": null,
+        "body_fault": false,
+        "header_delay": 0.0
+      },
+      {
+        "t": 1857.392252311,
+        "kind": "headers_sent",
+        "index": 3,
+        "status": 503
+      },
+      {
+        "t": 1857.392260852,
+        "kind": "body_end",
+        "index": 3,
+        "bytes": 73,
+        "truncated": false
+      },
+      {
+        "t": 1857.392262112,
+        "kind": "handler_end",
+        "index": 3
+      }
+    ],
+    "wire_attempts": 3,
+    "cap_exceeded": false,
+    "check": {
+      "verdict": "mismatch",
+      "findings": [
+        {
+          "dimension": "attempts",
+          "observed": 3,
+          "limit": 2
+        }
+      ],
+      "wire_attempts": 3,
+      "hard_deadline_guarantee": false,
+      "capability": "finite-trace observation; no DNS/connect/read interruption guarantee"
+    }
+  },
+  "after": {
+    "id": "migration_after",
+    "config": {
+      "stack": "boto",
+      "mode": "native",
+      "scenario": "persistent",
+      "flag": "true",
+      "intent": {
+        "max_wire_attempts": 2,
+        "retryable_statuses": [
+          503
+        ],
+        "allow_body_recovery": false,
+        "allow_transport_retry": false,
+        "expected_payload_on_success": null,
+        "required_outcome": null,
+        "budget_s": null,
+        "time_scope": "observation",
+        "boundary": "body",
+        "provenance": "researcher-authored two-wire migration probe",
+        "tolerance_s": 0.02
+      },
+      "id": "migration_after",
+      "retries": {
+        "mode": "standard",
+        "total_max_attempts": 2
+      }
+    },
+    "seed": 401,
+    "phase": "example",
+    "versions": {
+      "boto3": "1.43.18",
+      "botocore": "1.43.18",
+      "requests": "2.32.5",
+      "urllib3": "2.7.0",
+      "httpx": "0.28.1",
+      "retrying": "1.4.2",
+      "smart_open": "7.6.1",
+      "huggingface_hub": "1.16.1",
+      "pip": "25.1.1"
+    },
+    "read_timeout_s": 0.08,
+    "effective_retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "requested_flag": "true",
+    "effective_flag": true,
+    "setup_s": 0.056202649999931964,
+    "operation_start_t": 1857.461702764,
+    "outcome": "error",
+    "exception": "ClientError",
+    "error_message": "An error occurred (InternalError) when calling the GetObject operation (reached max retries: 1): local fixture",
+    "operation_end_t": 1857.492586115,
+    "elapsed_s": 0.03088335100005679,
+    "headers_elapsed_s": null,
+    "start_t": 1857.461702764,
+    "quiescence_s": 0.03098556700001609,
+    "trace_complete": true,
+    "events": [
+      {
+        "t": 1857.463671825,
+        "kind": "arrival",
+        "index": 1,
+        "status": 503,
+        "path": "/local-bucket/key",
+        "method": "GET",
+        "range": null,
+        "body_fault": false,
+        "header_delay": 0.0
+      },
+      {
+        "t": 1857.464476066,
+        "kind": "headers_sent",
+        "index": 1,
+        "status": 503
+      },
+      {
+        "t": 1857.464506731,
+        "kind": "body_end",
+        "index": 1,
+        "bytes": 73,
+        "truncated": false
+      },
+      {
+        "t": 1857.46450887,
+        "kind": "handler_end",
+        "index": 1
+      },
+      {
+        "t": 1857.491817923,
+        "kind": "arrival",
+        "index": 2,
+        "status": 503,
+        "path": "/local-bucket/key",
+        "method": "GET",
+        "range": null,
+        "body_fault": false,
+        "header_delay": 0.0
+      },
+      {
+        "t": 1857.491900756,
+        "kind": "headers_sent",
+        "index": 2,
+        "status": 503
+      },
+      {
+        "t": 1857.491909586,
+        "kind": "body_end",
+        "index": 2,
+        "bytes": 73,
+        "truncated": false
+      },
+      {
+        "t": 1857.491910952,
+        "kind": "handler_end",
+        "index": 2
+      }
+    ],
+    "wire_attempts": 2,
+    "cap_exceeded": false,
+    "check": {
+      "verdict": "pass",
+      "findings": [],
+      "wire_attempts": 2,
+      "hard_deadline_guarantee": false,
+      "capability": "finite-trace observation; no DNS/connect/read interruption guarantee"
+    }
+  },
+  "comparison": {
+    "before": {
+      "verdict": "mismatch",
+      "findings": [
+        {
+          "dimension": "attempts",
+          "observed": 3,
+          "limit": 2
+        }
+      ],
+      "wire_attempts": 3,
+      "hard_deadline_guarantee": false,
+      "capability": "finite-trace observation; no DNS/connect/read interruption guarantee"
+    },
+    "after": {
+      "verdict": "pass",
+      "findings": [],
+      "wire_attempts": 2,
+      "hard_deadline_guarantee": false,
+      "capability": "finite-trace observation; no DNS/connect/read interruption guarantee"
+    },
+    "transition": "mismatch -> pass",
+    "interpretation": "conformance change, not automatic library-defect attribution"
+  }
+}

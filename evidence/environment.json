@@ -1,0 +1,159 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "cpu_available": 5,
+  "source_files": [
+    {
+      "module": "botocore.configprovider",
+      "distribution": "botocore",
+      "version": "1.43.18",
+      "sha256": "f3c568b5d42577a834dacfc594a71fdafa0186e0c748dcf2f34c8c42dab90f12",
+      "snapshot": "evidence/source-snapshots/botocore_configprovider.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/botocore/configprovider.py",
+      "bytes": 39084
+    },
+    {
+      "module": "botocore.retries.standard",
+      "distribution": "botocore",
+      "version": "1.43.18",
+      "sha256": "4959b913829e410934c06e748df37533538e24d562214d4d97019a67a39873ac",
+      "snapshot": "evidence/source-snapshots/botocore_retries_standard.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/botocore/retries/standard.py",
+      "bytes": 26568
+    },
+    {
+      "module": "botocore.args",
+      "distribution": "botocore",
+      "version": "1.43.18",
+      "sha256": "ff83b1fa726c68a872d7bf49d5d8c713fd6494a1d19fdb1de962798f9d5e436c",
+      "snapshot": "evidence/source-snapshots/botocore_args.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/botocore/args.py",
+      "bytes": 41200
+    },
+    {
+      "module": "botocore.response",
+      "distribution": "botocore",
+      "version": "1.43.18",
+      "sha256": "e2ee6f81ec35f5dae9879f5f5c600dca22b78a2c43cefb0dac3b8b894ce9d11d",
+      "snapshot": "evidence/source-snapshots/botocore_response.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/botocore/response.py",
+      "bytes": 7865
+    },
+    {
+      "module": "requests.models",
+      "distribution": "requests",
+      "version": "2.32.5",
+      "sha256": "32365d67893bb67c3ed67cf93ca4a18e63e6ab29342fa0dc8b09c59e06ff564e",
+      "snapshot": "evidence/source-snapshots/requests_models.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/requests/models.py",
+      "bytes": 35510
+    },
+    {
+      "module": "requests.adapters",
+      "distribution": "requests",
+      "version": "2.32.5",
+      "sha256": "f275f5d7781b6f5db7694b71d844e400dffa22c617f8cd9f4682c696e4c47119",
+      "snapshot": "evidence/source-snapshots/requests_adapters.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/requests/adapters.py",
+      "bytes": 26285
+    },
+    {
+      "module": "urllib3.response",
+      "distribution": "urllib3",
+      "version": "2.7.0",
+      "sha256": "f525f806491da0b82cc759deea1a6dfb93e772b9c3ccfcdea82d4369285273e3",
+      "snapshot": "evidence/source-snapshots/urllib3_response.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/urllib3/response.py",
+      "bytes": 53219
+    },
+    {
+      "module": "urllib3.util.timeout",
+      "distribution": "urllib3",
+      "version": "2.7.0",
+      "sha256": "e1e4f5155799654ee1ee6603d49ab639735ee1fc5e91d36f868594919bac4690",
+      "snapshot": "evidence/source-snapshots/urllib3_util_timeout.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/urllib3/util/timeout.py",
+      "bytes": 10346
+    },
+    {
+      "module": "urllib3.util.retry",
+      "distribution": "urllib3",
+      "version": "2.7.0",
+      "sha256": "d989d25fefc579c312843eb5331e6cebc274fdbb541d9aeb73f064155452d4fe",
+      "snapshot": "evidence/source-snapshots/urllib3_util_retry.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/urllib3/util/retry.py",
+      "bytes": 19577
+    },
+    {
+      "module": "pip._vendor.urllib3.response",
+      "distribution": "pip",
+      "version": "25.1.1",
+      "sha256": "7e60c9005906ef5b854e7fac5524e1d88c345a6717418aa46d18e286fc018d4f",
+      "snapshot": "evidence/source-snapshots/pip__vendor_urllib3_response.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/pip/_vendor/urllib3/response.py",
+      "bytes": 30641
+    },
+    {
+      "module": "pip._vendor.requests.models",
+      "distribution": "pip",
+      "version": "25.1.1",
+      "sha256": "c782b80a61fe942d25d8a6fe88f7cc3787515f11c471b39a11604bfe2d3d0302",
+      "snapshot": "evidence/source-snapshots/pip__vendor_requests_models.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/pip/_vendor/requests/models.py",
+      "bytes": 35483
+    },
+    {
+      "module": "smart_open.s3",
+      "distribution": "smart_open",
+      "version": "7.6.1",
+      "sha256": "aa115d14c2e8741d6d1f0dce14cdd4fb6eb10629af9f2faf82ba2b7b9a613c7e",
+      "snapshot": "evidence/source-snapshots/smart_open_s3.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/smart_open/s3.py",
+      "bytes": 53120
+    },
+    {
+      "module": "huggingface_hub.utils._http",
+      "distribution": "huggingface_hub",
+      "version": "1.16.1",
+      "sha256": "4824cc7998ca33d6a06067d57d18ed4ff79728c34af6ed7e4424b30627ffa23b",
+      "snapshot": "evidence/source-snapshots/huggingface_hub_utils__http.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/huggingface_hub/utils/_http.py",
+      "bytes": 42652
+    },
+    {
+      "module": "huggingface_hub.hf_api",
+      "distribution": "huggingface_hub",
+      "version": "1.16.1",
+      "sha256": "cc8443e1d61cd5135c19258eaa867182f952a01a353068d036973250703ce540",
+      "snapshot": "evidence/source-snapshots/huggingface_hub_hf_api.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/huggingface_hub/hf_api.py",
+      "bytes": 617952
+    },
+    {
+      "module": "retrying",
+      "distribution": "retrying",
+      "version": "1.4.2",
+      "sha256": "392f8177273e88b510abb63f7b42695c9e7c0cc72adaa97ba14a4376607112d8",
+      "snapshot": "evidence/source-snapshots/retrying.py",
+      "installed_origin": "/opt/pyvenv/lib/python3.13/site-packages/retrying.py",
+      "bytes": 12267
+    }
+  ],
+  "packages": {
+    "boto3": "1.43.18",
+    "botocore": "1.43.18",
+    "s3transfer": "0.18.0",
+    "requests": "2.32.5",
+    "urllib3": "2.7.0",
+    "httpx": "0.28.1",
+    "httpcore": "1.0.9",
+    "retrying": "1.4.2",
+    "smart_open": "7.6.1",
+    "huggingface_hub": "1.16.1",
+    "pip": "25.1.1",
+    "pytest": "9.0.2",
+    "numpy": "2.3.5",
+    "matplotlib": "3.10.8"
+  },
+  "environment_names_only": []
+}

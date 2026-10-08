@@ -1,0 +1,115 @@
+{
+  "python": "3.13.5",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "modules": [
+    {
+      "module": "pooch.core",
+      "source_name": "core.py",
+      "snapshot": "evidence/extension-source/pooch__core.py",
+      "sha256": "32bdd64b440529ca295504f428acfb44b5f9695e0f7bf4051b48356660ce1da4"
+    },
+    {
+      "module": "pooch.downloaders",
+      "source_name": "downloaders.py",
+      "snapshot": "evidence/extension-source/pooch__downloaders.py",
+      "sha256": "aaf4aab587f98f167941b1c5458113d4d987b11d1dba10c35f568281f3f83844"
+    },
+    {
+      "module": "pooch.utils",
+      "source_name": "utils.py",
+      "snapshot": "evidence/extension-source/pooch__utils.py",
+      "sha256": "af5c088a303f6e653eb41606e963394d2c95403c8f419b5b05ceb192cee6f769"
+    },
+    {
+      "module": "fsspec.implementations.http",
+      "source_name": "http.py",
+      "snapshot": "evidence/extension-source/fsspec__implementations__http.py",
+      "sha256": "d6e5b0c6594e8cf7bc9900f9e08ac261024753561a01787f703997064f80a10f"
+    },
+    {
+      "module": "fsspec.caching",
+      "source_name": "caching.py",
+      "snapshot": "evidence/extension-source/fsspec__caching.py",
+      "sha256": "6099bb4a3413c4e8326af2af004d02493fc64749a99c48e7208582744d506cb9"
+    },
+    {
+      "module": "aiohttp.client",
+      "source_name": "client.py",
+      "snapshot": "evidence/extension-source/aiohttp__client.py",
+      "sha256": "7ce41fc1c2142f5346015455e030e3ebec22a41cde0fc299a66ce13be2cb2a9e"
+    },
+    {
+      "module": "aiohttp.client_reqrep",
+      "source_name": "client_reqrep.py",
+      "snapshot": "evidence/extension-source/aiohttp__client_reqrep.py",
+      "sha256": "7844440eb67433c6454edd708c776e47e3fcfec9b8d0aeb980dcfe88c1986ac9"
+    },
+    {
+      "module": "httpx._client",
+      "source_name": "_client.py",
+      "snapshot": "evidence/extension-source/httpx___client.py",
+      "sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d"
+    },
+    {
+      "module": "httpx._config",
+      "source_name": "_config.py",
+      "snapshot": "evidence/extension-source/httpx___config.py",
+      "sha256": "a4fa7653ec2271f70ab05f8a6111352d876dddee84446788a1767c1a3a372d67"
+    }
+  ],
+  "licenses": [
+    {
+      "package": "pooch",
+      "path": "evidence/extension-source/licenses/pooch/AUTHORS.md",
+      "sha256": "6400dc5b23d3c56c955ab82c44fe49db242d4d9a6d9b80f5575d8b9ccdbc4631"
+    },
+    {
+      "package": "pooch",
+      "path": "evidence/extension-source/licenses/pooch/LICENSE.txt",
+      "sha256": "af0482d59fc7a9d68d9f64682c74ce6e8a4684406bb3a21a191ae329950916b4"
+    },
+    {
+      "package": "aiohttp",
+      "path": "evidence/extension-source/licenses/aiohttp/LICENSE.txt",
+      "sha256": "9f80d0db7d755a941db4572172c270ecbd8f082ba215ddd095985942ed94a9eb"
+    },
+    {
+      "package": "aiohttp",
+      "path": "evidence/extension-source/licenses/aiohttp/vendor/llhttp/LICENSE",
+      "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277"
+    },
+    {
+      "package": "fsspec",
+      "path": "evidence/extension-source/licenses/fsspec/LICENSE",
+      "sha256": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94"
+    },
+    {
+      "package": "httpx",
+      "path": "evidence/extension-source/licenses/httpx/LICENSE.md",
+      "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+    }
+  ],
+  "packages": {
+    "httpx": "0.28.1",
+    "idna": "3.17",
+    "httpcore": "1.0.9",
+    "h11": "0.16.0",
+    "certifi": "2026.5.20",
+    "anyio": "4.13.0",
+    "fsspec": "2026.4.0",
+    "aiohttp": "3.13.3",
+    "yarl": "1.24.2",
+    "propcache": "0.5.2",
+    "multidict": "6.7.1",
+    "frozenlist": "1.8.0",
+    "attrs": "26.1.0",
+    "aiosignal": "1.4.0",
+    "aiohappyeyeballs": "2.6.2",
+    "pooch": "1.9.0",
+    "requests": "2.32.5",
+    "urllib3": "2.7.0",
+    "charset-normalizer": "3.4.7",
+    "packaging": "25.0",
+    "platformdirs": "4.10.0"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "records": 144,
+  "cells": 24,
+  "seeds": [
+    601,
+    602,
+    603,
+    604,
+    605,
+    606
+  ],
+  "wire_attempts": 156,
+  "max_wire_attempts": 2,
+  "expected_outcomes": 144,
+  "clients_closed": 144,
+  "body_verdicts": {
+    "pass": 108,
+    "mismatch": 36
+  },
+  "cleanup_verdicts": {
+    "pass": 108,
+    "mismatch": 36
+  },
+  "raw_sha256": "70f2b86ede2a7d594d247fba4ef8bef5c6d5a93b109837885480ede50047abaa",
+  "modes": {
+    "inactivity": {
+      "n": 48,
+      "cleanup_pass": 24
+    },
+    "admission": {
+      "n": 48,
+      "cleanup_pass": 36
+    },
+    "asyncio_timeout": {
+      "n": 48,
+      "cleanup_pass": 48
+    }
+  }
+}

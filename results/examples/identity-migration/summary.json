@@ -1,0 +1,17 @@
+{
+  "before": {
+    "verdict": "mismatch",
+    "outcome": "success",
+    "requests": 1,
+    "matches_expected": false,
+    "elapsed_s": 0.058138073999998596
+  },
+  "after": {
+    "verdict": "pass",
+    "outcome": "success",
+    "requests": 2,
+    "matches_expected": true,
+    "elapsed_s": 0.019875207000040973
+  },
+  "example_source_sha256": "1bad926e9c8f994c6b7b9d814a6824d85add22c5ba6d12e9f91fb1ec04d5f7c8"
+}

@@ -1,0 +1,104 @@
+{
+  "records": 402,
+  "cells": 67,
+  "replicates": 6,
+  "wire_attempts": 858,
+  "max_wire_attempts": 13,
+  "operation_seconds": 131.91216371399912,
+  "content_verdicts": {
+    "mismatch": 36,
+    "pass": 366
+  },
+  "retry_verdicts": {
+    "pass": 318,
+    "mismatch": 12,
+    "unknown": 72
+  },
+  "raw_sha256": "3e87bc6b697fcaefb0063fb133a83ca2d939da064e73e9a99ebd0aaa1a071521",
+  "families": {
+    "constituent_reads": {
+      "n": 36,
+      "wire_attempts": 282,
+      "outcomes": {
+        "success": 36
+      },
+      "content": {
+        "pass": 36
+      },
+      "retry": {
+        "pass": 36
+      }
+    },
+    "download": {
+      "n": 294,
+      "wire_attempts": 450,
+      "outcomes": {
+        "success": 168,
+        "error": 126
+      },
+      "content": {
+        "mismatch": 36,
+        "pass": 258
+      },
+      "retry": {
+        "pass": 282,
+        "mismatch": 12
+      }
+    },
+    "range_recovery": {
+      "n": 72,
+      "wire_attempts": 126,
+      "outcomes": {
+        "success": 72
+      },
+      "content": {
+        "pass": 72
+      },
+      "retry": {
+        "unknown": 72
+      }
+    }
+  },
+  "legacy_reaudit": {
+    "n": 1068,
+    "verdicts": {
+      "unknown": 780,
+      "mismatch": 288
+    },
+    "transitions": {
+      "pass -> unknown": 756,
+      "mismatch -> mismatch": 288,
+      "unknown -> unknown": 12,
+      "mismatch -> unknown": 12
+    },
+    "dimensions": {
+      "attempts:pass": 996,
+      "payload:pass": 972,
+      "classification:unknown": 1056,
+      "time:pass": 36,
+      "time:mismatch": 156,
+      "payload:mismatch": 60,
+      "outcome:pass": 60,
+      "outcome:mismatch": 12,
+      "attempts:mismatch": 60
+    }
+  },
+  "ablations": {
+    "complete": {
+      "mismatch": 36,
+      "pass": 240
+    },
+    "unwitnessed_body": {
+      "unknown": 276
+    },
+    "missing_payload": {
+      "unknown": 276
+    }
+  },
+  "adjacent_control": {
+    "n": 36,
+    "false_alarms": 36,
+    "attributed_false_alarms": 0
+  },
+  "offline_median_ms": 0.6152614999999999
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "offline_self_check": "passed",
+  "checks": {
+    "auxiliary_frozen_results": "passed",
+    "principal_analysis_regeneration": "passed",
+    "paper_inputs": "passed",
+    "tests": "220 passed",
+    "installed_versions_and_snapshots": "passed",
+    "frozen_source_relocations": "11 passed",
+    "reported_results": "passed",
+    "reference_closure": "68 verified and cited entries"
+  },
+  "principal_totals": {
+    "configurations": 228,
+    "operations": 2430,
+    "wire_requests": 4986,
+    "maximum_wire_requests_per_operation": 13
+  },
+  "paired_observations": 96,
+  "causal_mutations_detected": 360,
+  "scope": "Same prepared environment; frozen-input, deterministic-analysis, installed-version, software-test, and manuscript-input self-check. Not independent replication or peer review."
+}

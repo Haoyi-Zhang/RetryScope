@@ -1,0 +1,57 @@
+{
+  "audit_verdicts": {
+    "mismatch": 300,
+    "pass": 756,
+    "unknown": 12
+  },
+  "baseline_checker_verdicts": {
+    "mismatch": 300,
+    "pass": 756,
+    "unknown": 12
+  },
+  "baseline_to_evidence_transition": {
+    "mismatch_to_mismatch": 300,
+    "pass_to_pass": 756,
+    "unknown_to_unknown": 12
+  },
+  "cells": 89,
+  "client_events": 1728,
+  "dimension_verdicts": {
+    "attempts": {
+      "mismatch": 60,
+      "pass": 996
+    },
+    "classification": {
+      "mismatch": 12,
+      "pass": 1044
+    },
+    "outcome": {
+      "mismatch": 12,
+      "pass": 60
+    },
+    "payload": {
+      "mismatch": 60,
+      "pass": 972
+    },
+    "time": {
+      "mismatch": 156,
+      "pass": 36
+    }
+  },
+  "maximum_wire_requests": 5,
+  "raw_sha256": {
+    "false.jsonl": "7ff730ccaeb92c404ea5d4761b47975d04a7038e1ba8267bf82c15fc8b03eda1",
+    "true.jsonl": "81ffc900d42cdfcaf3ed318fdfc57c258e6a10621b662b62dd1d7a2c82891a60"
+  },
+  "records": 1068,
+  "replicates": 12,
+  "retry_arrivals": 636,
+  "schema": 1,
+  "scope": "fresh client-witnessed rerun of the original 89-cell matrix; loopback, sequential, no production endpoint",
+  "server_only_counterfactual_verdicts": {
+    "mismatch": 288,
+    "unknown": 780
+  },
+  "stacks": 7,
+  "wire_requests": 1704
+}

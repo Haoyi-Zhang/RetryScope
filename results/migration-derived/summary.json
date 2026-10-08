@@ -1,0 +1,30 @@
+{
+  "pair_types": 16,
+  "pair_observations": 96,
+  "real_pair_types": 14,
+  "real_pair_observations": 84,
+  "directional_controls": 1,
+  "observation_controls": 1,
+  "expected_categories": {
+    "stable_conformant": 3,
+    "repair": 10,
+    "regression": 1,
+    "stable_nonconformant": 1,
+    "evidence_loss": 1
+  },
+  "retryscope_agreement": [
+    96,
+    96
+  ],
+  "outcome_only_agreement": [
+    18,
+    96
+  ],
+  "flat_count_agreement": [
+    48,
+    96
+  ],
+  "structural_change_observations": 90,
+  "scope": "paired reanalysis of already executed immutable operations; controls are not additional independent cases",
+  "initial_source": "client-witnessed rerun"
+}

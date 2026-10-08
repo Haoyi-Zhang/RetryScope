@@ -1,0 +1,8 @@
+stack,label,records,wire_requests,retry_arrivals,owner_admission_witnesses,decision_result_witnesses,audit_pass,audit_mismatch,audit_unknown,classification_pass,classification_mismatch,classification_unknown,server_only_aggregate_unknown,server_only_classification_unknown
+boto,Boto3/botocore,204,444,240,0,240,180,24,0,204,0,0,180,204
+huggingface,Hugging Face Hub,144,204,60,60,0,96,36,12,132,0,0,108,132
+requests,Requests 2.32.5,420,648,228,228,0,312,108,0,408,12,0,324,420
+requests_old,Requests 2.32.3,48,48,0,0,0,0,48,0,48,0,0,0,48
+smart_open,smart\_open,60,72,12,12,0,36,24,0,60,0,0,36,60
+urllib3_new,urllib3 2.7.0,96,144,48,48,0,72,24,0,96,0,0,72,96
+urllib3_old,urllib3 1.26.20,96,144,48,48,0,60,36,0,96,0,0,60,96

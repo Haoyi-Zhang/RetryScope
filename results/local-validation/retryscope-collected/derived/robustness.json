@@ -1,0 +1,44 @@
+{
+  "join_measurements": 1200,
+  "join_time_us": {
+    "median": 20.7,
+    "p95": 25.5
+  },
+  "mutation_detection": {
+    "duplicate_wire": {
+      "attempted": 60,
+      "detected": 60
+    },
+    "invalid_wire_witness": {
+      "attempted": 60,
+      "detected": 60
+    },
+    "missing_parent_admission": {
+      "attempted": 60,
+      "detected": 60
+    },
+    "missing_wire": {
+      "attempted": 60,
+      "detected": 60
+    },
+    "noncausal_parent": {
+      "attempted": 60,
+      "detected": 60
+    },
+    "unknown_attempt": {
+      "attempted": 60,
+      "detected": 60
+    }
+  },
+  "mutation_traces": 360,
+  "operations_sampled_for_join_timing": 240,
+  "serialized_admission_bytes": {
+    "median": 250.0,
+    "p95": 285.0
+  },
+  "witness_header_bytes_per_attempt": {
+    "maximum": 193,
+    "median": 193.0,
+    "minimum": 193
+  }
+}

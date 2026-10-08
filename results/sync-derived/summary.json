@@ -1,0 +1,42 @@
+{
+  "records": 96,
+  "cells": 16,
+  "seeds": [
+    701,
+    702,
+    703,
+    704,
+    705,
+    706
+  ],
+  "wire_requests": 108,
+  "max_wire_requests": 2,
+  "cleanup_verdicts": {
+    "mismatch": 36,
+    "pass": 60
+  },
+  "mechanism_outcomes": {
+    "timeout": 72,
+    "completed": 24
+  },
+  "modes": {
+    "thread_future": {
+      "records": 48,
+      "cleanup_pass": 12,
+      "healthy_success": 12,
+      "expected_timeouts": 36,
+      "timeout_signals": 36,
+      "median_setup_ms": 0.07005049997133028
+    },
+    "process_watchdog": {
+      "records": 48,
+      "cleanup_pass": 48,
+      "healthy_success": 12,
+      "expected_timeouts": 36,
+      "timeout_signals": 36,
+      "median_setup_ms": 465.4715124999598
+    }
+  },
+  "raw_sha256": "60aec68cf22e314194bdb1e0e8bb62e2cb807652bf31316a269d17e86209aa89",
+  "scope": "pre-initialized local synchronous Requests operation; thread signal versus spawned-process termination"
+}

@@ -1,0 +1,46 @@
+{
+  "assignment_accuracy": {
+    "causal_token": 1.0,
+    "timestamp_window": 0.10462962962962963
+  },
+  "audit_verdicts": {
+    "mismatch": 0,
+    "pass": 720,
+    "unknown": 0
+  },
+  "causal_joins_complete": 720,
+  "cells": 192,
+  "edge_metrics": {
+    "causal_token": {
+      "expected": 1080,
+      "f1": 1.0,
+      "precision": 1.0,
+      "predicted": 1080,
+      "recall": 1.0,
+      "true_positive": 1080
+    },
+    "timestamp_window": {
+      "expected": 1080,
+      "f1": 0.12283308568598317,
+      "precision": 0.13205537806176784,
+      "predicted": 939,
+      "recall": 0.11481481481481481,
+      "true_positive": 124
+    }
+  },
+  "elapsed_ms": {
+    "maximum": 62.999999994644895,
+    "median": 15.000000013969839
+  },
+  "operations": 720,
+  "owner_accuracy": {
+    "causal_token": 1.0,
+    "timestamp_window": 0.5481481481481482
+  },
+  "role_accuracy": {
+    "adjacency": 0.6666666666666666,
+    "causal_token": 1.0,
+    "timestamp_window": 0.5398148148148149
+  },
+  "wire_attempts": 2160
+}

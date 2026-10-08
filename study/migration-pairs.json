@@ -1,0 +1,332 @@
+[
+  {
+    "id": "aws_default_policy_opt_in",
+    "phase": "initial",
+    "before": {
+      "file": "false",
+      "id": "boto_false_default"
+    },
+    "after": {
+      "file": "true",
+      "id": "boto_true_default"
+    },
+    "intent": {
+      "max_wire_attempts": 5,
+      "required_outcome": "error",
+      "provenance": "documented opt-in policy comparison under a local five-wire ceiling",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "stable_conformant",
+    "basis": "same installed botocore release, two import-time policy states"
+  },
+  {
+    "id": "boto_total_attempt_normalization",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "boto_app_cap2_native"
+    },
+    "after": {
+      "file": "true",
+      "id": "boto_true_total2"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "required_outcome": "error",
+      "provenance": "explicit application two-wire persistent-failure contract",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "repair",
+    "basis": "documented max_attempts versus total_max_attempts distinction"
+  },
+  {
+    "id": "requests_total_normalization",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "req_native_persistent"
+    },
+    "after": {
+      "file": "true",
+      "id": "req_normalized_persistent"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "required_outcome": "error",
+      "provenance": "explicit two-wire persistent-failure contract",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "repair",
+    "basis": "same Requests release with urllib3 Retry total reduced from two retries to one"
+  },
+  {
+    "id": "hub_total_normalization",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "hf_native_persistent"
+    },
+    "after": {
+      "file": "true",
+      "id": "hf_normalized_persistent"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "required_outcome": "error",
+      "provenance": "explicit two-wire persistent-failure contract",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "repair",
+    "basis": "same huggingface_hub helper with max_retries normalized"
+  },
+  {
+    "id": "broad_to_selective_400",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "req_outer_broad_denied"
+    },
+    "after": {
+      "file": "true",
+      "id": "req_outer_selective_denied"
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "required_outcome": "error",
+      "provenance": "local 503-only retry policy; HTTP 400 must not be repeated",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "repair",
+    "basis": "outer retry predicate narrowed from every exception to selected classes"
+  },
+  {
+    "id": "nested_retry_owner_normalization",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "req_outer_broad_persistent"
+    },
+    "after": {
+      "file": "true",
+      "id": "req_outer_selective_persistent"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "required_outcome": "error",
+      "provenance": "explicit two-wire ownership contract for a persistent read-only failure",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "repair",
+    "basis": "remove duplicate inner-plus-outer retry ownership while retaining one selective outer retry"
+  },
+  {
+    "id": "selective_to_broad_400_control",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "req_outer_selective_denied"
+    },
+    "after": {
+      "file": "true",
+      "id": "req_outer_broad_denied"
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "required_outcome": "error",
+      "provenance": "directional negative control under the same 503-only policy",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "regression",
+    "basis": "directed control reuses the same executions in the opposite migration direction",
+    "directional_control": true
+  },
+  {
+    "id": "native_http_upgrade_truncation",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "req_old_truncated_native"
+    },
+    "after": {
+      "file": "true",
+      "id": "req_new_truncated_native"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "expected_payload": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public dependency-change mechanism with a local recovery requirement",
+      "retryable_statuses": [
+        503
+      ]
+    },
+    "expected": "stable_nonconformant",
+    "basis": "wrong success changes to safe failure but native execution still does not recover"
+  },
+  {
+    "id": "body_aware_upgrade_adaptation",
+    "phase": "initial",
+    "before": {
+      "file": "true",
+      "id": "req_old_truncated_outer_body_aware"
+    },
+    "after": {
+      "file": "true",
+      "id": "req_new_truncated_outer_body_aware"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "expected_payload": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public dependency-change mechanism with explicit body-error recovery",
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true
+    },
+    "expected": "repair",
+    "basis": "new incomplete-body exception becomes observable to the existing class-aware wrapper"
+  },
+  {
+    "id": "pooch_enable_registered_hash_retry",
+    "phase": "extension",
+    "before": {
+      "id": "pooch_unchecked1_corrupt_once"
+    },
+    "after": {
+      "id": "pooch_hash1_corrupt_once"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "expected_payload": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu",
+      "required_outcome": "success",
+      "provenance": "Pooch registered-object identity contract"
+    },
+    "expected": "repair",
+    "basis": "native known hash rejects same-length corruption and one configured retry recovers"
+  },
+  {
+    "id": "requests_enable_digest_retry",
+    "phase": "extension",
+    "before": {
+      "id": "requests_old_length_corrupt_once"
+    },
+    "after": {
+      "id": "requests_old_hash_corrupt_once"
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "expected_payload": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu",
+      "required_outcome": "success",
+      "provenance": "explicit known-object identity contract"
+    },
+    "expected": "repair",
+    "basis": "ordinary SHA-256 validation replaces length-only acceptance"
+  },
+  {
+    "id": "fsspec_metadata_discovery",
+    "phase": "extension",
+    "before": {
+      "id": "fsspec_known_size_17"
+    },
+    "after": {
+      "id": "fsspec_metadata_17"
+    },
+    "intent": {
+      "expected_payload": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu",
+      "required_outcome": "success",
+      "provenance": "healthy ranged-read content contract"
+    },
+    "expected": "stable_conformant",
+    "basis": "metadata discovery adds a constituent request without adding an error retry"
+  },
+  {
+    "id": "fsspec_block_size_change",
+    "phase": "extension",
+    "before": {
+      "id": "fsspec_known_size_31"
+    },
+    "after": {
+      "id": "fsspec_known_size_8"
+    },
+    "intent": {
+      "expected_payload": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu",
+      "required_outcome": "success",
+      "provenance": "healthy ranged-read content contract"
+    },
+    "expected": "stable_conformant",
+    "basis": "smaller uncached reads increase constituent wire requests while preserving the operation"
+  },
+  {
+    "id": "async_trickle_total_timeout",
+    "phase": "async",
+    "before": {
+      "id": "inactivity_trickle_1"
+    },
+    "after": {
+      "id": "asyncio_timeout_trickle_1"
+    },
+    "intent": {
+      "budget_s": 0.1,
+      "boundary": "cleanup",
+      "tolerance_s": 0.02,
+      "provenance": "explicit whole-operation cleanup boundary"
+    },
+    "expected": "repair",
+    "basis": "inactivity timeout permits progress; asyncio timeout bounds the cooperative operation"
+  },
+  {
+    "id": "async_retry_delay_total_timeout",
+    "phase": "async",
+    "before": {
+      "id": "inactivity_retry_delay_1"
+    },
+    "after": {
+      "id": "asyncio_timeout_retry_delay_1"
+    },
+    "intent": {
+      "budget_s": 0.1,
+      "boundary": "cleanup",
+      "tolerance_s": 0.02,
+      "provenance": "explicit whole-operation cleanup boundary"
+    },
+    "expected": "repair",
+    "basis": "read inactivity does not cover delay before retry; cooperative timeout does"
+  },
+  {
+    "id": "observation_loss_control",
+    "phase": "extension",
+    "before": {
+      "id": "fsspec_known_size_17"
+    },
+    "after": {
+      "id": "fsspec_known_size_17",
+      "mutate": {
+        "arrival_stream_complete": false
+      }
+    },
+    "intent": {
+      "max_wire_attempts": 16,
+      "expected_payload": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu",
+      "required_outcome": "success",
+      "provenance": "instrumentation-loss control; not a library behavior change"
+    },
+    "expected": "evidence_loss",
+    "basis": "the same completed operation is re-audited after removing the completion witness",
+    "observation_control": true
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "phases": [
+    {
+      "name": "Policy, HTTP, and integration",
+      "configurations": 89,
+      "operations": 1068,
+      "wire_requests": 1704
+    },
+    {
+      "name": "Identity, range, and constituents",
+      "configurations": 67,
+      "operations": 402,
+      "wire_requests": 858
+    },
+    {
+      "name": "Asynchronous boundaries",
+      "configurations": 24,
+      "operations": 144,
+      "wire_requests": 156
+    },
+    {
+      "name": "Synchronous enforcement boundaries",
+      "configurations": 16,
+      "operations": 96,
+      "wire_requests": 108
+    },
+    {
+      "name": "Concurrent causal attribution",
+      "configurations": 32,
+      "operations": 720,
+      "wire_requests": 2160
+    }
+  ],
+  "totals": {
+    "configurations": 228,
+    "operations": 2430,
+    "wire_requests": 4986,
+    "maximum_wire_requests_per_operation": 13
+  },
+  "paired_migration_reuses_operations": 96,
+  "causal_seeded_batches": 192
+}

@@ -1,0 +1,165 @@
+{
+  "utc": "2026-09-30T13:07:44.721119+00:00",
+  "python": "3.13.5",
+  "httpx": "0.28.1",
+  "cases": [
+    {
+      "id": "inactivity_success_1",
+      "mode": "inactivity",
+      "scenario": "success",
+      "scale": 1
+    },
+    {
+      "id": "inactivity_success_1.5",
+      "mode": "inactivity",
+      "scenario": "success",
+      "scale": 1.5
+    },
+    {
+      "id": "inactivity_trickle_1",
+      "mode": "inactivity",
+      "scenario": "trickle",
+      "scale": 1
+    },
+    {
+      "id": "inactivity_trickle_1.5",
+      "mode": "inactivity",
+      "scenario": "trickle",
+      "scale": 1.5
+    },
+    {
+      "id": "inactivity_slow_headers_1",
+      "mode": "inactivity",
+      "scenario": "slow_headers",
+      "scale": 1
+    },
+    {
+      "id": "inactivity_slow_headers_1.5",
+      "mode": "inactivity",
+      "scenario": "slow_headers",
+      "scale": 1.5
+    },
+    {
+      "id": "inactivity_retry_delay_1",
+      "mode": "inactivity",
+      "scenario": "retry_delay",
+      "scale": 1
+    },
+    {
+      "id": "inactivity_retry_delay_1.5",
+      "mode": "inactivity",
+      "scenario": "retry_delay",
+      "scale": 1.5
+    },
+    {
+      "id": "admission_success_1",
+      "mode": "admission",
+      "scenario": "success",
+      "scale": 1
+    },
+    {
+      "id": "admission_success_1.5",
+      "mode": "admission",
+      "scenario": "success",
+      "scale": 1.5
+    },
+    {
+      "id": "admission_trickle_1",
+      "mode": "admission",
+      "scenario": "trickle",
+      "scale": 1
+    },
+    {
+      "id": "admission_trickle_1.5",
+      "mode": "admission",
+      "scenario": "trickle",
+      "scale": 1.5
+    },
+    {
+      "id": "admission_slow_headers_1",
+      "mode": "admission",
+      "scenario": "slow_headers",
+      "scale": 1
+    },
+    {
+      "id": "admission_slow_headers_1.5",
+      "mode": "admission",
+      "scenario": "slow_headers",
+      "scale": 1.5
+    },
+    {
+      "id": "admission_retry_delay_1",
+      "mode": "admission",
+      "scenario": "retry_delay",
+      "scale": 1
+    },
+    {
+      "id": "admission_retry_delay_1.5",
+      "mode": "admission",
+      "scenario": "retry_delay",
+      "scale": 1.5
+    },
+    {
+      "id": "asyncio_timeout_success_1",
+      "mode": "asyncio_timeout",
+      "scenario": "success",
+      "scale": 1
+    },
+    {
+      "id": "asyncio_timeout_success_1.5",
+      "mode": "asyncio_timeout",
+      "scenario": "success",
+      "scale": 1.5
+    },
+    {
+      "id": "asyncio_timeout_trickle_1",
+      "mode": "asyncio_timeout",
+      "scenario": "trickle",
+      "scale": 1
+    },
+    {
+      "id": "asyncio_timeout_trickle_1.5",
+      "mode": "asyncio_timeout",
+      "scenario": "trickle",
+      "scale": 1.5
+    },
+    {
+      "id": "asyncio_timeout_slow_headers_1",
+      "mode": "asyncio_timeout",
+      "scenario": "slow_headers",
+      "scale": 1
+    },
+    {
+      "id": "asyncio_timeout_slow_headers_1.5",
+      "mode": "asyncio_timeout",
+      "scenario": "slow_headers",
+      "scale": 1.5
+    },
+    {
+      "id": "asyncio_timeout_retry_delay_1",
+      "mode": "asyncio_timeout",
+      "scenario": "retry_delay",
+      "scale": 1
+    },
+    {
+      "id": "asyncio_timeout_retry_delay_1.5",
+      "mode": "asyncio_timeout",
+      "scenario": "retry_delay",
+      "scale": 1.5
+    }
+  ],
+  "seeds": [
+    601,
+    602,
+    603,
+    604,
+    605,
+    606
+  ],
+  "sources": {
+    "scripts/async_boundary_study.py": "018288a613049ccf4093cdb80619804ed4642004a8e85c3f1f9b1010797b65fd",
+    "study/async-boundary-protocol.md": "a9e0565ee18c4b09344c629f3caa1f078ab30b52de97630d14f26ba35f6b8c7d",
+    "src/retryscope/responder.py": "3c7ea3ac6d38e8e12fe0de492a99aceb1b3b0f0d1f508e3b0da61b00bed9e84e",
+    "src/retryscope/audit.py": "1a18e7250e5ca1843e304c9bfe93b9821f0d7c4a1991aa1b7c6e5aece7d1f64d"
+  }
+}

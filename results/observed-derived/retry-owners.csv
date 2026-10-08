@@ -1,0 +1,16 @@
+owner,cause,stack,retry_arrivals
+botocore.needs-retry,status,boto,240
+huggingface.http_backoff,status,huggingface,60
+requests.HTTPAdapter.Retry,status,requests,96
+requests.admission,status,requests,24
+retrying.outer_body_aware,body_error,requests,12
+retrying.outer_body_aware,status,requests,24
+retrying.outer_broad,body_error,requests,12
+retrying.outer_broad,status,requests,24
+retrying.outer_selective,status,requests,24
+retrying.stop_delay,status,requests,12
+smart_open.reader-recovery,body_error,smart_open,12
+urllib3_new.Retry.increment,status,urllib3_new,36
+urllib3_new.Retry.increment,transport_error,urllib3_new,12
+urllib3_old.Retry.increment,status,urllib3_old,36
+urllib3_old.Retry.increment,transport_error,urllib3_old,12

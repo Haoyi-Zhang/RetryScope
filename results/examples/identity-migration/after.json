@@ -1,0 +1,174 @@
+{
+  "id": "requests_old_hash_corrupt_once",
+  "seed": 701,
+  "case": {
+    "id": "requests_old_hash_corrupt_once",
+    "family": "download",
+    "mode": "requests_old_hash",
+    "scenario": "corrupt_once"
+  },
+  "phase": "extension",
+  "outcome": "success",
+  "arrivals": [
+    {
+      "t": 1572.570496609,
+      "kind": "arrival",
+      "id": 1,
+      "method": "GET",
+      "path": "/data",
+      "range": null,
+      "start": 0,
+      "end": 95,
+      "status": 200,
+      "body_fault": false,
+      "planned_bytes": 96,
+      "role": "initial",
+      "attribution_witness": "explicit ordinary outer loop"
+    },
+    {
+      "t": 1572.584273302,
+      "kind": "arrival",
+      "id": 2,
+      "method": "GET",
+      "path": "/data",
+      "range": null,
+      "start": 0,
+      "end": 95,
+      "status": 200,
+      "body_fault": false,
+      "planned_bytes": 96,
+      "role": "retry",
+      "attribution_witness": "explicit ordinary outer loop",
+      "retry_of": 1,
+      "cause": {
+        "kind": "body_error"
+      }
+    }
+  ],
+  "events": [
+    {
+      "t": 1572.570496609,
+      "kind": "arrival",
+      "id": 1,
+      "method": "GET",
+      "path": "/data",
+      "range": null,
+      "start": 0,
+      "end": 95,
+      "status": 200,
+      "body_fault": false,
+      "planned_bytes": 96
+    },
+    {
+      "t": 1572.570632194,
+      "kind": "headers_sent",
+      "id": 1,
+      "status": 200
+    },
+    {
+      "t": 1572.570653559,
+      "kind": "body_end",
+      "id": 1,
+      "bytes": 96
+    },
+    {
+      "t": 1572.570655542,
+      "kind": "handler_end",
+      "id": 1
+    },
+    {
+      "t": 1572.584273302,
+      "kind": "arrival",
+      "id": 2,
+      "method": "GET",
+      "path": "/data",
+      "range": null,
+      "start": 0,
+      "end": 95,
+      "status": 200,
+      "body_fault": false,
+      "planned_bytes": 96
+    },
+    {
+      "t": 1572.584500544,
+      "kind": "headers_sent",
+      "id": 2,
+      "status": 200
+    },
+    {
+      "t": 1572.584585029,
+      "kind": "body_end",
+      "id": 2,
+      "bytes": 96
+    },
+    {
+      "t": 1572.584587099,
+      "kind": "handler_end",
+      "id": 2
+    }
+  ],
+  "wire_attempts": 2,
+  "arrival_stream_complete": true,
+  "retry_attribution_complete": true,
+  "operations": [
+    {
+      "id": 1,
+      "outcome": "error",
+      "exception": "ChunkedEncodingError",
+      "status": 200
+    }
+  ],
+  "payload": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu",
+  "payload_complete": true,
+  "body_elapsed_s": 0.019875207000040973,
+  "body_complete": true,
+  "cleanup_elapsed_s": 0.019875207000040973,
+  "cleanup_complete": true,
+  "admissions_s": [
+    0.0008584650001921545,
+    0.013734080000176618
+  ],
+  "admissions_complete": true,
+  "content_audit": {
+    "schema": 2,
+    "verdict": "pass",
+    "dimensions": {
+      "payload": {
+        "verdict": "pass",
+        "reason": "complete returned payload compared",
+        "observed": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu"
+      }
+    },
+    "intent_provenance": "registered object identity (Pooch); explicit same-object probe for other readers",
+    "hard_deadline_guarantee": false
+  },
+  "retry_audit": {
+    "schema": 2,
+    "verdict": "pass",
+    "dimensions": {
+      "attempts": {
+        "verdict": "pass",
+        "reason": "complete inventory satisfies cap",
+        "observed": 2
+      },
+      "classification": {
+        "verdict": "pass",
+        "reason": "explicit retry ownership and received cause; no adjacent-status inference",
+        "requests": [
+          {
+            "id": 1,
+            "verdict": "pass",
+            "role": "initial"
+          },
+          {
+            "id": 2,
+            "verdict": "pass",
+            "role": "retry"
+          }
+        ]
+      }
+    },
+    "intent_provenance": "local selective-retry probe; not a documented Pooch 400 exclusion",
+    "hard_deadline_guarantee": false
+  }
+}

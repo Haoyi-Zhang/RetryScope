@@ -1,0 +1,850 @@
+[
+  {
+    "bibkey": "boto-retries",
+    "verification_basis": "Official language guide",
+    "metadata_check": "AWS corporate documentation; no invented publication year; accessed 2026-09-30; live guide 1.43.105, not executed 1.43.18.",
+    "permitted_claim_and_limit": "Config max excludes first; total includes it. Live documentation cross-checked against installed args.py.",
+    "primary_identifier": "https://docs.aws.amazon.com/boto3/latest/guide/retries.html",
+    "checked_utc_date": "2026-09-30",
+    "rechecked_utc_date": "2026-10-03"
+  },
+  {
+    "bibkey": "aws-cross-sdk",
+    "verification_basis": "Official SDK reference",
+    "metadata_check": "AWS corporate documentation; accessed 2026-09-30.",
+    "permitted_claim_and_limit": "New retry behavior is conditional on opt-in; not an unconditional current Python default.",
+    "primary_identifier": "https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html",
+    "checked_utc_date": "2026-09-30",
+    "rechecked_utc_date": "2026-10-03"
+  },
+  {
+    "bibkey": "aws-announcement",
+    "verification_basis": "Official repository announcement",
+    "metadata_check": "millems, 2026-05-20; exact discussion title and number 4789 checked.",
+    "permitted_claim_and_limit": "Opt-in available from botocore 1.43.3; rollout no sooner than Nov 2026. Does not establish actual installed state.",
+    "primary_identifier": "https://github.com/boto/boto3/discussions/4789",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "boto-source",
+    "verification_basis": "Installed source",
+    "metadata_check": "botocore 1.43.18 distribution attribution and metadata; descriptive software-source title, not a research article.",
+    "permitted_claim_and_limit": "Four files, exact bytes/hash in environment.json; config-provider constant evaluated at import.",
+    "primary_identifier": "evidence/environment.json and evidence/source-snapshots/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "requests-doc",
+    "verification_basis": "Official Requests documentation",
+    "metadata_check": "Requests project authorship; accessed 2026-09-30; live page not a historical release pin.",
+    "permitted_claim_and_limit": "Timeout is not the entire-response download limit.",
+    "primary_identifier": "https://requests.readthedocs.io/en/latest/user/quickstart/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "requests-source",
+    "verification_basis": "Installed source",
+    "metadata_check": "Requests 2.32.5 package metadata and unmodified adapters.py/models.py.",
+    "permitted_claim_and_limit": "Descriptive title identifies retained files; source-backed response/adapter control flow.",
+    "primary_identifier": "evidence/environment.json and evidence/source-snapshots/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "urllib-old",
+    "verification_basis": "Installed vendored source",
+    "metadata_check": "urllib3 1.26.20 and Requests 2.32.3 inside pip 25.1.1; exact module identities captured at execution.",
+    "permitted_claim_and_limit": "Not standalone historical wheels; release-tagged licenses checked separately. No assertion about all pip patches.",
+    "primary_identifier": "evidence/environment.json and evidence/source-snapshots/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "urllib-new",
+    "verification_basis": "Installed source",
+    "metadata_check": "urllib3 2.7.0 package metadata and retained response/retry/timeout source.",
+    "permitted_claim_and_limit": "Public enforcement option, retry and timeout mechanics; title is descriptive source inventory.",
+    "primary_identifier": "evidence/environment.json and evidence/source-snapshots/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "smart551",
+    "verification_basis": "Public issue body + API metadata",
+    "metadata_check": "mpenkov; 2020-10-24; smart_open does not recover from connection errors when reading from S3; issue 551.",
+    "permitted_claim_and_limit": "S3 body-read failure stack; exact affected release missing. Historical problem, not a new defect.",
+    "primary_identifier": "https://github.com/piskvorky/smart_open/issues/551",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "smart552",
+    "verification_basis": "Public PR body + merge metadata",
+    "metadata_check": "mpenkov; opened 2020-10-25, merged 2021-01-15; Improve robustness of S3 reading; PR 552.",
+    "permitted_claim_and_limit": "Merge 4f301d62aabf7b9fd15d6ef4118a776eba932522; multiple retries/backoff. Bibliography year denotes opening, note gives merge.",
+    "primary_identifier": "https://github.com/piskvorky/smart_open/pull/552",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "smart784",
+    "verification_basis": "Public issue body + API metadata",
+    "metadata_check": "mweinelt; 2023-09-20; Test failures with urllib3 2.0.4; issue 784.",
+    "permitted_claim_and_limit": "Reported 1.26.16 to 2.0.4. Intro says smart_open 0.4.0 while version section says 6.4.0; inconsistency not silently corrected.",
+    "primary_identifier": "https://github.com/piskvorky/smart_open/issues/784",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "smart-source",
+    "verification_basis": "Installed source",
+    "metadata_check": "smart_open 7.6.1; S3 reader file and distribution metadata.",
+    "permitted_claim_and_limit": "Current read retry/reopen mechanism executed; not original 2020 binary.",
+    "primary_identifier": "evidence/environment.json and evidence/source-snapshots/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "requests1855",
+    "verification_basis": "Public issue body + API metadata",
+    "metadata_check": "patricklaw; 2014-01-10; exact long title and issue 1855 checked.",
+    "permitted_claim_and_limit": "Complete-body requirement motivation, no exact Requests version supplied in the original body.",
+    "primary_identifier": "https://github.com/psf/requests/issues/1855",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "hf-source",
+    "verification_basis": "Installed source",
+    "metadata_check": "huggingface_hub 1.16.1; utils/_http.py and hf_api.py with package metadata.",
+    "permitted_claim_and_limit": "Actual helper and metadata calls; not a replay of a later authentication/DNS report.",
+    "primary_identifier": "evidence/environment.json and evidence/source-snapshots/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "retrying-source",
+    "verification_basis": "Installed source",
+    "metadata_check": "retrying 1.4.2; actual retrying.py plus metadata.",
+    "permitted_claim_and_limit": "Actual outer wrapper used; name/version/source, not substituted Tenacity results.",
+    "primary_identifier": "evidence/environment.json and evidence/source-snapshots/",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "tenacity",
+    "verification_basis": "Project README",
+    "metadata_check": "Tenacity project attribution; accessed 2026-09-30; no invented fixed release year.",
+    "permitted_claim_and_limit": "stop_after_attempt, stop_after_delay and stop_before_delay context inspected. Dependency not installed or executed.",
+    "primary_identifier": "https://github.com/jd/tenacity",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "futures",
+    "verification_basis": "Official Python documentation",
+    "metadata_check": "Python Software Foundation; current docs inspected, executions CPython 3.13.5.",
+    "permitted_claim_and_limit": "Future timeout, cancellation and context-manager shutdown semantics. Current docs not represented as version-pinned old docs.",
+    "primary_identifier": "https://docs.python.org/3/library/concurrent.futures.html",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "rfc9112",
+    "verification_basis": "Original IETF standard",
+    "metadata_check": "Roy T. Fielding, Mark Nottingham, Julian Reschke; HTTP/1.1; June 2022; RFC9112; DOI 10.17487/RFC9112.",
+    "permitted_claim_and_limit": "Length-delimited incomplete-response framing; does not itself mandate a particular Python retry predicate.",
+    "primary_identifier": "https://datatracker.ietf.org/doc/html/rfc9112",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "amplification",
+    "verification_basis": "Original preprint abstract + full HTML",
+    "metadata_check": "Rishabh Mehan and Jasmit Kaur Saluja; full title checked; 2026; arXiv:2608.25403v1; DOI 10.48550/arXiv.2608.25403.",
+    "permitted_claim_and_limit": "Census/simulation/adaptive budgeting distinct from this local version/intent study. Preprint, not asserted peer-reviewed.",
+    "primary_identifier": "https://arxiv.org/abs/2608.25403",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "filibuster",
+    "verification_basis": "Original author preprint PDF and metadata",
+    "metadata_check": "Michael Assad, Christopher S. Meiklejohn, Heather Miller, Stephan Krusche; exact title; ICSE Companion 2024; DOI 10.1145/3639478.3640021; arXiv:2404.01886.",
+    "permitted_claim_and_limit": "Full PDF inspected including figures; fault injection/visualization comparison, not an executed baseline. PDF not redistributed.",
+    "primary_identifier": "https://arxiv.org/abs/2404.01886",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "tfix",
+    "verification_basis": "Original arXiv metadata and abstract",
+    "metadata_check": "Jingzhu He, Ting Dai, Xiaohui Gu; TFix+: Self-configuring Hybrid Timeout Bug Fixing for Cloud Systems; 2021; arXiv:2110.04101; DOI 10.48550/arXiv.2110.04101.",
+    "permitted_claim_and_limit": "Only abstract-level methodology comparison supported; full paper not retrieved. No unverified evaluation claims imported.",
+    "primary_identifier": "https://arxiv.org/abs/2110.04101",
+    "checked_utc_date": "2026-09-30"
+  },
+  {
+    "bibkey": "intramorphic",
+    "verification_basis": "Official ACM Digital Library DOI record, SPLASH 2022 program record, and linked arXiv metadata",
+    "metadata_check": "Manuel Rigger and Zhendong Su; Intramorphic Testing: A New Approach to the Test Oracle Problem; Onward! 2022; pages 62--76; DOI 10.1145/3563835.3567662. The arXiv record identifies this DOI as the related published version.",
+    "permitted_claim_and_limit": "Methodological oracle comparison only; no claim to reproduce their implementation or empirical results.",
+    "primary_identifier": "https://doi.org/10.1145/3563835.3567662",
+    "checked_utc_date": "2026-10-03"
+  },
+  {
+    "bibkey": "tang",
+    "verification_basis": "Springer publisher article record",
+    "metadata_check": "Xunzhu Tang, Haoye Tian, Pingfan Kong, Saad Ezzini, Kui Liu, Xin Xia, Jacques Klein, and Tegawendé F. Bissyandé; App review driven collaborative bug finding; Empirical Software Engineering 29, article 124; 2024; DOI 10.1007/s10664-024-10489-x.",
+    "permitted_claim_and_limit": "Methodological report-to-validation connection only; not an extension of their algorithm, evidence of private data, or assertion of work by a named collaborator.",
+    "primary_identifier": "https://doi.org/10.1007/s10664-024-10489-x",
+    "checked_utc_date": "2026-10-03"
+  },
+  {
+    "bibkey": "pooch-paper",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://joss.theoj.org/papers/10.21105/joss.01943",
+    "permitted_claim_and_limit": "Scientific-data fetching and hash registry, not a production validation of RetryScope.",
+    "metadata_check": "All eight authors, exact title, 2020, 5(45):1943, DOI checked against JOSS and project citing page.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Leonardo Uieda and Santiago Rub{\\'e}n Soler and R{\\'e}mi Rampin and Hugo van Kemenade and Matthew Turk and Daniel Shapero and Anderson Banihirwe and John Leeman",
+      "title": "Pooch: A friend to fetch your data files",
+      "journal": "Journal of Open Source Software",
+      "volume": "5",
+      "number": "45",
+      "pages": "1943",
+      "year": "2020",
+      "doi": "10.21105/joss.01943"
+    },
+    "publication_year": "2020"
+  },
+  {
+    "bibkey": "pooch-create",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.fatiando.org/pooch/latest/api/generated/pooch.create.html",
+    "permitted_claim_and_limit": "retry_if_failed counts retries after the first; native Pooch retry and hash settings. Executed 1.9.0.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Pooch contributors}",
+      "title": "pooch.create",
+      "url": "https://www.fatiando.org/pooch/latest/api/generated/pooch.create.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "pooch-hashes",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.fatiando.org/pooch/latest/hashes.html",
+    "permitted_claim_and_limit": "Known registry digest versus explicit None bypass; unchecked corruption is not a Pooch bug.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Pooch contributors}",
+      "title": "Hashes: Calculating and bypassing",
+      "url": "https://www.fatiando.org/pooch/latest/hashes.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "pooch-downloaders",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.fatiando.org/pooch/latest/downloaders.html",
+    "permitted_claim_and_limit": "Supported downloader callback is the integration point; no private source patch.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Pooch contributors}",
+      "title": "Downloaders: Customizing the download",
+      "url": "https://www.fatiando.org/pooch/latest/downloaders.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "fsspec-api",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://filesystem-spec.readthedocs.io/en/latest/api.html",
+    "permitted_claim_and_limit": "HTTPFileSystem and file interfaces; live docs newer than installed 2026.4.0, installed source retained.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{fsspec contributors}",
+      "title": "API Reference",
+      "url": "https://filesystem-spec.readthedocs.io/en/latest/api.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "fsspec-features",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://filesystem-spec.readthedocs.io/en/latest/features.html",
+    "permitted_claim_and_limit": "Random access, buffering and cache_type=none; extra healthy ranged requests are not necessarily retries.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{fsspec contributors}",
+      "title": "Features of fsspec",
+      "url": "https://filesystem-spec.readthedocs.io/en/latest/features.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "aiohttp-ref",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://docs.aiohttp.org/en/stable/client_reference.html",
+    "permitted_claim_and_limit": "ClientTimeout total versus sock_read; documentation contrast, not an aiohttp deadline experiment. Installed 3.13.3; live 3.14.3.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{aiohttp contributors}",
+      "title": "Client Reference",
+      "url": "https://docs.aiohttp.org/en/stable/client_reference.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "urllib-migration",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://urllib3.readthedocs.io/en/stable/v2-migration-guide.html",
+    "permitted_claim_and_limit": "Release migration context; actual available comparison is 1.26.20 vendored versus 2.7.0, not original report wheels.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{urllib3 contributors}",
+      "title": "v2.0 Migration Guide",
+      "url": "https://urllib3.readthedocs.io/en/stable/v2-migration-guide.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "urllib-changelog",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://urllib3.readthedocs.io/en/stable/changelog.html",
+    "permitted_claim_and_limit": "Content length enforcement and version history; release notes are not proof of local behavior.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{urllib3 contributors}",
+      "title": "Changelog",
+      "url": "https://urllib3.readthedocs.io/en/stable/changelog.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "urllib-util",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html",
+    "permitted_claim_and_limit": "Retry/Timeout argument semantics; numeric total does not alone establish operation-wide deadline.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{urllib3 contributors}",
+      "title": "Utilities",
+      "url": "https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "urllib-response",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://urllib3.readthedocs.io/en/stable/reference/urllib3.response.html",
+    "permitted_claim_and_limit": "HTTPResponse length enforcement and incremental consumption; do not conflate framing with object identity.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{urllib3 contributors}",
+      "title": "Response and Decoders",
+      "url": "https://urllib3.readthedocs.io/en/stable/reference/urllib3.response.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "requests-advanced",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://requests.readthedocs.io/en/latest/user/advanced/",
+    "permitted_claim_and_limit": "Response hooks, streaming response consumption and connection reuse; instrumentation through supported hooks.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Requests contributors}",
+      "title": "Advanced Usage",
+      "url": "https://requests.readthedocs.io/en/latest/user/advanced/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "httpx-timeouts",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.python-httpx.org/advanced/timeouts/",
+    "permitted_claim_and_limit": "Connect/read/write/pool timeouts; actual async experiment uses HTTPX 0.28.1.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{HTTPX contributors}",
+      "title": "Timeouts",
+      "url": "https://www.python-httpx.org/advanced/timeouts/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "httpx-transports",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.python-httpx.org/advanced/transports/",
+    "permitted_claim_and_limit": "Built-in retry applies to connect error/timeout; transport retries explicitly zero in actual async comparison.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{HTTPX contributors}",
+      "title": "Transports",
+      "url": "https://www.python-httpx.org/advanced/transports/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "httpx-exceptions",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.python-httpx.org/exceptions/",
+    "permitted_claim_and_limit": "Different transport, protocol, HTTP-status exception classes; matching timeout names does not imply matching predicates.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{HTTPX contributors}",
+      "title": "Exceptions",
+      "url": "https://www.python-httpx.org/exceptions/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "google-retry",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://googleapis.dev/python/google-api-core/latest/retry.html",
+    "permitted_claim_and_limit": "Retry timeout checked before starting an attempt; docs-only semantic contrast, not executed here.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Google}",
+      "title": "Retry",
+      "url": "https://googleapis.dev/python/google-api-core/latest/retry.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "storage-retry",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://docs.cloud.google.com/storage/docs/retry-strategy",
+    "permitted_claim_and_limit": "Language-specific retry and conditional-idempotency policies; no Google Cloud execution or claim of universal settings.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Google Cloud}",
+      "title": "Retry strategy",
+      "url": "https://docs.cloud.google.com/storage/docs/retry-strategy"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "grpc-deadlines",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://grpc.io/docs/guides/deadlines/",
+    "permitted_claim_and_limit": "RPC deadline and server application responsibility for work after cancellation; not evaluated with gRPC.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{gRPC Authors}",
+      "title": "Deadlines",
+      "url": "https://grpc.io/docs/guides/deadlines/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "grpc-retry",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://grpc.io/docs/guides/retry/",
+    "permitted_claim_and_limit": "Retry policy, backoff and RPC commitment; documentation contrast, not another experimental stack.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{gRPC Authors}",
+      "title": "Retry",
+      "url": "https://grpc.io/docs/guides/retry/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "aws-builders",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/",
+    "permitted_claim_and_limit": "Established backoff/jitter practice, not a new policy introduced here.",
+    "metadata_check": "Author Marc Brooker, exact title, original 2015-03-04 and explicit 2023 update verified; not confused with 2026 Builder Center republication.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Marc Brooker",
+      "title": "Exponential Backoff And Jitter",
+      "year": "2015",
+      "url": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/"
+    },
+    "publication_year": "2015"
+  },
+  {
+    "bibkey": "aws-idempotent",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+    "permitted_claim_and_limit": "Read-only study cannot establish safe replay of side-effecting calls; no original publication year invented.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Malcolm Featonby}",
+      "title": "Making retries safe with idempotent APIs",
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "sre-overload",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://sre.google/sre-book/handling-overload/",
+    "permitted_claim_and_limit": "SRE chapter 21 gives production overload context; local call counts do not measure overload protection.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Alejandro Forero Cuervo}",
+      "title": "Handling Overload",
+      "url": "https://sre.google/sre-book/handling-overload/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "sre-cascading",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://sre.google/sre-book/addressing-cascading-failures/",
+    "permitted_claim_and_limit": "SRE chapter 22 context; no inference of outage reduction from local experiments.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Mike Ulrich}",
+      "title": "Addressing Cascading Failures",
+      "url": "https://sre.google/sre-book/addressing-cascading-failures/"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "asyncio",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://docs.python.org/3.13/library/asyncio-task.html",
+    "permitted_claim_and_limit": "asyncio.timeout cooperative cancellation and wait_for cleanup semantics. CPython 3.13.5 actually executed, docs later 3.13 patch.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Python Software Foundation}",
+      "title": "Coroutines and tasks",
+      "url": "https://docs.python.org/3.13/library/asyncio-task.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "socket",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://docs.python.org/3.13/library/socket.html",
+    "permitted_claim_and_limit": "Socket timeout phase is not universal DNS/connect/read/cleanup cancellation; no DNS/TLS experiment.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Python Software Foundation}",
+      "title": "socket: Low-level networking interface",
+      "url": "https://docs.python.org/3.13/library/socket.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "http-client",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://docs.python.org/3.13/library/http.client.html",
+    "permitted_claim_and_limit": "HTTP response reading is a separate operation; body observation not inferred from headers.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Python Software Foundation}",
+      "title": "http.client: HTTP protocol client",
+      "url": "https://docs.python.org/3.13/library/http.client.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "hashlib",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://docs.python.org/3.13/library/hashlib.html",
+    "permitted_claim_and_limit": "SHA-256 used as ordinary whole-buffer validation, not a novel digest algorithm.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Python Software Foundation}",
+      "title": "hashlib: Secure hashes and message digests",
+      "url": "https://docs.python.org/3.13/library/hashlib.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "tempfile",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://docs.python.org/3.13/library/tempfile.html",
+    "permitted_claim_and_limit": "Temporary staging/cleanup API supports Pooch inspection; no claimed crash durability.",
+    "metadata_check": "Title and attribution checked on the primary source; undated documentation has no invented publication year.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "{Python Software Foundation}",
+      "title": "tempfile: Generate temporary files and directories",
+      "url": "https://docs.python.org/3.13/library/tempfile.html"
+    },
+    "publication_year": "not stated (undated documentation)"
+  },
+  {
+    "bibkey": "rfc9110",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://datatracker.ietf.org/doc/html/rfc9110",
+    "permitted_claim_and_limit": "Range, Content-Range and representation identity semantics used by the bounded fixture.",
+    "metadata_check": "Three editors, title, June 2022, RFC and DOI checked on IETF.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Roy T. Fielding and Mark Nottingham and Julian Reschke",
+      "title": "HTTP Semantics",
+      "institution": "IETF",
+      "number": "RFC 9110",
+      "year": "2022",
+      "doi": "10.17487/RFC9110"
+    },
+    "publication_year": "2022"
+  },
+  {
+    "bibkey": "rfc6585",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.rfc-editor.org/info/rfc6585/",
+    "permitted_claim_and_limit": "429 and Retry-After are outside our 400/503 local fixture; never prescribe universal status lists.",
+    "metadata_check": "Authors, title, April 2012, RFC and DOI checked at RFC Editor.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Mark Nottingham and Roy T. Fielding",
+      "title": "Additional HTTP Status Codes",
+      "institution": "IETF",
+      "number": "RFC 6585",
+      "year": "2012",
+      "doi": "10.17487/RFC6585"
+    },
+    "publication_year": "2012"
+  },
+  {
+    "bibkey": "sfit",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://christophermeiklejohn.com/publications/filibuster-socc-2021.pdf",
+    "permitted_claim_and_limit": "Fault exploration differs from our manually chosen local replay/oracle scope.",
+    "metadata_check": "Author PDF first page inspected; all five authors, SoCC 2021, exact DOI verified.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Christopher S. Meiklejohn and Andrea Estrada and Yiwen Song and Heather Miller and Rohan Padhye",
+      "title": "Service-Level Fault Injection Testing",
+      "booktitle": "SoCC",
+      "year": "2021",
+      "doi": "10.1145/3472883.3487005"
+    },
+    "publication_year": "2021"
+  },
+  {
+    "bibkey": "yuan",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan",
+    "permitted_claim_and_limit": "Error-handling investigation motivates discriminating local fault tests; no reuse of its industrial prevalence evidence.",
+    "metadata_check": "All eight authors, title, year and page range checked against USENIX BibTeX.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Ding Yuan and Yu Luo and Xin Zhuang and Guilherme Renna Rodrigues and Xu Zhao and Yongle Zhang and Pranay U. Jain and Michael Stumm",
+      "title": "Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems",
+      "booktitle": "OSDI",
+      "year": "2014",
+      "pages": "249--265",
+      "url": "https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan"
+    },
+    "publication_year": "2014"
+  },
+  {
+    "bibkey": "bogart",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.cs.cmu.edu/~ckaestne/pdf/fse16.pdf",
+    "permitted_claim_and_limit": "API ecosystem study differs from our non-interview behavior audit.",
+    "metadata_check": "Four authors, title, FSE 2016, pages and DOI checked against author PDF, SMU record and ACM metadata.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Christopher Bogart and Christian K{\\\"a}stner and James Herbsleb and Ferdian Thung",
+      "title": "How to Break an API: Cost Negotiation and Community Values in Three Software Ecosystems",
+      "booktitle": "FSE",
+      "year": "2016",
+      "pages": "109--120",
+      "doi": "10.1145/2950290.2950325"
+    },
+    "publication_year": "2016"
+  },
+  {
+    "bibkey": "oracle",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://philmcminn.com/publications/",
+    "permitted_claim_and_limit": "Explicit intent does not infer requirements; observed old behavior is not ground truth.",
+    "metadata_check": "Exact title (no additional Test prefix), five authors, 2015 volume/issue/pages checked against McMinn official BibTeX; DOI link identified.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Earl T. Barr and Mark Harman and Phil McMinn and Muzammil Shahbaz and Shin Yoo",
+      "title": "The Oracle Problem in Software Testing: A Survey",
+      "journal": "IEEE Transactions on Software Engineering",
+      "volume": "41",
+      "number": "5",
+      "pages": "507--525",
+      "year": "2015",
+      "doi": "10.1109/TSE.2014.2372785"
+    },
+    "publication_year": "2015"
+  },
+  {
+    "bibkey": "tail",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://research.google/pubs/the-tail-at-scale/",
+    "permitted_claim_and_limit": "Production latency motivation only, no transfer of local deadline ratios into tail-latency improvement.",
+    "metadata_check": "Names, exact title, 2013, CACM 56 and pages verified at Google Research; omitted unverified issue/DOI fields.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Jeffrey Dean and Luiz Andr{\\'e} Barroso",
+      "title": "The Tail at Scale",
+      "journal": "Communications of the ACM",
+      "volume": "56",
+      "pages": "74--80",
+      "year": "2013",
+      "url": "https://research.google/pubs/the-tail-at-scale/"
+    },
+    "publication_year": "2013"
+  },
+  {
+    "bibkey": "end-to-end",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf",
+    "permitted_claim_and_limit": "End-to-end checksum and retry is established; ordinary SHA-256 baseline is not our novelty.",
+    "metadata_check": "Primary MIT PDF identifies authors and journal 2(4), 1984, pages 277--288. No unverified DOI field.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "J. H. Saltzer and D. P. Reed and D. D. Clark",
+      "title": "End-to-End Arguments in System Design",
+      "journal": "ACM Transactions on Computer Systems",
+      "volume": "2",
+      "number": "4",
+      "pages": "277--288",
+      "year": "1984",
+      "url": "https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf"
+    },
+    "publication_year": "1984"
+  },
+  {
+    "bibkey": "case-study",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://link.springer.com/article/10.1007/s10664-008-9102-8",
+    "permitted_claim_and_limit": "Case context and generalization limits; repetitions are not independent industrial case studies.",
+    "metadata_check": "Two authors, exact title, 2009 issue (2008 online), pages, DOI verified publisher and Lund record.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Per Runeson and Martin H{\\\"o}st",
+      "title": "Guidelines for conducting and reporting case study research in software engineering",
+      "journal": "Empirical Software Engineering",
+      "volume": "14",
+      "number": "2",
+      "pages": "131--164",
+      "year": "2009",
+      "doi": "10.1007/s10664-008-9102-8"
+    },
+    "publication_year": "2009"
+  },
+  {
+    "bibkey": "runtime-verification",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://research.uni-luebeck.de/de/publications/runtime-verification-for-ltl-and-tltl/",
+    "permitted_claim_and_limit": "Three-valued runtime monitoring precedes this work; our field-specific completeness is an engineering application, not new temporal logic.",
+    "metadata_check": "Three authors, title, TOSEM 20(4), article 14, 2011 and DOI checked at author institution.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Andreas Bauer and Martin Leucker and Christian Schallhart",
+      "title": "Runtime Verification for LTL and TLTL",
+      "journal": "ACM Transactions on Software Engineering and Methodology",
+      "volume": "20",
+      "number": "4",
+      "pages": "14:1--14:64",
+      "year": "2011",
+      "doi": "10.1145/2000799.2000800"
+    },
+    "publication_year": "2011"
+  },
+  {
+    "bibkey": "chaos",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://arxiv.org/abs/1905.04648",
+    "permitted_claim_and_limit": "Netflix production experience is distinct evidence; ours not production rollout or field evaluation.",
+    "metadata_check": "Author-submitted paper verifies four names/title; venue/year/pages/DOI cross-checked against proceedings metadata.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Ali Basiri and Lorin Hochstein and Nora Jones and Haley Tucker",
+      "title": "Automating chaos experiments in production",
+      "booktitle": "ICSE-SEIP",
+      "year": "2019",
+      "pages": "31--40",
+      "doi": "10.1109/ICSE-SEIP.2019.00012"
+    },
+    "publication_year": "2019"
+  },
+  {
+    "bibkey": "ldfi",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://people.ucsc.edu/~palvaro/molly.pdf",
+    "permitted_claim_and_limit": "Automated fault selection/lineage is different from manual local fixtures and explicit user-provided ownership.",
+    "metadata_check": "Primary author PDF first page rendered: all three authors, title, SIGMOD 2015 and DOI checked.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Peter Alvaro and Joshua Rosen and Joseph M. Hellerstein",
+      "title": "Lineage-driven Fault Injection",
+      "booktitle": "SIGMOD",
+      "year": "2015",
+      "doi": "10.1145/2723372.2723711"
+    },
+    "publication_year": "2015"
+  },
+  {
+    "bibkey": "rfc9530",
+    "verification_basis": "Primary publisher, author, standards, or official project source",
+    "primary_identifier": "https://www.rfc-editor.org/info/rfc9530/",
+    "permitted_claim_and_limit": "Representation/content digests distinguish identity from framing; not claiming this artifact implements the RFC fields.",
+    "metadata_check": "Two names, exact title, February 2024, RFC and DOI checked at RFC Editor.",
+    "checked_utc_date": "2026-09-30",
+    "verified_metadata": {
+      "author": "Roberto Polli and Lucas Pardue",
+      "title": "Digest Fields",
+      "institution": "IETF",
+      "number": "RFC 9530",
+      "year": "2024",
+      "doi": "10.17487/RFC9530"
+    },
+    "publication_year": "2024"
+  },
+  {
+    "bibkey": "multiprocessing",
+    "verification_basis": "Official Python 3.13 library documentation",
+    "metadata_check": "Python Software Foundation documentation; process start, join, terminate, and start-method semantics; accessed 2026-10-04.",
+    "permitted_claim_and_limit": "A Process can be joined with a timeout and explicitly terminated; termination skips exit handlers and can corrupt shared IPC or leave descendants, so it is an isolation mechanism with operational costs rather than universal cancellation.",
+    "primary_identifier": "https://docs.python.org/3.13/library/multiprocessing.html",
+    "checked_utc_date": "2026-10-04",
+    "rechecked_utc_date": "2026-10-04"
+  },
+  {
+    "bibkey": "dapper",
+    "verification_basis": "Original Google technical report landing page and report PDF",
+    "metadata_check": "Title, eight authors, report number dapper-2010-1, and April 2010 date checked against the report front page.",
+    "permitted_claim_and_limit": "Establishes distributed tracing as prior infrastructure for propagating and joining causal context; it does not provide RetryScope's application-intent audit or finite migration verdicts.",
+    "primary_identifier": "https://research.google/pubs/dapper-a-large-scale-distributed-systems-tracing-infrastructure/",
+    "checked_utc_date": "2026-10-07",
+    "rechecked_utc_date": "2026-10-07"
+  },
+  {
+    "bibkey": "w3c-trace-context",
+    "verification_basis": "W3C Recommendation",
+    "metadata_check": "Recommendation title and publication date 23 November 2021 checked on the W3C specification.",
+    "permitted_claim_and_limit": "Defines traceparent/tracestate propagation and identifier syntax. RetryScope uses a standards-shaped traceparent in its bounded fixture but does not claim a complete Trace Context or tracing implementation.",
+    "primary_identifier": "https://www.w3.org/TR/trace-context/",
+    "checked_utc_date": "2026-10-07",
+    "rechecked_utc_date": "2026-10-07"
+  },
+  {
+    "bibkey": "otel-http",
+    "verification_basis": "Official OpenTelemetry semantic-conventions specification",
+    "metadata_check": "HTTP span document and resend-count guidance checked on the official specification page; accessed 2026-10-07.",
+    "permitted_claim_and_limit": "Supports one client span per wire attempt and resend-count conventions. It is prior observability infrastructure, not an operation-intent migration oracle.",
+    "primary_identifier": "https://opentelemetry.io/docs/specs/semconv/http/http-spans/",
+    "checked_utc_date": "2026-10-07",
+    "rechecked_utc_date": "2026-10-07"
+  }
+]

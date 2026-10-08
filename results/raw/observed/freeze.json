@@ -1,0 +1,13 @@
+{
+  "utc": "2026-10-04T12:29:13.081451+00:00",
+  "phase": "observed-v4",
+  "seeds": "301,302,303,304,305,306,307,308,309,310,311,312",
+  "ids": "",
+  "files": {
+    "study/cases.json": "f5e805a528d48c7de2494d5b97eb352cc2aa72f43bad3df29f680e9bc7414775",
+    "src/retryscope/observed_worker.py": "49e22d18ac0d1204617bcefe646ad747f2014800f5ed95cf380b01a58c3d22b9",
+    "src/retryscope/observation.py": "b8615660a106e9ab79b88bf923a04986fcec8170d2fcb3d8d6d11f3a7174d11c",
+    "src/retryscope/audit.py": "83e83c256543f6eea731726b478839f111b7338d87a4e0c90a8b9b02681a0a0c",
+    "src/retryscope/responder.py": "3c7ea3ac6d38e8e12fe0de492a99aceb1b3b0f0d1f508e3b0da61b00bed9e84e"
+  }
+}

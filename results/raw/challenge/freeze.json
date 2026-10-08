@@ -1,0 +1,19 @@
+{
+  "utc": "2026-09-30T03:12:39.350807+00:00",
+  "phase": "post-evaluation-baseline-challenge",
+  "seeds": [
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208
+  ],
+  "sources": {
+    "scripts/challenge_baselines.py": "0d81e02a1df7daaba01ab7a151c9a1feef2a42fdced3b12c13bc39e0e7c54121",
+    "src/retryscope/ordinary.py": "5d64aa078ad8408b7b2789babab7993ce36ae62e433b1d4eea91c7a7c1460c53"
+  },
+  "plan": "2 stacks x 5 scenarios x 8 repeats; public enforce_content_length 2 stacks x 2 options x 8 repeats. Do not combine with main evaluation."
+}

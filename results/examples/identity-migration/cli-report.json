@@ -1,0 +1,31 @@
+{
+  "before": {
+    "schema": 2,
+    "verdict": "mismatch",
+    "dimensions": {
+      "payload": {
+        "verdict": "mismatch",
+        "reason": "complete returned payload compared",
+        "observed": "123456789:bcdefghijklmnopqrstuvwxyz{BCDEFGHIJKLMNOPQRSTUVWXYZ[.`\u000b123456789:bcdefghijklmnopqrstuv"
+      }
+    },
+    "intent_provenance": "explicit known-object download requirement",
+    "hard_deadline_guarantee": false
+  },
+  "after": {
+    "schema": 2,
+    "verdict": "pass",
+    "dimensions": {
+      "payload": {
+        "verdict": "pass",
+        "reason": "complete returned payload compared",
+        "observed": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu"
+      }
+    },
+    "intent_provenance": "explicit known-object download requirement",
+    "hard_deadline_guarantee": false
+  },
+  "verdict": "pass",
+  "transition": "mismatch -> pass",
+  "interpretation": "finite-trace conformance change, not automatic defect attribution"
+}

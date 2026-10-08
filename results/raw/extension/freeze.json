@@ -1,0 +1,463 @@
+{
+  "utc": "2026-09-30T12:58:00.589295+00:00",
+  "phase": "evaluation",
+  "cases": [
+    {
+      "id": "pooch_hash0_success",
+      "family": "download",
+      "mode": "pooch_hash0",
+      "scenario": "success"
+    },
+    {
+      "id": "pooch_hash0_transient",
+      "family": "download",
+      "mode": "pooch_hash0",
+      "scenario": "transient"
+    },
+    {
+      "id": "pooch_hash0_persistent",
+      "family": "download",
+      "mode": "pooch_hash0",
+      "scenario": "persistent"
+    },
+    {
+      "id": "pooch_hash0_denied",
+      "family": "download",
+      "mode": "pooch_hash0",
+      "scenario": "denied"
+    },
+    {
+      "id": "pooch_hash0_truncated_once",
+      "family": "download",
+      "mode": "pooch_hash0",
+      "scenario": "truncated_once"
+    },
+    {
+      "id": "pooch_hash0_corrupt_once",
+      "family": "download",
+      "mode": "pooch_hash0",
+      "scenario": "corrupt_once"
+    },
+    {
+      "id": "pooch_hash0_corrupt_always",
+      "family": "download",
+      "mode": "pooch_hash0",
+      "scenario": "corrupt_always"
+    },
+    {
+      "id": "pooch_hash1_success",
+      "family": "download",
+      "mode": "pooch_hash1",
+      "scenario": "success"
+    },
+    {
+      "id": "pooch_hash1_transient",
+      "family": "download",
+      "mode": "pooch_hash1",
+      "scenario": "transient"
+    },
+    {
+      "id": "pooch_hash1_persistent",
+      "family": "download",
+      "mode": "pooch_hash1",
+      "scenario": "persistent"
+    },
+    {
+      "id": "pooch_hash1_denied",
+      "family": "download",
+      "mode": "pooch_hash1",
+      "scenario": "denied"
+    },
+    {
+      "id": "pooch_hash1_truncated_once",
+      "family": "download",
+      "mode": "pooch_hash1",
+      "scenario": "truncated_once"
+    },
+    {
+      "id": "pooch_hash1_corrupt_once",
+      "family": "download",
+      "mode": "pooch_hash1",
+      "scenario": "corrupt_once"
+    },
+    {
+      "id": "pooch_hash1_corrupt_always",
+      "family": "download",
+      "mode": "pooch_hash1",
+      "scenario": "corrupt_always"
+    },
+    {
+      "id": "pooch_unchecked1_success",
+      "family": "download",
+      "mode": "pooch_unchecked1",
+      "scenario": "success"
+    },
+    {
+      "id": "pooch_unchecked1_transient",
+      "family": "download",
+      "mode": "pooch_unchecked1",
+      "scenario": "transient"
+    },
+    {
+      "id": "pooch_unchecked1_persistent",
+      "family": "download",
+      "mode": "pooch_unchecked1",
+      "scenario": "persistent"
+    },
+    {
+      "id": "pooch_unchecked1_denied",
+      "family": "download",
+      "mode": "pooch_unchecked1",
+      "scenario": "denied"
+    },
+    {
+      "id": "pooch_unchecked1_truncated_once",
+      "family": "download",
+      "mode": "pooch_unchecked1",
+      "scenario": "truncated_once"
+    },
+    {
+      "id": "pooch_unchecked1_corrupt_once",
+      "family": "download",
+      "mode": "pooch_unchecked1",
+      "scenario": "corrupt_once"
+    },
+    {
+      "id": "pooch_unchecked1_corrupt_always",
+      "family": "download",
+      "mode": "pooch_unchecked1",
+      "scenario": "corrupt_always"
+    },
+    {
+      "id": "requests_old_length_success",
+      "family": "download",
+      "mode": "requests_old_length",
+      "scenario": "success"
+    },
+    {
+      "id": "requests_old_length_transient",
+      "family": "download",
+      "mode": "requests_old_length",
+      "scenario": "transient"
+    },
+    {
+      "id": "requests_old_length_persistent",
+      "family": "download",
+      "mode": "requests_old_length",
+      "scenario": "persistent"
+    },
+    {
+      "id": "requests_old_length_denied",
+      "family": "download",
+      "mode": "requests_old_length",
+      "scenario": "denied"
+    },
+    {
+      "id": "requests_old_length_truncated_once",
+      "family": "download",
+      "mode": "requests_old_length",
+      "scenario": "truncated_once"
+    },
+    {
+      "id": "requests_old_length_corrupt_once",
+      "family": "download",
+      "mode": "requests_old_length",
+      "scenario": "corrupt_once"
+    },
+    {
+      "id": "requests_old_length_corrupt_always",
+      "family": "download",
+      "mode": "requests_old_length",
+      "scenario": "corrupt_always"
+    },
+    {
+      "id": "requests_new_length_success",
+      "family": "download",
+      "mode": "requests_new_length",
+      "scenario": "success"
+    },
+    {
+      "id": "requests_new_length_transient",
+      "family": "download",
+      "mode": "requests_new_length",
+      "scenario": "transient"
+    },
+    {
+      "id": "requests_new_length_persistent",
+      "family": "download",
+      "mode": "requests_new_length",
+      "scenario": "persistent"
+    },
+    {
+      "id": "requests_new_length_denied",
+      "family": "download",
+      "mode": "requests_new_length",
+      "scenario": "denied"
+    },
+    {
+      "id": "requests_new_length_truncated_once",
+      "family": "download",
+      "mode": "requests_new_length",
+      "scenario": "truncated_once"
+    },
+    {
+      "id": "requests_new_length_corrupt_once",
+      "family": "download",
+      "mode": "requests_new_length",
+      "scenario": "corrupt_once"
+    },
+    {
+      "id": "requests_new_length_corrupt_always",
+      "family": "download",
+      "mode": "requests_new_length",
+      "scenario": "corrupt_always"
+    },
+    {
+      "id": "requests_old_hash_success",
+      "family": "download",
+      "mode": "requests_old_hash",
+      "scenario": "success"
+    },
+    {
+      "id": "requests_old_hash_transient",
+      "family": "download",
+      "mode": "requests_old_hash",
+      "scenario": "transient"
+    },
+    {
+      "id": "requests_old_hash_persistent",
+      "family": "download",
+      "mode": "requests_old_hash",
+      "scenario": "persistent"
+    },
+    {
+      "id": "requests_old_hash_denied",
+      "family": "download",
+      "mode": "requests_old_hash",
+      "scenario": "denied"
+    },
+    {
+      "id": "requests_old_hash_truncated_once",
+      "family": "download",
+      "mode": "requests_old_hash",
+      "scenario": "truncated_once"
+    },
+    {
+      "id": "requests_old_hash_corrupt_once",
+      "family": "download",
+      "mode": "requests_old_hash",
+      "scenario": "corrupt_once"
+    },
+    {
+      "id": "requests_old_hash_corrupt_always",
+      "family": "download",
+      "mode": "requests_old_hash",
+      "scenario": "corrupt_always"
+    },
+    {
+      "id": "requests_new_hash_success",
+      "family": "download",
+      "mode": "requests_new_hash",
+      "scenario": "success"
+    },
+    {
+      "id": "requests_new_hash_transient",
+      "family": "download",
+      "mode": "requests_new_hash",
+      "scenario": "transient"
+    },
+    {
+      "id": "requests_new_hash_persistent",
+      "family": "download",
+      "mode": "requests_new_hash",
+      "scenario": "persistent"
+    },
+    {
+      "id": "requests_new_hash_denied",
+      "family": "download",
+      "mode": "requests_new_hash",
+      "scenario": "denied"
+    },
+    {
+      "id": "requests_new_hash_truncated_once",
+      "family": "download",
+      "mode": "requests_new_hash",
+      "scenario": "truncated_once"
+    },
+    {
+      "id": "requests_new_hash_corrupt_once",
+      "family": "download",
+      "mode": "requests_new_hash",
+      "scenario": "corrupt_once"
+    },
+    {
+      "id": "requests_new_hash_corrupt_always",
+      "family": "download",
+      "mode": "requests_new_hash",
+      "scenario": "corrupt_always"
+    },
+    {
+      "id": "smart_range_3_7",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 3,
+      "cut": 7
+    },
+    {
+      "id": "smart_range_3_31",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 3,
+      "cut": 31
+    },
+    {
+      "id": "smart_range_3_63",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 3,
+      "cut": 63
+    },
+    {
+      "id": "smart_range_3_healthy",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "success",
+      "read_size": 3,
+      "cut": 7
+    },
+    {
+      "id": "smart_range_11_7",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 11,
+      "cut": 7
+    },
+    {
+      "id": "smart_range_11_31",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 11,
+      "cut": 31
+    },
+    {
+      "id": "smart_range_11_63",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 11,
+      "cut": 63
+    },
+    {
+      "id": "smart_range_11_healthy",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "success",
+      "read_size": 11,
+      "cut": 7
+    },
+    {
+      "id": "smart_range_23_7",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 23,
+      "cut": 7
+    },
+    {
+      "id": "smart_range_23_31",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 23,
+      "cut": 31
+    },
+    {
+      "id": "smart_range_23_63",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "truncated_once",
+      "read_size": 23,
+      "cut": 63
+    },
+    {
+      "id": "smart_range_23_healthy",
+      "family": "range_recovery",
+      "mode": "smart",
+      "scenario": "success",
+      "read_size": 23,
+      "cut": 7
+    },
+    {
+      "id": "fsspec_known_size_8",
+      "family": "constituent_reads",
+      "mode": "known_size",
+      "scenario": "success",
+      "read_size": 8
+    },
+    {
+      "id": "fsspec_metadata_8",
+      "family": "constituent_reads",
+      "mode": "metadata",
+      "scenario": "success",
+      "read_size": 8
+    },
+    {
+      "id": "fsspec_known_size_17",
+      "family": "constituent_reads",
+      "mode": "known_size",
+      "scenario": "success",
+      "read_size": 17
+    },
+    {
+      "id": "fsspec_metadata_17",
+      "family": "constituent_reads",
+      "mode": "metadata",
+      "scenario": "success",
+      "read_size": 17
+    },
+    {
+      "id": "fsspec_known_size_31",
+      "family": "constituent_reads",
+      "mode": "known_size",
+      "scenario": "success",
+      "read_size": 31
+    },
+    {
+      "id": "fsspec_metadata_31",
+      "family": "constituent_reads",
+      "mode": "metadata",
+      "scenario": "success",
+      "read_size": 31
+    }
+  ],
+  "seeds": [
+    501,
+    502,
+    503,
+    504,
+    505,
+    506
+  ],
+  "versions": {
+    "pooch": "1.9.0",
+    "fsspec": "2026.4.0",
+    "aiohttp": "3.13.3",
+    "requests": "2.32.5",
+    "urllib3": "2.7.0",
+    "boto3": "1.43.18",
+    "botocore": "1.43.18",
+    "smart_open": "7.6.1",
+    "pip": "25.1.1"
+  },
+  "sources": {
+    "scripts/extend_study.py": "47dddb2d94c039b3d404a78156bec176a9f17ef7a5055fda879f8aba435294b3",
+    "src/retryscope/audit.py": "1a18e7250e5ca1843e304c9bfe93b9821f0d7c4a1991aa1b7c6e5aece7d1f64d",
+    "src/retryscope/range_fixture.py": "7c3173094deefe211974e7cec9a7a236ea38c222a5348d4fcc77024334b9242e",
+    "study/extension-protocol.md": "f79720e1b1133c3de55761586500f11db0e9ecc1a58a6209554bc3ef887a9ae5"
+  }
+}

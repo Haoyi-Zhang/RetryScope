@@ -1,0 +1,117 @@
+{
+  "utc": "2026-10-04T12:34:42.734421+00:00",
+  "python": "3.13.5",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "cases": [
+    {
+      "id": "thread_future_success_1.0",
+      "mode": "thread_future",
+      "scenario": "success",
+      "scale": 1.0
+    },
+    {
+      "id": "thread_future_success_1.5",
+      "mode": "thread_future",
+      "scenario": "success",
+      "scale": 1.5
+    },
+    {
+      "id": "thread_future_trickle_1.0",
+      "mode": "thread_future",
+      "scenario": "trickle",
+      "scale": 1.0
+    },
+    {
+      "id": "thread_future_trickle_1.5",
+      "mode": "thread_future",
+      "scenario": "trickle",
+      "scale": 1.5
+    },
+    {
+      "id": "thread_future_slow_headers_1.0",
+      "mode": "thread_future",
+      "scenario": "slow_headers",
+      "scale": 1.0
+    },
+    {
+      "id": "thread_future_slow_headers_1.5",
+      "mode": "thread_future",
+      "scenario": "slow_headers",
+      "scale": 1.5
+    },
+    {
+      "id": "thread_future_retry_delay_1.0",
+      "mode": "thread_future",
+      "scenario": "retry_delay",
+      "scale": 1.0
+    },
+    {
+      "id": "thread_future_retry_delay_1.5",
+      "mode": "thread_future",
+      "scenario": "retry_delay",
+      "scale": 1.5
+    },
+    {
+      "id": "process_watchdog_success_1.0",
+      "mode": "process_watchdog",
+      "scenario": "success",
+      "scale": 1.0
+    },
+    {
+      "id": "process_watchdog_success_1.5",
+      "mode": "process_watchdog",
+      "scenario": "success",
+      "scale": 1.5
+    },
+    {
+      "id": "process_watchdog_trickle_1.0",
+      "mode": "process_watchdog",
+      "scenario": "trickle",
+      "scale": 1.0
+    },
+    {
+      "id": "process_watchdog_trickle_1.5",
+      "mode": "process_watchdog",
+      "scenario": "trickle",
+      "scale": 1.5
+    },
+    {
+      "id": "process_watchdog_slow_headers_1.0",
+      "mode": "process_watchdog",
+      "scenario": "slow_headers",
+      "scale": 1.0
+    },
+    {
+      "id": "process_watchdog_slow_headers_1.5",
+      "mode": "process_watchdog",
+      "scenario": "slow_headers",
+      "scale": 1.5
+    },
+    {
+      "id": "process_watchdog_retry_delay_1.0",
+      "mode": "process_watchdog",
+      "scenario": "retry_delay",
+      "scale": 1.0
+    },
+    {
+      "id": "process_watchdog_retry_delay_1.5",
+      "mode": "process_watchdog",
+      "scenario": "retry_delay",
+      "scale": 1.5
+    }
+  ],
+  "seeds": [
+    701,
+    702,
+    703,
+    704,
+    705,
+    706
+  ],
+  "sources": {
+    "scripts/sync_enforcement_study.py": "7f9d32f4fdf34d78d7e2fc1de0391d7c509d44bc51f71b124dda5302fbdf2389",
+    "study/sync-enforcement-protocol.md": "c48e6f27c930162df165c8333b5428398be13377488760156e8a4cad30e43869",
+    "src/retryscope/responder.py": "3c7ea3ac6d38e8e12fe0de492a99aceb1b3b0f0d1f508e3b0da61b00bed9e84e",
+    "src/retryscope/audit.py": "83e83c256543f6eea731726b478839f111b7338d87a4e0c90a8b9b02681a0a0c"
+  }
+}

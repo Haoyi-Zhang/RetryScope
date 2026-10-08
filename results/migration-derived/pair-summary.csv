@@ -1,0 +1,17 @@
+id,phase,n,expected,basis,directional_control,observation_control,structural_changes,outcome_prediction,count_prediction,outcome_correct,count_correct,retryscope_correct
+aws_default_policy_opt_in,initial,6,stable_conformant,"same installed botocore release, two import-time policy states",False,False,6,stable:6,repair:6,6,0,6
+boto_total_attempt_normalization,initial,6,repair,documented max_attempts versus total_max_attempts distinction,False,False,6,stable:6,repair:6,0,6,6
+requests_total_normalization,initial,6,repair,same Requests release with urllib3 Retry total reduced from two retries to one,False,False,6,stable:6,repair:6,0,6,6
+hub_total_normalization,initial,6,repair,same huggingface_hub helper with max_retries normalized,False,False,6,stable:6,repair:6,0,6,6
+broad_to_selective_400,initial,6,repair,outer retry predicate narrowed from every exception to selected classes,False,False,6,stable:6,repair:6,0,6,6
+nested_retry_owner_normalization,initial,6,repair,remove duplicate inner-plus-outer retry ownership while retaining one selective outer retry,False,False,6,stable:6,repair:6,0,6,6
+selective_to_broad_400_control,initial,6,regression,directed control reuses the same executions in the opposite migration direction,True,False,6,stable:6,regression:6,0,6,6
+native_http_upgrade_truncation,initial,6,stable_nonconformant,wrong success changes to safe failure but native execution still does not recover,False,False,6,regression:6,stable:6,0,6,6
+body_aware_upgrade_adaptation,initial,6,repair,new incomplete-body exception becomes observable to the existing class-aware wrapper,False,False,6,stable:6,regression:6,0,0,6
+pooch_enable_registered_hash_retry,extension,6,repair,native known hash rejects same-length corruption and one configured retry recovers,False,False,6,stable:6,regression:6,0,0,6
+requests_enable_digest_retry,extension,6,repair,ordinary SHA-256 validation replaces length-only acceptance,False,False,6,stable:6,regression:6,0,0,6
+fsspec_metadata_discovery,extension,6,stable_conformant,metadata discovery adds a constituent request without adding an error retry,False,False,6,stable:6,regression:6,6,0,6
+fsspec_block_size_change,extension,6,stable_conformant,smaller uncached reads increase constituent wire requests while preserving the operation,False,False,6,stable:6,regression:6,6,0,6
+async_trickle_total_timeout,async,6,repair,inactivity timeout permits progress; asyncio timeout bounds the cooperative operation,False,False,6,regression:6,stable:6,0,0,6
+async_retry_delay_total_timeout,async,6,repair,read inactivity does not cover delay before retry; cooperative timeout does,False,False,6,regression:6,repair:6,0,6,6
+observation_loss_control,extension,6,evidence_loss,the same completed operation is re-audited after removing the completion witness,False,True,0,stable:6,stable:6,0,0,6

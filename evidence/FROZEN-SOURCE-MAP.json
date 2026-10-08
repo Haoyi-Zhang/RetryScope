@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "relocations": [
+    {
+      "frozen_path": "src/retryscope/audit.py",
+      "preserved_path": "evidence/source-snapshots/frozen-extension-audit.py",
+      "sha256": "1a18e7250e5ca1843e304c9bfe93b9821f0d7c4a1991aa1b7c6e5aece7d1f64d",
+      "reason": "Extension and asynchronous executions froze an earlier audit source; preserve the executed bytes while the live checker adds paired and causal analysis."
+    },
+    {
+      "frozen_path": "src/retryscope/audit.py",
+      "preserved_path": "evidence/source-snapshots/frozen-sequential-audit.py",
+      "sha256": "83e83c256543f6eea731726b478839f111b7338d87a4e0c90a8b9b02681a0a0c",
+      "reason": "The client-witnessed sequential and synchronous executions froze the checker before recovery-role support was added to the live causal implementation."
+    },
+    {
+      "frozen_path": "study/extension-protocol.md",
+      "preserved_path": "evidence/source-snapshots/frozen-extension-protocol.md",
+      "sha256": "f79720e1b1133c3de55761586500f11db0e9ecc1a58a6209554bc3ef887a9ae5",
+      "reason": "The retained extension execution froze this protocol before the clean handoff wording was consolidated."
+    },
+    {
+      "frozen_path": "study/async-boundary-protocol.md",
+      "preserved_path": "evidence/source-snapshots/frozen-async-protocol.md",
+      "sha256": "a9e0565ee18c4b09344c629f3caa1f078ab30b52de97630d14f26ba35f6b8c7d",
+      "reason": "The retained asynchronous execution froze this protocol before the clean handoff wording was consolidated."
+    },
+    {
+      "frozen_path": "study/sync-enforcement-protocol.md",
+      "preserved_path": "evidence/source-snapshots/frozen-sync-protocol.md",
+      "sha256": "c48e6f27c930162df165c8333b5428398be13377488760156e8a4cad30e43869",
+      "reason": "The retained synchronous execution froze this protocol before the clean handoff wording was consolidated."
+    },
+    {
+      "frozen_path": "src/retryscope/__init__.py",
+      "preserved_path": "evidence/source-snapshots/frozen-evaluation/__init__.py",
+      "sha256": "0fd8361d21029588d9b88e96dfb4de8bc53099f39a1656094bdf54073a977eab",
+      "reason": "The initial policy/HTTP evaluation froze this exact source before the current package metadata and causal implementation were added."
+    },
+    {
+      "frozen_path": "src/retryscope/checker.py",
+      "preserved_path": "evidence/source-snapshots/frozen-evaluation/checker.py",
+      "sha256": "6180ce1e90b4e6deb39c3533f307c46096e4a31a3e25ecb0578b7589f3d4f731",
+      "reason": "The initial policy/HTTP evaluation froze this exact source before the current package metadata and causal implementation were added."
+    },
+    {
+      "frozen_path": "src/retryscope/responder.py",
+      "preserved_path": "evidence/source-snapshots/frozen-evaluation/responder.py",
+      "sha256": "3c7ea3ac6d38e8e12fe0de492a99aceb1b3b0f0d1f508e3b0da61b00bed9e84e",
+      "reason": "The initial policy/HTTP evaluation froze this exact source before the current package metadata and causal implementation were added."
+    },
+    {
+      "frozen_path": "src/retryscope/worker.py",
+      "preserved_path": "evidence/source-snapshots/frozen-evaluation/worker.py",
+      "sha256": "c7028972ecc4cec9d4069a2e2e8896302a7dae79c37b1f0f14f77f7340cf8fca",
+      "reason": "The initial policy/HTTP evaluation froze this exact source before the current package metadata and causal implementation were added."
+    },
+    {
+      "frozen_path": "scripts/extend_study.py",
+      "preserved_path": "evidence/source-snapshots/frozen-extension-runner.py",
+      "sha256": "47dddb2d94c039b3d404a78156bec176a9f17ef7a5055fda879f8aba435294b3",
+      "reason": "The retained extension execution froze this exact runner before current documentation-only cleanup."
+    },
+    {
+      "frozen_path": "src/retryscope/range_fixture.py",
+      "preserved_path": "evidence/source-snapshots/frozen-range-fixture.py",
+      "sha256": "7c3173094deefe211974e7cec9a7a236ea38c222a5348d4fcc77024334b9242e",
+      "reason": "The retained extension execution froze this exact loopback range fixture before current documentation-only cleanup."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "max_wire_attempts": null,
+  "retryable_statuses": null,
+  "allow_body_recovery": false,
+  "allow_transport_retry": false,
+  "expected_payload": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\n0123456789abcdefghijklmnopqrstu",
+  "required_outcome": null,
+  "budget_s": null,
+  "tolerance_s": 0.02,
+  "time_scope": "operation",
+  "boundary": "body",
+  "provenance": "explicit known-object download requirement"
+}
