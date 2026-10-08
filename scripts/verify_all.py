@@ -47,12 +47,21 @@ def assert_same_json(actual: Path, retained: Path, *, ignore: tuple[str, ...] = 
         raise AssertionError(f"regenerated JSON differs: {actual.name} vs {retained}")
 
 
+def run_unit_tests() -> str:
+    """Use pytest's exit status; retain its current summary without a fixed count."""
+    result = run_checked([sys.executable, "-B", "-m", "pytest", "-q", "-p", "no:cacheprovider"])
+    return result.stdout.strip()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=ROOT / "results/verification.json")
     args = parser.parse_args()
 
     checks: dict[str, Any] = {}
+    # Resolve every principal declaration before any regeneration or paper writes.
+    source_result = run_checked([sys.executable, "-B", str(ROOT / "scripts/verify_frozen_sources.py")])
+    checks["principal_frozen_sources"] = json.loads(source_result.stdout)
     run_checked([sys.executable, str(ROOT / "scripts/verify_results.py")])
     checks["auxiliary_frozen_results"] = "passed"
 
@@ -120,11 +129,7 @@ def main() -> None:
     assert paper_data["totals"] == expected_totals
     checks["paper_inputs"] = "passed"
 
-    pytest_result = run_checked([sys.executable, "-m", "pytest", "-q"])
-    match = re.search(r"(\d+) passed", pytest_result.stdout)
-    if not match or int(match.group(1)) != 226:
-        raise AssertionError(f"expected 226 passing tests, observed output: {pytest_result.stdout[-1000:]}")
-    checks["tests"] = "226 passed"
+    checks["tests"] = run_unit_tests()
 
     upstream = load(ROOT / "evidence/extension-environment.json")
     for entry in upstream["modules"]:

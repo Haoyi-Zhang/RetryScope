@@ -1,14 +1,18 @@
+import pytest
+
 from retryscope.audit import AuditIntent
 from retryscope.migration import compare_migration, evidence_obligations, intent_fingerprint
 
 
-def trace(*, n=1, payload='ok', complete=True, role='initial', cause=None):
+def trace(*, n=1, payload='ok', complete=True, role='initial', cause=None, owner=None):
     rows=[]
     for i in range(1,n+1):
         row={'id':i,'role':role if i>1 else 'initial','attribution_witness':'test'}
         if i>1:
             row['retry_of']=i-1
             row['cause']=cause or {'kind':'status','received_status':503}
+            if owner is not None:
+                row['owner']=owner
         rows.append(row)
     return {
         'arrivals':rows,
@@ -47,11 +51,28 @@ def test_stable_pass_can_still_change_behavior():
     assert result['changed_dimensions']==['attempts']
 
 
-def test_integrity_retry_classification():
-    intent=AuditIntent(retryable_statuses=(503,),allow_integrity_retry=True)
-    t=trace(n=2,cause={'kind':'content_mismatch'})
-    result=compare_migration(t,t,intent)
-    assert result['category']=='stable_conformant'
+@pytest.mark.parametrize('allow,owner,verdict,category', [
+    (True, 'object-validator', 'pass', 'stable_conformant'),
+    (False, 'object-validator', 'mismatch', 'regression'),
+    (True, None, 'unknown', 'evidence_loss'),
+])
+def test_integrity_retry_classification(allow,owner,verdict,category):
+    intent=AuditIntent(retryable_statuses=(503,),allow_integrity_retry=allow)
+    before=trace(n=1)
+    after=trace(n=2,role='retry',owner=owner,cause={'kind':'content_mismatch'})
+    result=compare_migration(before,after,intent)
+    assert result['category']==category
+    assert result['before']['verdict']=='pass'
+    assert result['after']['verdict']==verdict
+    classification=result['after']['dimensions']['classification']
+    assert classification['verdict']==verdict
+    assert classification['requests'][1]=={
+        'id':2, 'verdict':verdict, 'role':'retry', 'owner':owner,
+        'retry_of':1, 'cause':{'kind':'content_mismatch'},
+    }
+    transition=result['dimension_transitions']['classification']
+    assert transition['before']=='pass' and transition['after']==verdict
+    assert transition['category']==category
 
 
 def test_obligations_and_fingerprint_stable():

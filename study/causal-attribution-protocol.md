@@ -6,7 +6,7 @@ Can client-generated operation/attempt identities preserve retry ownership and p
 
 ## Matrix
 
-Execute two real HTTP stacks (Requests/urllib3 and HTTPX), four operation structures, four concurrency levels (1, 2, 4, 8), and six seeds. The four structures are:
+Execute two client-stack configurations (Requests with a nested application policy, and urllib3 with its native policy), four operation structures, four concurrency levels (1, 2, 4, 8), and six seeds. HTTPX is used in the separate async-boundary study, not this causal matrix. The four structures are:
 
 - one initial request followed by retry;
 - nested retry ownership;
