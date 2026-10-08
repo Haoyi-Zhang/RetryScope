@@ -48,7 +48,7 @@ python -m pip install -e '.[test]'
 python -m pytest -q
 ```
 
-The current suite contains 226 tests. The retained study used its recorded source snapshots; new Windows validation uses the current implementation and is kept separately in `results/local-validation/`.
+The current suite contains 234 tests. The retained study used its recorded source snapshots; new Windows validation uses the current implementation and is kept separately in `results/local-validation/`.
 
 ## Regenerate the analyses
 
@@ -127,6 +127,8 @@ All responders bind to `127.0.0.1`; operations are GET/HEAD-only and bounded by 
 ## Frozen source relocation
 
 The extension and async records identify the exact `src/retryscope/audit.py` bytes used when they were executed. The live checker now includes paired and causal analysis. The executed source is retained unchanged as `evidence/source-snapshots/frozen-extension-audit.py`; `evidence/FROZEN-SOURCE-MAP.json` records its original path and digest. Raw freeze files are not rewritten.
+
+The historical extension analysis uses that retained checker. Applying the current checker, which also requires an explicit policy owner, to the unchanged 402 extension records yields 174 pass and 228 unknown. Older records lack that owner field; it is not backfilled from an outcome or timestamp. The measured download outcomes and request counts are unaffected. New replay instrumentation records the owner at admission time.
 
 ## Scope
 

@@ -20,6 +20,7 @@ def arrival(ticket, global_index=1):
         "kind": "arrival",
         "global_index": global_index,
         "operation_index": ticket.ordinal,
+        "ordinal": ticket.ordinal,
         "operation_id": ticket.operation_id,
         "attempt_id": ticket.attempt_id,
         "witness_valid": True,

@@ -44,13 +44,13 @@ def test_no_status_adjacency_inference():
 
 @pytest.mark.parametrize('kind,allow,expected',[('body_error',True,'pass'),('body_error',False,'mismatch'),('transport_error',True,'pass'),('transport_error',False,'mismatch'),('planned_status',True,'unknown')])
 def test_retry_cause(kind,allow,expected):
-    r=trace();r['arrivals'].append({'id':2,'role':'retry','retry_of':1,'cause':{'kind':kind},'attribution_witness':'caller exception'})
+    r=trace();r['arrivals'].append({'id':2,'role':'retry','owner':'caller','retry_of':1,'cause':{'kind':kind},'attribution_witness':'caller exception'})
     v=audit(r,AuditIntent(retryable_statuses=(503,),allow_body_recovery=allow,allow_transport_retry=allow))
     assert v['verdict']==expected
 
 @pytest.mark.parametrize('status,expected',[(503,'pass'),(400,'mismatch'),(None,'unknown'),(True,'unknown'),(999,'unknown')])
 def test_received_status(status,expected):
-    r=trace();r['arrivals'].append({'id':2,'role':'retry','retry_of':1,'cause':{'kind':'status','received_status':status},'attribution_witness':'response hook'})
+    r=trace();r['arrivals'].append({'id':2,'role':'retry','owner':'caller','retry_of':1,'cause':{'kind':'status','received_status':status},'attribution_witness':'response hook'})
     assert audit(r,AuditIntent(retryable_statuses=(503,)))['verdict']==expected
 
 def test_arrival_not_admission():

@@ -124,6 +124,8 @@ def main() -> None:
     matplotlib.use("Agg")
     matplotlib.rcParams["pdf.fonttype"] = 42
     matplotlib.rcParams["ps.fonttype"] = 42
+    matplotlib.rcParams['font.family'] = 'serif'
+    matplotlib.rcParams['font.serif'] = ['Times New Roman', 'Nimbus Roman', 'Liberation Serif', 'DejaVu Serif']
     import matplotlib.pyplot as plt
 
     labels = ["Healthy", "Progressing body", "Delayed headers", "Retry delay"]

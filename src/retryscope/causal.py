@@ -405,6 +405,7 @@ def join_causal_trace(
     parent_errors = _validate_parents(operation_admissions)
 
     joined: list[dict[str, Any]] = []
+    join_errors: list[str] = []
     unmatched_wire = 0
     matched_attempt_ids: set[str] = set()
     for (op, attempt_id), wire in sorted(
@@ -424,6 +425,8 @@ def join_causal_trace(
                 }
             )
             continue
+        if wire.get('ordinal') != admission['ordinal']:
+            join_errors.append(f"conflicting ordinal for {op}/{attempt_id}")
         matched_attempt_ids.add(attempt_id)
         parent = admission.get("parent_attempt_id")
         parent_ordinal = admissions.get((op, parent), {}).get("ordinal") if parent else None
@@ -447,13 +450,16 @@ def join_causal_trace(
     ]
     ordinal_values = [row.get("id") for row in joined if isinstance(row.get("id"), int)]
     inventory_unique = len(ordinal_values) == len(set(ordinal_values))
-    causal_errors = client_errors + wire_errors + parent_errors
+    causal_errors = client_errors + wire_errors + parent_errors + join_errors
+    if not inventory_complete:
+        causal_errors.append("physical arrival inventory is incomplete or conflicting")
     if not operation_admissions:
         causal_errors.append("operation has no valid client admissions")
     if not any(op == operation_id for op, _attempt in arrivals):
         causal_errors.append("operation has no valid wire arrivals")
     complete = (
         stream_complete
+        and inventory_complete
         and not causal_errors
         and unmatched_wire == 0
         and not unmatched_admissions

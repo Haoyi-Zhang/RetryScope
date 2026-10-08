@@ -119,7 +119,8 @@ def validate(rows: list[dict[str, Any]], raw_dir: Path, seeds: range) -> None:
         rebuilt = build_trace(row)
         if rebuilt != row.get("audit_trace"):
             raise SystemExit(f"stored trace does not recompute in {case_id}/{row.get('seed')}")
-        recomputed = audit(rebuilt, audit_intent(row["config"]))
+        from retryscope.retained import recorded_audit
+        recomputed = recorded_audit(rebuilt, audit_intent(row["config"]), 'observed')
         if recomputed != row.get("audit"):
             raise SystemExit(f"stored audit does not recompute in {case_id}/{row.get('seed')}")
         if rebuilt.get("retry_attribution_complete") is not True:
@@ -302,6 +303,8 @@ def main() -> None:
     matplotlib.use("Agg")
     matplotlib.rcParams["pdf.fonttype"] = 42
     matplotlib.rcParams["ps.fonttype"] = 42
+    matplotlib.rcParams['font.family'] = 'serif'
+    matplotlib.rcParams['font.serif'] = ['Times New Roman', 'Nimbus Roman', 'Liberation Serif', 'DejaVu Serif']
     import matplotlib.pyplot as plt
 
     labels = [row["label"] for row in stack_rows]

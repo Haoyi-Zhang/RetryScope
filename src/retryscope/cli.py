@@ -28,7 +28,7 @@ def validate_trace(r):
             if not isinstance(row,dict):raise ValueError('arrival must be an object')
             if 'cause' in row and not isinstance(row['cause'],dict):raise ValueError('cause must be an object')
             if 'retry_of' in row and type(row['retry_of']) is not int:raise ValueError('retry_of must be an integer')
-            if 'role' in row and row['role'] not in ('initial','constituent','retry','recovery'):raise ValueError('invalid request role')
+            if 'role' in row and row['role'] not in ('initial','constituent','retry','recovery','unknown'):raise ValueError('invalid request role')
     for key in ['body_elapsed_s','headers_elapsed_s','cleanup_elapsed_s']:
         if key in r and r[key] is not None and (type(r[key]) not in (int,float) or not math.isfinite(r[key]) or r[key]<0):raise ValueError('invalid '+key)
     return r

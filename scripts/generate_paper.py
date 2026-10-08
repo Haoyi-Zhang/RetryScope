@@ -5,7 +5,10 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import shutil
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,6 +21,17 @@ def load(path: Path) -> dict:
 
 def tex_row(cells: list[str]) -> str:
     return " & ".join(cells) + r" \\"
+
+
+def collected_tests() -> int:
+    result = subprocess.run(
+        [sys.executable, '-m', 'pytest', '--collect-only', '-q'],
+        cwd=ROOT, capture_output=True, text=True, check=True, timeout=60,
+    )
+    match = re.search(r'(\d+) tests? collected', result.stdout)
+    if match is None:
+        raise RuntimeError('Could not determine the current collected test count')
+    return int(match.group(1))
 
 
 def main() -> None:
@@ -72,7 +86,7 @@ def main() -> None:
         rf"\newcommand{{\TotalWires}}{{{total_wires:,}}}",
         rf"\newcommand{{\TotalMaxWires}}{{{max_wires}}}",
         r"\newcommand{\ReferenceCount}{68}",
-        r"\newcommand{\TestCount}{220}",
+        rf"\newcommand{{\TestCount}}{{{collected_tests()}}}",
     ]
     (generated / "study-macros.tex").write_text("\n".join(macros) + "\n")
 

@@ -60,7 +60,7 @@ def run(case,seed):
                             before=server.count;hook=[]
                             # Instrument a public downloader callback. Its write/read behavior is unchanged.
                             real.kwargs['hooks']={'response':[lambda r,*a,**k:hook.append(r.status_code)]}
-                            w={'id':before+1,'role':'initial' if previous is None else 'retry','attribution_witness':'pooch downloader callback entry'}
+                            w={'id':before+1,'role':'initial' if previous is None else 'retry','owner':'pooch-fetch','attribution_witness':'pooch downloader callback entry'}
                             if previous:w.update(retry_of=previous['id'],cause=previous['cause'])
                             witnesses.append(w)
                             try:
@@ -86,7 +86,7 @@ def run(case,seed):
                         for attempt in range(2):
                             admissions.append(time.monotonic()-started)
                             hook=[];before=server.count
-                            w={'id':before+1,'role':'initial' if attempt==0 else 'retry','attribution_witness':'explicit ordinary outer loop'}
+                            w={'id':before+1,'role':'initial' if attempt==0 else 'retry','owner':'outer-loop','attribution_witness':'explicit ordinary outer loop'}
                             if previous:w.update(retry_of=previous['id'],cause=previous['cause'])
                             witnesses.append(w)
                             try:

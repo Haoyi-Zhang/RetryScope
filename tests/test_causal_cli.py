@@ -15,6 +15,7 @@ def test_causal_cli_joins_json_arrays(tmp_path):
         "kind": "arrival",
         "global_index": 1,
         "operation_index": 1,
+        "ordinal": ticket.ordinal,
         "operation_id": ticket.operation_id,
         "attempt_id": ticket.attempt_id,
         "witness_valid": True,

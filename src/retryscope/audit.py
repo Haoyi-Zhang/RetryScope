@@ -1,4 +1,4 @@
-"""Evidence-aware finite-trace audit, version 2.
+"""Evidence-aware finite-trace audit.
 
 Unknown data never establishes conformance. A witnessed violation is retained even
 when another dimension or the rest of the trace is unknown. This is an offline
@@ -107,7 +107,10 @@ def audit(record: Mapping[str, Any], intent: AuditIntent) -> dict[str, Any]:
                 role = a.get('role')
                 if role in ('initial', 'constituent') and a.get('attribution_witness'):
                     states.append('pass')
-                elif role in ('retry', 'recovery') and a.get('attribution_witness') and a.get('retry_of') in ids and a['retry_of'] < a['id']:
+                elif (role in ('retry', 'recovery') and a.get('attribution_witness')
+                      and isinstance(a.get('owner'), str) and a['owner'].strip()
+                      and len(a['owner']) <= 128
+                      and a.get('retry_of') in ids and a['retry_of'] < a['id']):
                     cause = a.get('cause', {})
                     kind = cause.get('kind')
                     if kind == 'status' and type(cause.get('received_status')) is int and 100 <= cause['received_status'] <= 599:

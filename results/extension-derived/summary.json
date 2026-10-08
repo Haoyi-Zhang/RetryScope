@@ -59,6 +59,10 @@
       }
     }
   },
+  "current_retry_verdicts": {
+    "pass": 174,
+    "unknown": 228
+  },
   "legacy_reaudit": {
     "n": 1068,
     "verdicts": {

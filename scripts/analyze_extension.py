@@ -5,6 +5,7 @@ import argparse, collections, copy, csv, hashlib, json, statistics, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from retryscope.audit import AuditIntent,audit,from_legacy
+from retryscope.retained import recorded_audit
 from retryscope.checker import Intent,check
 from retryscope.range_fixture import PAYLOAD
 
@@ -41,10 +42,10 @@ def main():
         assert not r.get('harness_error'),r['id']
         assert r['arrival_stream_complete'] and r['body_complete'] and 1<=r['wire_attempts']<=16,r['id']
         assert r['wire_attempts']==len(r['arrivals'])==sum(e['kind']=='arrival' for e in r['events']),r['id']
-        assert audit(r,ci)==r['content_audit'],r['id']
+        assert recorded_audit(r,ci,'extension')==r['content_audit'],r['id']
         cap=1 if r['case']['mode'].endswith('0') else 2
         ri=AuditIntent(max_wire_attempts=cap if r['case']['family']=='download' else None,retryable_statuses=(503,),allow_body_recovery=True,allow_transport_retry=True,provenance='local selective-retry probe; not a documented Pooch 400 exclusion')
-        assert audit(r,ri)==r['retry_audit'],r['id']
+        assert recorded_audit(r,ri,'extension')==r['retry_audit'],r['id']
         assert all(e.get('method','GET') in ('GET','HEAD') for e in r['events'])
     groups=collections.defaultdict(list)
     for r in rs:groups[r['id']].append(r)
@@ -54,6 +55,9 @@ def main():
         rows.append(dict(id=key,n=len(rr),family=rr[0]['case']['family'],mode=rr[0]['case'].get('mode','range'),scenario=rr[0]['case'].get('scenario','healthy'),success=sum(r['outcome']=='success' for r in rr),wrong_success=sum(r['outcome']=='success' and r['payload']!=PAYLOAD.decode() for r in rr),content_mismatch=sum(r['content_audit']['verdict']=='mismatch' for r in rr),retry_mismatch=sum(r['retry_audit']['verdict']=='mismatch' for r in rr),retry_unknown=sum(r['retry_audit']['verdict']=='unknown' for r in rr),wire_min=min(r['wire_attempts'] for r in rr),wire_max=max(r['wire_attempts'] for r in rr),min_ms=min(ts),median_ms=statistics.median(ts),max_ms=max(ts)))
     write_csv(a.out/'cells.csv',rows)
     summary=dict(records=len(rs),cells=len(groups),replicates=6,wire_attempts=sum(r['wire_attempts'] for r in rs),max_wire_attempts=max(r['wire_attempts'] for r in rs),operation_seconds=sum(r['body_elapsed_s'] for r in rs),content_verdicts=dict(collections.Counter(r['content_audit']['verdict'] for r in rs)),retry_verdicts=dict(collections.Counter(r['retry_audit']['verdict'] for r in rs)),raw_sha256=sha(raw/'records.jsonl'),families={})
+    summary['current_retry_verdicts'] = dict(collections.Counter(
+        audit(r, AuditIntent(retryable_statuses=(503,), allow_body_recovery=True,
+                            allow_transport_retry=True))['verdict'] for r in rs))
     for f in sorted({r['case']['family'] for r in rs}):
         rr=[r for r in rs if r['case']['family']==f]
         summary['families'][f]=dict(n=len(rr),wire_attempts=sum(r['wire_attempts'] for r in rr),outcomes=dict(collections.Counter(r['outcome'] for r in rr)),content=dict(collections.Counter(r['content_audit']['verdict'] for r in rr)),retry=dict(collections.Counter(r['retry_audit']['verdict'] for r in rr)))
@@ -123,6 +127,8 @@ def main():
     write_csv(a.out/'range-offsets.csv',rangerows)
     import matplotlib
     matplotlib.use('Agg');matplotlib.rcParams['pdf.fonttype']=42;matplotlib.rcParams['ps.fonttype']=42
+    matplotlib.rcParams['font.family'] = 'serif'
+    matplotlib.rcParams['font.serif'] = ['Times New Roman', 'Nimbus Roman', 'Liberation Serif', 'DejaVu Serif']
     import matplotlib.pyplot as plt
     fig,ax=plt.subplots(figsize=(3.48,2.45))
     for i,(m,label) in enumerate(zip(modes,labels)):
