@@ -4,6 +4,8 @@
 The script treats the JSONL files as immutable measurements.  It recomputes every
 trace and audit from server arrivals plus client-side witnesses, verifies the
 predeclared matrix, and emits manuscript tables/figures without network access.
+Historical replay is the default. Current-source inputs require explicit batch
+and per-record provenance; no historical records are upgraded by this script.
 """
 from __future__ import annotations
 
@@ -19,10 +21,64 @@ from typing import Any, Iterable, Mapping
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "scripts"))
 
 from retryscope.audit import AuditIntent, audit, from_legacy
 from retryscope.checker import Intent
 from retryscope.observation import build_trace
+from run_observed_current import CURRENT_SOURCE_FILES, match_source_provenance
+
+
+def analysis_provenance(freeze: Any, analysis_mode: str,
+                        source_snapshot: Path | None) -> dict[str, Any] | None:
+    """Match current freeze.files to captured bytes and this implementation.
+
+    Current records must carry the returned dictionary as source_provenance.
+    An unmarked freeze is historical, never implicitly current. This checks
+    declared source consistency, not authenticity of the measurement process.
+    """
+    if analysis_mode not in {"historical", "current"}:
+        raise SystemExit(f"unsupported analysis mode: {analysis_mode}")
+    if analysis_mode == "historical":
+        if isinstance(freeze, Mapping) and freeze.get("analysis_mode", "historical") != "historical":
+            raise SystemExit("freeze analysis mode conflicts with selected mode")
+        if source_snapshot is not None:
+            raise SystemExit("source snapshot is only allowed in current mode")
+        return None
+    if not isinstance(freeze, Mapping) or freeze.get("analysis_mode") != "current":
+        raise SystemExit("freeze analysis mode is missing or conflicts with selected mode")
+    if source_snapshot is None:
+        raise SystemExit("current mode requires --source-snapshot")
+    for name in ("retryscope", "retryscope.audit", "retryscope.checker", "retryscope.observation"):
+        relative = "src/" + name.replace(".", "/") + ("/__init__.py" if name == "retryscope" else ".py")
+        if Path(sys.modules[name].__file__).resolve() != (ROOT / relative).resolve():
+            raise SystemExit(f"current implementation imported from another source: {name}")
+    if Path(sys.modules["run_observed_current"].__file__).resolve() != (ROOT / "scripts/run_observed_current.py").resolve():
+        raise SystemExit("current provenance helper imported from another source")
+    return match_source_provenance(freeze, ROOT, source_snapshot)
+
+
+def validate_record_audit(row: Mapping[str, Any], rebuilt: Mapping[str, Any], *,
+                          analysis_mode: str = "historical",
+                          provenance: Mapping[str, Any] | None = None) -> None:
+    """Offline exact replay with one explicitly selected validator, no fallback."""
+    if row.get("analysis_mode", analysis_mode) != analysis_mode:
+        raise SystemExit("record analysis mode conflicts with selected mode")
+    if analysis_mode == "historical":
+        if provenance is not None or "source_provenance" in row:
+            raise SystemExit("current or ambiguous record provenance in historical mode")
+        from retryscope.retained import recorded_audit
+        recomputed = recorded_audit(rebuilt, audit_intent(row["config"]), 'observed')
+    elif analysis_mode == "current":
+        if (row.get("analysis_mode") != "current"
+                or not isinstance(provenance, Mapping) or provenance.get("analysis_mode") != "current"
+                or row.get("source_provenance") != provenance):
+            raise SystemExit("missing, mixed or mismatched current record source provenance")
+        recomputed = audit(rebuilt, audit_intent(row["config"]))
+    else:
+        raise SystemExit(f"unsupported analysis mode: {analysis_mode}")
+    if recomputed != row.get("audit"):
+        raise SystemExit(f"stored audit does not recompute in {row.get('id')}/{row.get('seed')}")
 
 
 def load_jsonl(paths: Iterable[Path]) -> list[dict[str, Any]]:
@@ -90,7 +146,8 @@ def stack_label(stack: str) -> str:
     }.get(stack, stack)
 
 
-def validate(rows: list[dict[str, Any]], raw_dir: Path, seeds: range) -> None:
+def validate(rows: list[dict[str, Any]], raw_dir: Path, seeds: range, *,
+             analysis_mode: str = "historical", source_snapshot: Path | None = None) -> dict[str, Any] | None:
     configs = json.loads((ROOT / "study/cases.json").read_text())
     expected_ids = {config["id"] for config in configs}
     expected = {(case_id, seed) for case_id in expected_ids for seed in seeds}
@@ -105,6 +162,13 @@ def validate(rows: list[dict[str, Any]], raw_dir: Path, seeds: range) -> None:
     for path in (raw_dir / "false.jsonl", raw_dir / "true.jsonl", raw_dir / "freeze.json"):
         if not path.exists():
             raise SystemExit(f"missing frozen input: {path}")
+    try:
+        freeze = json.loads((raw_dir / "freeze.json").read_text())
+    except json.JSONDecodeError:
+        if analysis_mode != "historical":
+            raise SystemExit("current mode requires JSON freeze provenance")
+        freeze = None  # Legacy historical validation required existence only.
+    provenance = analysis_provenance(freeze, analysis_mode, source_snapshot)
     for row in rows:
         case_id = row.get("id")
         if row.get("harness_error"):
@@ -119,10 +183,7 @@ def validate(rows: list[dict[str, Any]], raw_dir: Path, seeds: range) -> None:
         rebuilt = build_trace(row)
         if rebuilt != row.get("audit_trace"):
             raise SystemExit(f"stored trace does not recompute in {case_id}/{row.get('seed')}")
-        from retryscope.retained import recorded_audit
-        recomputed = recorded_audit(rebuilt, audit_intent(row["config"]), 'observed')
-        if recomputed != row.get("audit"):
-            raise SystemExit(f"stored audit does not recompute in {case_id}/{row.get('seed')}")
+        validate_record_audit(row, rebuilt, analysis_mode=analysis_mode, provenance=provenance)
         if rebuilt.get("retry_attribution_complete") is not True:
             raise SystemExit(f"retry attribution incomplete in {case_id}/{row.get('seed')}")
         for arrival in rebuilt.get("arrivals", [])[1:]:
@@ -133,6 +194,7 @@ def validate(rows: list[dict[str, Any]], raw_dir: Path, seeds: range) -> None:
                 "status", "body_error", "transport_error", "content_mismatch"
             }:
                 raise SystemExit(f"unsupported retry cause in {case_id}/{row.get('seed')}: {cause}")
+    return provenance
 
 
 def main() -> None:
@@ -140,6 +202,10 @@ def main() -> None:
     parser.add_argument("--raw", type=Path, default=ROOT / "results/raw/observed")
     parser.add_argument("--out", type=Path, default=ROOT / "results/observed-derived")
     parser.add_argument("--paper-dir", type=Path)
+    parser.add_argument("--analysis-mode", choices=["historical", "current"], default="historical",
+                        help="historical: exact retained audit replay (default); current: explicitly provenanced new records only")
+    parser.add_argument("--source-snapshot", type=Path,
+                        help="current mode only: captured source tree matching freeze.files and each record's source_provenance")
     parser.add_argument("--seed-start", type=int, default=301)
     parser.add_argument("--seed-stop", type=int, default=313, help="exclusive")
     args = parser.parse_args()
@@ -148,7 +214,8 @@ def main() -> None:
     rows = load_jsonl(paths)
     if not rows:
         raise SystemExit("no observed records")
-    validate(rows, args.raw, range(args.seed_start, args.seed_stop))
+    provenance = validate(rows, args.raw, range(args.seed_start, args.seed_stop),
+                          analysis_mode=args.analysis_mode, source_snapshot=args.source_snapshot)
     args.out.mkdir(parents=True, exist_ok=False)
 
     by_id: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -296,6 +363,9 @@ def main() -> None:
         "raw_sha256": hashes,
         "scope": "fresh client-witnessed rerun of the original 89-cell matrix; loopback, sequential, no production endpoint",
     }
+    if args.analysis_mode == "current":
+        summary["analysis_mode"] = "current"
+        summary["source_provenance"] = provenance
     (args.out / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
 
     # Data-derived vector figure: supported aggregate verdicts by executed stack.

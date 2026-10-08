@@ -111,7 +111,11 @@ This command first requires every principal frozen source declaration to resolve
 The raw records are retained because the full studies take longer than the deterministic reanalysis. To execute new loopback runs into separate directories, inspect the corresponding protocol first and provide a new output path:
 
 ```bash
-python scripts/run_observed_study.py --out results/replay/observed
+python scripts/run_observed_current.py --run-mode current --out results/replay/observed
+python scripts/analyze_observed.py --analysis-mode current \
+  --raw results/replay/observed \
+  --source-snapshot results/replay/observed/source-snapshot \
+  --out results/replay/observed-derived
 python scripts/extend_study.py --out results/replay/extension
 python scripts/async_boundary_study.py --out results/replay/async-boundary
 python scripts/sync_enforcement_study.py --out results/replay/sync-enforcement
@@ -120,6 +124,14 @@ PYTHONPATH=src python scripts/causal_witness_study.py \
 ```
 
 All responders bind to `127.0.0.1`; operations are GET/HEAD-only and bounded by the protocols.
+
+The observed-study entry above captures nine owned source files before collection
+and records that source map with each newly returned observation. It requires a
+fresh output directory, a compatible POSIX worker runtime, and the evaluated SDK
+dependencies; the snapshot is not a replacement for the environment lock. Both
+policy processes share a 15-minute limit, and a stopped partial batch is not a
+complete matrix. This mode does not modify retained records or reconstruct their
+missing worker. Omitting `--run-mode current` delegates the historical runner.
 
 ## Repository map
 
