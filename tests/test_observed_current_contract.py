@@ -42,6 +42,9 @@ def synthetic_record(config, seed, phase, historical=False):
 
 class CurrentCollectorContract(unittest.TestCase):
     def setUp(self):
+        self.existing_optional_modules = {
+            name: sys.modules.get(name) for name in ("retryscope.observed_worker", "matplotlib")
+        }
         base = Path(os.environ.get("P114_TEST_ROOT", tempfile.gettempdir())).resolve()
         self.temp = tempfile.TemporaryDirectory(prefix="p114-collector-", dir=base)
         self.directory = Path(self.temp.name).resolve()
@@ -103,8 +106,8 @@ class CurrentCollectorContract(unittest.TestCase):
                             for row in rows))
         self.assertIn("scripts/run_observed_current.py", expected["files"])
         self.assertNotIn("scripts/run_observed_study.py", expected["files"])
-        self.assertNotIn("retryscope.observed_worker", sys.modules)
-        self.assertNotIn("matplotlib", sys.modules)
+        for name, before in self.existing_optional_modules.items():
+            self.assertIs(sys.modules.get(name), before)
 
     def test_current_cli_dispatches_capture_before_mock_collection(self):
         with patch.object(sys, "argv", ["run_observed_current.py", "--run-mode", "current",

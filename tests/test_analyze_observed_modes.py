@@ -218,12 +218,13 @@ class ObservedAnalysisModes(unittest.TestCase):
             analyzer.validate_record_audit(row, analyzer.build_trace(row), analysis_mode="either")
 
     def test_current_full_synthetic_matrix_validates_without_plotting(self):
+        plotting_before = sys.modules.get("matplotlib")
         raw, rows = self.matrix("current")
         self.assertEqual(
             analyzer.validate(rows, raw, range(301, 302), analysis_mode="current", source_snapshot=self.snapshot),
             self.provenance,
         )
-        self.assertNotIn("matplotlib", sys.modules)
+        self.assertIs(sys.modules.get("matplotlib"), plotting_before)
 
     def test_historical_full_synthetic_matrix_keeps_default_validation(self):
         raw, rows = self.matrix("historical")
