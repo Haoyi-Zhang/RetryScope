@@ -6,6 +6,8 @@ name = "retryscope"
 version = "1.0.0"
 description = "Causal-witness migration audits for retry and timeout semantics"
 requires-python = ">=3.11"
+[project.optional-dependencies]
+test = ["pytest==9.0.2", "requests==2.34.2", "botocore==1.43.18"]
 [project.scripts]
 retryscope = "retryscope.cli:main"
 retryscope-join = "retryscope.causal_cli:main"

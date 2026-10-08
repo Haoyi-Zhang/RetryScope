@@ -44,7 +44,7 @@ These are bounded local results, not estimates of production prevalence or outag
 Python 3.11 or newer is required. Exact evaluated package versions are recorded in `requirements/locked.txt` and environment evidence in `evidence/`.
 
 ```bash
-python -m pip install -e .
+python -m pip install -e '.[test]'
 python -m pytest -q
 ```
 

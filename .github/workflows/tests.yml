@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install test dependencies
-        run: python -m pip install pytest==9.0.2 requests==2.34.2
+        run: python -m pip install -e '.[test]'
       - name: Test code and recorded inputs
         shell: bash
         run: |
