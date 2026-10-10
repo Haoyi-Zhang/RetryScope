@@ -24,6 +24,7 @@ def test_causal_cli_joins_json_arrays(tmp_path):
         "--client-events", str(client),
         "--wire-events", str(wire),
         "--operation-id", ledger.operation_id,
+        "--stream-complete",
         "--output", str(out),
     ]) == 0
     assert json.loads(out.read_text())["causal_join_complete"] is True

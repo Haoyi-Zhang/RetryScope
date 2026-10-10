@@ -35,6 +35,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--client-events", type=Path, required=True)
     parser.add_argument("--wire-events", type=Path, required=True)
     parser.add_argument("--operation-id", required=True)
+    parser.add_argument("--stream-complete", action="store_true",
+                        help="trusted declaration that both input streams are closed for this operation; otherwise treat them as prefixes")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
@@ -42,6 +44,7 @@ def main(argv: list[str] | None = None) -> int:
             _load_events(args.client_events),
             _load_events(args.wire_events),
             operation_id=args.operation_id,
+            stream_complete=args.stream_complete,
         )
         text = json.dumps(trace, indent=2, sort_keys=True, allow_nan=False) + "\n"
         if args.output:

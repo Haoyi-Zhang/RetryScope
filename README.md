@@ -14,6 +14,13 @@ The causal witness protocol records an isolated admission snapshot before each w
 
 The responder records the carried identifiers independently. The offline join accepts an edge only when client admission and wire arrival agree, then validates uniqueness, parent scope, order, acyclicity, one-to-one admission/arrival coverage, and evidence completeness. Missing or malformed evidence causes classification to abstain rather than infer ownership from timing.
 
+The causal join CLI treats supplied streams as prefixes unless the caller provides
+`--stream-complete`, a trusted declaration that both input streams are closed for
+the selected operation. Matching prefixes alone do not prove exhaustiveness.
+Without closure, a below-cap count is unknown; an observed over-cap prefix still
+proves mismatch. The library's `stream_complete` argument is a caller-supplied
+premise, not a closure inferred by the join.
+
 ## Retained study
 
 | Phase | Configurations | Logical operations | Wire requests |
