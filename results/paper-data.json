@@ -1,4 +1,7 @@
 {
+  "policy_matrix": "results\\native-policy-derived",
+  "policy_analysis_mode": "current",
+  "migration_pairs_use_retained_policy_records": true,
   "phases": [
     {
       "name": "Policy, HTTP, and integration",

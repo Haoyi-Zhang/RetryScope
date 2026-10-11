@@ -37,9 +37,12 @@ def collected_tests() -> int:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--paper-dir", type=Path, default=DEFAULT_PAPER)
+    parser.add_argument("--observed-derived", type=Path,
+                        help="explicitly select the validated policy matrix used by the manuscript")
     args = parser.parse_args()
 
-    observed = load(ROOT / "results/observed-derived/summary.json")
+    observed_dir = args.observed_derived or ROOT / "results/observed-derived"
+    observed = load(observed_dir / "summary.json")
     extension = load(ROOT / "results/extension-derived/summary.json")
     async_summary = load(ROOT / "results/async-derived/summary.json")
     sync_summary = load(ROOT / "results/sync-derived/summary.json")
@@ -68,8 +71,14 @@ def main() -> None:
     )
 
     assert (total_cells, total_ops, total_wires, max_wires) == (228, 2430, 4986, 13)
-    assert observed["audit_verdicts"] == {"pass": 756, "mismatch": 300, "unknown": 12}
-    assert observed["server_only_counterfactual_verdicts"] == {"mismatch": 288, "unknown": 780}
+    assert sum(observed["audit_verdicts"].values()) == observed["records"]
+    assert sum(observed["server_only_counterfactual_verdicts"].values()) == observed["records"]
+    if observed.get("analysis_mode", "historical") == "historical":
+        assert observed["audit_verdicts"] == {"pass": 756, "mismatch": 300, "unknown": 12}
+        assert observed["server_only_counterfactual_verdicts"] == {"mismatch": 288, "unknown": 780}
+    else:
+        assert observed["analysis_mode"] == "current"
+        assert observed["source_provenance"]["analysis_mode"] == "current"
     assert causal["causal_joins_complete"] == causal["operations"] == 720
     assert causal["assignment_accuracy"]["causal_token"] == 1.0
     assert causal["edge_metrics"]["causal_token"]["f1"] == 1.0
@@ -102,15 +111,15 @@ def main() -> None:
         dim_rows.append(tex_row([dim.capitalize(), f"{requested:,}", f"{counts.get('pass', 0):,}", f"{counts.get('mismatch', 0):,}", f"{counts.get('unknown', 0):,}"]))
     (generated / "observed-dimension-rows.tex").write_text("\n".join(dim_rows) + "\n")
 
-    with (ROOT / "results/observed-derived/cell-summary.csv").open(newline="") as handle:
+    with (observed_dir / "cell-summary.csv").open(newline="") as handle:
         cell_by_id = {row["id"]: row for row in csv.DictReader(handle)}
     boto_specs = [
         ("Pre-policy default", "boto_false_default"),
         ("2026 default", "boto_true_default"),
         ("Pre-policy explicit standard", "boto_false_explicit_standard"),
         ("2026 explicit standard", "boto_true_explicit_standard"),
-        (r"2026 \code{max\_attempts=2}", "boto_true_max2"),
-        (r"2026 \code{total\_max\_attempts=2}", "boto_true_total2"),
+        ("2026 two-retry limit", "boto_true_max2"),
+        ("2026 two-total-attempt limit", "boto_true_total2"),
     ]
     boto_rows = []
     for label, case_id in boto_specs:
@@ -121,8 +130,8 @@ def main() -> None:
 
     # Copy all remaining manuscript inputs from the retained, verified derived results.
     generated_inputs = {
-        ROOT / "results/observed-derived/observed-macros.tex": generated / "observed-macros.tex",
-        ROOT / "results/observed-derived/observed-stack-rows.tex": generated / "observed-stack-rows.tex",
+        observed_dir / "observed-macros.tex": generated / "observed-macros.tex",
+        observed_dir / "observed-stack-rows.tex": generated / "observed-stack-rows.tex",
         ROOT / "results/extension-derived/download-rows.tex": generated / "download-rows.tex",
         ROOT / "results/migration-derived/migration-macros.tex": generated / "migration-macros.tex",
         ROOT / "results/migration-derived/migration-category-rows.tex": generated / "migration-category-rows.tex",
@@ -146,6 +155,9 @@ def main() -> None:
         shutil.copy2(source, destination)
 
     report = {
+        "policy_matrix": str(observed_dir.relative_to(ROOT)) if observed_dir.is_relative_to(ROOT) else str(observed_dir),
+        "policy_analysis_mode": observed.get("analysis_mode", "historical"),
+        "migration_pairs_use_retained_policy_records": True,
         "phases": [
             {"name": name, "configurations": cells, "operations": ops, "wire_requests": wires}
             for name, cells, ops, wires in phases

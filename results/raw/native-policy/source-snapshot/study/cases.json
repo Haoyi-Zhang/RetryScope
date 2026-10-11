@@ -1,0 +1,1553 @@
+[
+  {
+    "id": "boto_false_max2",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "false",
+    "retries": {
+      "mode": "standard",
+      "max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 3,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_false_total2",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "false",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_false_default",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "false",
+    "retries": {},
+    "intent": {
+      "max_wire_attempts": 5,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_false_explicit_standard",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "false",
+    "retries": {
+      "mode": "standard"
+    },
+    "intent": {
+      "max_wire_attempts": 3,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_false_success",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "success",
+    "flag": "false",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented total-attempt and classification control",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_false_transient",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "transient",
+    "flag": "false",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented total-attempt and classification control",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_false_denied",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "denied",
+    "flag": "false",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented total-attempt and classification control",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_true_max2",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "true",
+    "retries": {
+      "mode": "standard",
+      "max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 3,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_true_total2",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "true",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_true_default",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "true",
+    "retries": {},
+    "intent": {
+      "max_wire_attempts": 3,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_true_explicit_standard",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "flag": "true",
+    "retries": {
+      "mode": "standard"
+    },
+    "intent": {
+      "max_wire_attempts": 3,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented SDK counting or 2026 migration contract",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_true_success",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "success",
+    "flag": "true",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented total-attempt and classification control",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_true_transient",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "transient",
+    "flag": "true",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented total-attempt and classification control",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_true_denied",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "denied",
+    "flag": "true",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented total-attempt and classification control",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_app_cap2_native",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "persistent",
+    "retries": {
+      "mode": "standard",
+      "max_attempts": 2
+    },
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_trickle_body",
+    "stack": "boto",
+    "mode": "body",
+    "scenario": "trickle",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 1
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "boundary": "body",
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "boto_trickle_headers_only",
+    "stack": "boto",
+    "mode": "headers_only",
+    "scenario": "trickle",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 1
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "boundary": "headers",
+      "budget_s": 0.1,
+      "time_scope": "operation"
+    }
+  },
+  {
+    "id": "urllib3_old_success",
+    "stack": "urllib3_old",
+    "mode": "native",
+    "scenario": "success",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_old_transient",
+    "stack": "urllib3_old",
+    "mode": "native",
+    "scenario": "transient",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_old_persistent",
+    "stack": "urllib3_old",
+    "mode": "native",
+    "scenario": "persistent",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_old_denied",
+    "stack": "urllib3_old",
+    "mode": "native",
+    "scenario": "denied",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_old_truncated",
+    "stack": "urllib3_old",
+    "mode": "native",
+    "scenario": "truncated",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_old_trickle",
+    "stack": "urllib3_old",
+    "mode": "total_timeout",
+    "scenario": "trickle",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_old_slow_headers",
+    "stack": "urllib3_old",
+    "mode": "native",
+    "scenario": "slow_headers",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_old_retry_after",
+    "stack": "urllib3_old",
+    "mode": "native",
+    "scenario": "retry_after",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_success",
+    "stack": "urllib3_new",
+    "mode": "native",
+    "scenario": "success",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_transient",
+    "stack": "urllib3_new",
+    "mode": "native",
+    "scenario": "transient",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_persistent",
+    "stack": "urllib3_new",
+    "mode": "native",
+    "scenario": "persistent",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_denied",
+    "stack": "urllib3_new",
+    "mode": "native",
+    "scenario": "denied",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_truncated",
+    "stack": "urllib3_new",
+    "mode": "native",
+    "scenario": "truncated",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "documented Retry total and local complete-read test",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_trickle",
+    "stack": "urllib3_new",
+    "mode": "total_timeout",
+    "scenario": "trickle",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_slow_headers",
+    "stack": "urllib3_new",
+    "mode": "native",
+    "scenario": "slow_headers",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "urllib3_new_retry_after",
+    "stack": "urllib3_new",
+    "mode": "native",
+    "scenario": "retry_after",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_native_success",
+    "stack": "requests",
+    "mode": "native",
+    "scenario": "success",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_native_transient",
+    "stack": "requests",
+    "mode": "native",
+    "scenario": "transient",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_native_persistent",
+    "stack": "requests",
+    "mode": "native",
+    "scenario": "persistent",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_native_denied",
+    "stack": "requests",
+    "mode": "native",
+    "scenario": "denied",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_normalized_success",
+    "stack": "requests",
+    "mode": "normalized",
+    "scenario": "success",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_normalized_transient",
+    "stack": "requests",
+    "mode": "normalized",
+    "scenario": "transient",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_normalized_persistent",
+    "stack": "requests",
+    "mode": "normalized",
+    "scenario": "persistent",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_normalized_denied",
+    "stack": "requests",
+    "mode": "normalized",
+    "scenario": "denied",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_broad_success",
+    "stack": "requests",
+    "mode": "outer_broad",
+    "scenario": "success",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_broad_transient",
+    "stack": "requests",
+    "mode": "outer_broad",
+    "scenario": "transient",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_broad_persistent",
+    "stack": "requests",
+    "mode": "outer_broad",
+    "scenario": "persistent",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_broad_denied",
+    "stack": "requests",
+    "mode": "outer_broad",
+    "scenario": "denied",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_selective_success",
+    "stack": "requests",
+    "mode": "outer_selective",
+    "scenario": "success",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_selective_transient",
+    "stack": "requests",
+    "mode": "outer_selective",
+    "scenario": "transient",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_selective_persistent",
+    "stack": "requests",
+    "mode": "outer_selective",
+    "scenario": "persistent",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_outer_selective_denied",
+    "stack": "requests",
+    "mode": "outer_selective",
+    "scenario": "denied",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_admission_success",
+    "stack": "requests",
+    "mode": "admission",
+    "scenario": "success",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_admission_transient",
+    "stack": "requests",
+    "mode": "admission",
+    "scenario": "transient",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_admission_persistent",
+    "stack": "requests",
+    "mode": "admission",
+    "scenario": "persistent",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_admission_denied",
+    "stack": "requests",
+    "mode": "admission",
+    "scenario": "denied",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_native_trickle",
+    "stack": "requests",
+    "mode": "native",
+    "scenario": "trickle",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_stop_delay_trickle",
+    "stack": "requests",
+    "mode": "stop_delay",
+    "scenario": "trickle",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_admission_trickle",
+    "stack": "requests",
+    "mode": "admission",
+    "scenario": "trickle",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_future_timeout_trickle",
+    "stack": "requests",
+    "mode": "future_timeout",
+    "scenario": "trickle",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_stop_delay_wait",
+    "stack": "requests",
+    "mode": "stop_delay",
+    "scenario": "persistent",
+    "retry_total": 0,
+    "wait_ms": 180,
+    "outer_attempts": 3,
+    "intent": {
+      "max_wire_attempts": 3,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_admission_wait",
+    "stack": "requests",
+    "mode": "admission",
+    "scenario": "persistent",
+    "retry_total": 0,
+    "wait_ms": 180,
+    "outer_attempts": 3,
+    "intent": {
+      "max_wire_attempts": 3,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_native_slow_headers",
+    "stack": "requests",
+    "mode": "native",
+    "scenario": "slow_headers",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "smart_success",
+    "stack": "smart_open",
+    "mode": "body",
+    "scenario": "success",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 1
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "smart_transient",
+    "stack": "smart_open",
+    "mode": "body",
+    "scenario": "transient",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 1
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "smart_denied",
+    "stack": "smart_open",
+    "mode": "body",
+    "scenario": "denied",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 1
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "smart_truncated",
+    "stack": "smart_open",
+    "mode": "body",
+    "scenario": "truncated",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 1
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "smart_trickle",
+    "stack": "smart_open",
+    "mode": "body",
+    "scenario": "trickle",
+    "retries": {
+      "mode": "standard",
+      "total_max_attempts": 1
+    },
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_native_success",
+    "stack": "huggingface",
+    "mode": "native",
+    "scenario": "success",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_normalized_success",
+    "stack": "huggingface",
+    "mode": "normalized",
+    "scenario": "success",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_native_transient",
+    "stack": "huggingface",
+    "mode": "native",
+    "scenario": "transient",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_normalized_transient",
+    "stack": "huggingface",
+    "mode": "normalized",
+    "scenario": "transient",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_native_persistent",
+    "stack": "huggingface",
+    "mode": "native",
+    "scenario": "persistent",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_normalized_persistent",
+    "stack": "huggingface",
+    "mode": "normalized",
+    "scenario": "persistent",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_native_denied",
+    "stack": "huggingface",
+    "mode": "native",
+    "scenario": "denied",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_normalized_denied",
+    "stack": "huggingface",
+    "mode": "normalized",
+    "scenario": "denied",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_native_trickle",
+    "stack": "huggingface",
+    "mode": "native",
+    "scenario": "trickle",
+    "retry_total": 2,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_normalized_trickle",
+    "stack": "huggingface",
+    "mode": "normalized",
+    "scenario": "trickle",
+    "retry_total": 1,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "budget_s": 0.1,
+      "time_scope": "operation",
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "hf_model_info_control",
+    "stack": "huggingface",
+    "mode": "model_info",
+    "scenario": "metadata",
+    "intent": {
+      "max_wire_attempts": 1,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "allow_transport_retry": true,
+      "provenance": "public model_info request path"
+    }
+  },
+  {
+    "id": "hf_model_info_transient",
+    "stack": "huggingface",
+    "mode": "model_info",
+    "scenario": "transient",
+    "intent": {}
+  },
+  {
+    "id": "req_old_truncated_native",
+    "stack": "requests_old",
+    "mode": "native",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": null,
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_old_truncated_outer_broad",
+    "stack": "requests_old",
+    "mode": "outer_broad",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_old_truncated_outer_selective",
+    "stack": "requests_old",
+    "mode": "outer_selective",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_old_truncated_outer_body_aware",
+    "stack": "requests_old",
+    "mode": "outer_body_aware",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_new_truncated_native",
+    "stack": "requests",
+    "mode": "native",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": null,
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_new_truncated_outer_broad",
+    "stack": "requests",
+    "mode": "outer_broad",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_new_truncated_outer_selective",
+    "stack": "requests",
+    "mode": "outer_selective",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_new_truncated_outer_body_aware",
+    "stack": "requests",
+    "mode": "outer_body_aware",
+    "scenario": "truncated",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789",
+      "required_outcome": "success",
+      "provenance": "reduced public report mechanism; local application recovery test for outer wrappers"
+    }
+  },
+  {
+    "id": "req_body_aware_success",
+    "stack": "requests",
+    "mode": "outer_body_aware",
+    "scenario": "success",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_body_aware_transient",
+    "stack": "requests",
+    "mode": "outer_body_aware",
+    "scenario": "transient",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_body_aware_persistent",
+    "stack": "requests",
+    "mode": "outer_body_aware",
+    "scenario": "persistent",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  },
+  {
+    "id": "req_body_aware_denied",
+    "stack": "requests",
+    "mode": "outer_body_aware",
+    "scenario": "denied",
+    "retry_total": 0,
+    "intent": {
+      "max_wire_attempts": 2,
+      "retryable_statuses": [
+        503
+      ],
+      "allow_body_recovery": true,
+      "expected_payload_on_success": "0123456789"
+    }
+  }
+]

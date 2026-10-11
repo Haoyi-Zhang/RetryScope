@@ -2,7 +2,8 @@
 
 ## Principal raw records
 
-- `raw/observed/`: 1,068 client-witnessed policy/HTTP/integration operations.
+- `raw/native-policy/`: 1,068 freshly executed client-witnessed policy/HTTP/integration operations, with captured sources and complete current-source replay.
+- `raw/observed/`: the separately retained policy observations used by migration-pair analysis; not added to the principal operation total.
 - `raw/extension/`: 402 object-identity, range-recovery, and constituent-read operations.
 - `raw/async-boundary/`: 144 cooperative async boundary operations.
 - `raw/sync-enforcement/`: 96 thread/process boundary operations.
@@ -13,6 +14,7 @@ Auxiliary retained records in `raw/evaluation`, `raw/sensitivity`, `raw/challeng
 ## Derived reports
 
 - `observed-derived/`
+- `native-policy-derived/` (primary policy tables)
 - `extension-derived/`
 - `async-derived/`
 - `sync-derived/`
