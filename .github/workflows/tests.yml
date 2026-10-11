@@ -32,3 +32,39 @@ jobs:
         shell: bash
         run: |
           python -m pytest -q
+  native-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      AWS_EC2_METADATA_DISABLED: 'true'
+      HF_HUB_DISABLE_IMPLICIT_TOKEN: '1'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      - name: Install native study dependencies
+        run: python -m pip install -r requirements/locked.txt
+      - name: Record actual execution environment
+        run: |
+          mkdir -p execution
+          python --version > execution/python.txt
+          uname -a > execution/system.txt
+          lscpu > execution/cpu.txt
+          python -m pip freeze > execution/packages.txt
+      - name: Collect the complete current-source native matrix
+        run: python -B scripts/run_observed_current.py --run-mode current --out execution/raw
+      - name: Recompute every trace with the current implementation
+        run: |
+          python -B scripts/analyze_observed.py --analysis-mode current --raw execution/raw --source-snapshot execution/raw/source-snapshot --out execution/analysis
+          python -c "import json; from pathlib import Path; print(json.dumps(json.loads(Path('execution/analysis/summary.json').read_text()), indent=2))"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: observed-execution
+          path: execution/
+          if-no-files-found: error
+          retention-days: 30
