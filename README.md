@@ -23,10 +23,10 @@ premise, not a closure inferred by the join.
 
 ## Study evidence
 
-The primary policy matrix is a fresh 89-configuration, 1,068-operation native
+The primary policy matrix is a source-bound 89-configuration, 1,068-operation native
 execution in `results/raw/native-policy/`, with nine captured instrumenting
 sources and per-record source binding. It records 1,704 requests, 1,728 client
-events, and 636 retry arrivals. Current-source replay reports 755 pass, 301
+events, and 636 retry arrivals. Recorded-source replay reports 755 pass, 301
 mismatch, and 12 unknown; removing client witnesses gives 289 mismatch and 779
 unknown. The checker supplied with the same complete observations gives the
 same verdicts. The recorded environment is Ubuntu x86-64, CPython 3.13.5 and
@@ -71,12 +71,14 @@ Obtain the current suite size with `python -B -m pytest --collect-only -q -p no:
 
 ## Regenerate the analyses
 
-To regenerate the primary policy matrix and select it for the manuscript:
+To collect a new source-bound policy matrix and select it for a candidate manuscript:
 
 ```bash
+python scripts/run_observed_current.py --run-mode current \
+  --out "$COMPARE_ROOT/native-policy"
 python scripts/analyze_observed.py --analysis-mode current \
-  --raw results/raw/native-policy \
-  --source-snapshot results/raw/native-policy/source-snapshot \
+  --raw "$COMPARE_ROOT/native-policy" \
+  --source-snapshot "$COMPARE_ROOT/native-policy/source-snapshot" \
   --out "$COMPARE_ROOT/native-policy-derived"
 python scripts/generate_paper.py \
   --observed-derived "$COMPARE_ROOT/native-policy-derived" --paper-dir ../paper
@@ -85,6 +87,13 @@ python scripts/generate_paper.py \
 Allocate `COMPARE_ROOT` as below before these commands. Paper generation writes
 the selected project's `paper/` inputs and `results/paper-data.json`; use a
 disposable project copy when comparing against the delivered manuscript.
+The collector requires the compatible POSIX runtime and pinned SDK dependencies
+described below. The retained `results/raw/native-policy/` campaign and its nine
+captured sources are immutable. If the live audit has changed, the current-source
+analyzer must reject that older binding rather than relabel it. The current
+library rejects Boolean/float parent identities and abstains on missing or
+non-mapping causes. Offline replay of all 1,068 retained native records preserves
+their audit decisions without constituting a new native collection.
 The default historical policy analyzer and generator paths remain available
 for the retained migration-pair evidence, not as the source of the current
 primary policy table.

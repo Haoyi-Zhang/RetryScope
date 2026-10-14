@@ -72,3 +72,21 @@ def test_empty_intent_unknown():
 def test_legacy_causes_not_fabricated():
     r=from_legacy({'events':[{'kind':'arrival','index':1,'status':503}], 'trace_complete':True})
     assert audit(r,AuditIntent(retryable_statuses=(503,)))['verdict']=='unknown'
+
+@pytest.mark.parametrize('parent',[True,1.0,'1',[],{},None])
+def test_library_retry_parent_requires_integer_identity(parent):
+    r=trace()
+    r['arrivals'].append({'id':2,'role':'retry','owner':'caller','retry_of':parent,
+                         'cause':{'kind':'status','received_status':503},
+                         'attribution_witness':'caller decision'})
+    assert audit(r,AuditIntent(retryable_statuses=(503,)))['verdict']=='unknown'
+
+@pytest.mark.parametrize('cause',[None,[],True,'status'])
+def test_library_missing_or_malformed_cause_abstains(cause):
+    r=trace()
+    r['arrivals'].append({'id':2,'role':'retry','owner':'caller','retry_of':1,
+                         'cause':cause,'attribution_witness':'caller decision'})
+    result=audit(r,AuditIntent(retryable_statuses=(503,),max_wire_attempts=1))
+    assert result['dimensions']['classification']['verdict']=='unknown'
+    assert result['dimensions']['attempts']['verdict']=='mismatch'
+    assert result['verdict']=='mismatch'
