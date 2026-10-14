@@ -68,6 +68,19 @@ python -m pip install -e '.[test]'
 python -m pytest -q
 ```
 
+The adopted input selection has a read-only offline check:
+
+```bash
+python scripts/verify_selected.py
+python scripts/verify_selected.py --paper-dir ../paper
+```
+
+The second command also checks the generated manuscript count macros. The
+standalone command needs no sibling paper. Both check the current policy
+matrix, the selected paired analysis, retained phase source bindings and input
+counts; they do not certify every archived campaign. Git attributes preserve
+recorded source and evidence bytes on both Windows and POSIX checkouts.
+
 Obtain the current suite size with `python -B -m pytest --collect-only -q -p no:cacheprovider`; the count changes when regressions are added. The retained study identifies its historical sources in freeze metadata, subject to the observed-worker limitation below. Tests of the current implementation do not validate the worker bytes used by an older run. New Windows study validation is kept separately in `results/local-validation/`.
 
 ## Regenerate the analyses
