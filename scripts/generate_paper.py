@@ -39,6 +39,8 @@ def main() -> None:
     parser.add_argument("--paper-dir", type=Path, default=DEFAULT_PAPER)
     parser.add_argument("--observed-derived", type=Path,
                         help="explicitly select the validated policy matrix used by the manuscript")
+    parser.add_argument("--migration-derived", type=Path,
+                        help="explicitly select the paired analysis and its phase-source accounting")
     args = parser.parse_args()
 
     observed_dir = args.observed_derived or ROOT / "results/observed-derived"
@@ -46,7 +48,8 @@ def main() -> None:
     extension = load(ROOT / "results/extension-derived/summary.json")
     async_summary = load(ROOT / "results/async-derived/summary.json")
     sync_summary = load(ROOT / "results/sync-derived/summary.json")
-    migration = load(ROOT / "results/migration-derived/summary.json")
+    migration_dir = args.migration_derived or ROOT / "results/migration-derived"
+    migration = load(migration_dir / "summary.json")
     causal = load(ROOT / "results/causal-derived/summary.json")
     with (ROOT / "results/causal-derived/cells.csv").open(newline="") as handle:
         causal_configurations = len(list(csv.DictReader(handle)))
@@ -133,9 +136,9 @@ def main() -> None:
         observed_dir / "observed-macros.tex": generated / "observed-macros.tex",
         observed_dir / "observed-stack-rows.tex": generated / "observed-stack-rows.tex",
         ROOT / "results/extension-derived/download-rows.tex": generated / "download-rows.tex",
-        ROOT / "results/migration-derived/migration-macros.tex": generated / "migration-macros.tex",
-        ROOT / "results/migration-derived/migration-category-rows.tex": generated / "migration-category-rows.tex",
-        ROOT / "results/migration-derived/migration-rows.tex": generated / "migration-rows.tex",
+        migration_dir / "migration-macros.tex": generated / "migration-macros.tex",
+        migration_dir / "migration-category-rows.tex": generated / "migration-category-rows.tex",
+        migration_dir / "migration-rows.tex": generated / "migration-rows.tex",
         ROOT / "results/sync-derived/sync-macros.tex": generated / "sync-macros.tex",
         ROOT / "results/sync-derived/sync-rows.tex": generated / "sync-rows.tex",
         ROOT / "results/causal-derived/causal-macros.tex": generated / "causal-macros.tex",
@@ -155,9 +158,10 @@ def main() -> None:
         shutil.copy2(source, destination)
 
     report = {
-        "policy_matrix": str(observed_dir.relative_to(ROOT)) if observed_dir.is_relative_to(ROOT) else str(observed_dir),
+        "policy_matrix": observed_dir.relative_to(ROOT).as_posix() if observed_dir.is_relative_to(ROOT) else observed_dir.as_posix(),
         "policy_analysis_mode": observed.get("analysis_mode", "historical"),
-        "migration_pairs_use_retained_policy_records": True,
+        "migration_pairs_use_retained_policy_records": migration.get("phase_sources", {}).get("initial", {}).get("collection", "retained") == "retained",
+        "migration_phase_sources": migration.get("phase_sources", {}),
         "phases": [
             {"name": name, "configurations": cells, "operations": ops, "wire_requests": wires}
             for name, cells, ops, wires in phases

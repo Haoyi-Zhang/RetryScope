@@ -1,7 +1,21 @@
 {
-  "policy_matrix": "results\\native-policy-derived",
+  "policy_matrix": "results/native-policy-derived",
   "policy_analysis_mode": "current",
-  "migration_pairs_use_retained_policy_records": true,
+  "migration_pairs_use_retained_policy_records": false,
+  "migration_phase_sources": {
+    "async": {
+      "pair_observations": 12,
+      "collection": "retained"
+    },
+    "extension": {
+      "pair_observations": 30,
+      "collection": "retained"
+    },
+    "initial": {
+      "pair_observations": 54,
+      "collection": "current"
+    }
+  },
   "phases": [
     {
       "name": "Policy, HTTP, and integration",

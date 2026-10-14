@@ -1,18 +1,18 @@
 {
   "analysis_mode": "current",
   "audit_verdicts": {
-    "mismatch": 301,
-    "pass": 755,
+    "mismatch": 300,
+    "pass": 756,
     "unknown": 12
   },
   "baseline_checker_verdicts": {
-    "mismatch": 301,
-    "pass": 755,
+    "mismatch": 300,
+    "pass": 756,
     "unknown": 12
   },
   "baseline_to_evidence_transition": {
-    "mismatch_to_mismatch": 301,
-    "pass_to_pass": 755,
+    "mismatch_to_mismatch": 300,
+    "pass_to_pass": 756,
     "unknown_to_unknown": 12
   },
   "cells": 89,
@@ -35,14 +35,14 @@
       "pass": 972
     },
     "time": {
-      "mismatch": 157,
-      "pass": 35
+      "mismatch": 156,
+      "pass": 36
     }
   },
   "maximum_wire_requests": 5,
   "raw_sha256": {
-    "false.jsonl": "03c9fe23df7f9c31f2a4890788b8424fc860b83234c21571a2aca80df49e456e",
-    "true.jsonl": "936e717368ecf2400a9ebb91d65c8acb1d05ee7960aff294778566c5c62cad18"
+    "false.jsonl": "c660a188dc8d9348d45ec74531ca672b26369146d02c72b09178ec2709e0b3fb",
+    "true.jsonl": "5ff52350bdee5a7716eb6b45afb6f49d811d2e27af185a1a7fcdcc79226b83db"
   },
   "records": 1068,
   "replicates": 12,
@@ -50,15 +50,15 @@
   "schema": 1,
   "scope": "fresh client-witnessed rerun of the original 89-cell matrix; loopback, sequential, no production endpoint",
   "server_only_counterfactual_verdicts": {
-    "mismatch": 289,
-    "unknown": 779
+    "mismatch": 288,
+    "unknown": 780
   },
   "source_provenance": {
     "analysis_mode": "current",
     "files": {
       "scripts/run_observed_current.py": "efd89f4657e99e10e7127ec36c2f1dffad5b41aeeb93fbd6663127126d242a3f",
       "src/retryscope/__init__.py": "6cbbfb132aa09563f50063071dd059503462d4faa381e345732a3b95c60fee4a",
-      "src/retryscope/audit.py": "26251d69a011b7f4b5ebb262cb9f4dbc8d44926ff621789813d97fb919647765",
+      "src/retryscope/audit.py": "94e6d041fe1903011e80997b1d39d7ac12ab259d4bd192a38b20a4611cc3cc33",
       "src/retryscope/checker.py": "6180ce1e90b4e6deb39c3533f307c46096e4a31a3e25ecb0578b7589f3d4f731",
       "src/retryscope/observation.py": "b8615660a106e9ab79b88bf923a04986fcec8170d2fcb3d8d6d11f3a7174d11c",
       "src/retryscope/observed_worker.py": "39abf0047665926dcc491c5e92268e813d0b911a551948e8628206ccb7d526c9",

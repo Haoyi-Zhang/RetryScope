@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-11T23:09:42.281829+00:00",
+  "utc": "2026-10-14T16:22:57.830341+00:00",
   "phase": "observed-current",
   "analysis_mode": "current",
   "seeds": "301,302,303,304,305,306,307,308,309,310,311,312",
@@ -12,7 +12,7 @@
     "src/retryscope/worker.py": "c7028972ecc4cec9d4069a2e2e8896302a7dae79c37b1f0f14f77f7340cf8fca",
     "src/retryscope/checker.py": "6180ce1e90b4e6deb39c3533f307c46096e4a31a3e25ecb0578b7589f3d4f731",
     "src/retryscope/observation.py": "b8615660a106e9ab79b88bf923a04986fcec8170d2fcb3d8d6d11f3a7174d11c",
-    "src/retryscope/audit.py": "26251d69a011b7f4b5ebb262cb9f4dbc8d44926ff621789813d97fb919647765",
+    "src/retryscope/audit.py": "94e6d041fe1903011e80997b1d39d7ac12ab259d4bd192a38b20a4611cc3cc33",
     "src/retryscope/responder.py": "3c7ea3ac6d38e8e12fe0de492a99aceb1b3b0f0d1f508e3b0da61b00bed9e84e"
   }
 }

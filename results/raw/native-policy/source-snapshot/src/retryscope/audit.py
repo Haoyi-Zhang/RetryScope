@@ -110,7 +110,9 @@ def audit(record: Mapping[str, Any], intent: AuditIntent) -> dict[str, Any]:
                 elif (role in ('retry', 'recovery') and a.get('attribution_witness')
                       and isinstance(a.get('owner'), str) and a['owner'].strip()
                       and len(a['owner']) <= 128
-                      and a.get('retry_of') in ids and a['retry_of'] < a['id']):
+                      and type(a.get('retry_of')) is int
+                      and a['retry_of'] in ids and a['retry_of'] < a['id']
+                      and isinstance(a.get('cause'), Mapping)):
                     cause = a.get('cause', {})
                     kind = cause.get('kind')
                     if kind == 'status' and type(cause.get('received_status')) is int and 100 <= cause['received_status'] <= 599:

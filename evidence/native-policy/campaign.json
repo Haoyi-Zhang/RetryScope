@@ -1,0 +1,24 @@
+{
+  "source": "GitHub Actions observed-execution artifact",
+  "workflow_run": 38597528255,
+  "workflow_url": "https://github.com/Haoyi-Zhang/RetryScope/actions/runs/38597528255",
+  "execution_commit": "4f50b7eafbb4dd073affbcef0e54104e7434df8f",
+  "artifact_id": 11912835646,
+  "created_at_utc": "2026-10-14T16:27:28Z",
+  "records": 1068,
+  "cells": 89,
+  "wire_requests": 1704,
+  "analysis_mode": "current",
+  "captured_owned_sources": 9,
+  "all_current_raw_traces_recomputed": true,
+  "paired_initial_observations": 54,
+  "retained_extension_observations": 30,
+  "retained_async_observations": 12,
+  "environment_records": [
+    "cpu.txt",
+    "python.txt",
+    "system.txt",
+    "packages.txt"
+  ],
+  "original_archived_observed_records_rewritten": false
+}

@@ -26,5 +26,24 @@
   ],
   "structural_change_observations": 90,
   "scope": "paired reanalysis of already executed immutable operations; controls are not additional independent cases",
-  "initial_source": "client-witnessed rerun"
+  "initial_source": "client-witnessed rerun",
+  "phase_sources": {
+    "async": {
+      "pair_observations": 12,
+      "collection": "retained"
+    },
+    "extension": {
+      "pair_observations": 30,
+      "collection": "retained"
+    },
+    "initial": {
+      "pair_observations": 54,
+      "collection": "current"
+    }
+  },
+  "initial_raw_sha256": {
+    "false.jsonl": "c660a188dc8d9348d45ec74531ca672b26369146d02c72b09178ec2709e0b3fb",
+    "true.jsonl": "5ff52350bdee5a7716eb6b45afb6f49d811d2e27af185a1a7fcdcc79226b83db",
+    "freeze.json": "54ebe727bd58f9d60a1d0ebd8c17166f22d4d8a598fa8947a4710c62230bbaa4"
+  }
 }

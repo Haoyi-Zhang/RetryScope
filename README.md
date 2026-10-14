@@ -26,14 +26,15 @@ premise, not a closure inferred by the join.
 The primary policy matrix is a source-bound 89-configuration, 1,068-operation native
 execution in `results/raw/native-policy/`, with nine captured instrumenting
 sources and per-record source binding. It records 1,704 requests, 1,728 client
-events, and 636 retry arrivals. Recorded-source replay reports 755 pass, 301
-mismatch, and 12 unknown; removing client witnesses gives 289 mismatch and 779
+events, and 636 retry arrivals. Current-source replay reports 756 pass, 300
+mismatch, and 12 unknown; removing client witnesses gives 288 mismatch and 780
 unknown. The checker supplied with the same complete observations gives the
 same verdicts. The recorded environment is Ubuntu x86-64, CPython 3.13.5 and
-an AMD EPYC 9V45 virtual CPU allocation; exact packages are in
+an AMD EPYC 7763 virtual CPU allocation; exact packages are in
 `evidence/native-policy/`. Collection and replay passed in the repository's
-native-replay job. Other phases and the 96 migration pairs retain their own
-separately identified execution evidence.
+native-replay job. The 96 migration pairs combine 54 pairs from this current-source
+matrix with 30 retained extension pairs and 12 retained asynchronous pairs;
+`results/migration-derived/summary.json` records this phase accounting.
 
 | Phase | Configurations | Logical operations | Wire requests |
 |---|---:|---:|---:|
@@ -48,7 +49,7 @@ The separate paired analysis reuses 96 executed before/after trace pairs; it is 
 
 Key retained findings are generated from the records, not hard-coded in the paper:
 
-- client witnesses make all 1,056 requested retry-classification decisions in the fresh sequential matrix decidable; deleting those witnesses leaves 779 aggregate outcomes unknown;
+- client witnesses make all 1,056 requested retry-classification decisions in the fresh sequential matrix decidable; deleting those witnesses leaves 780 aggregate outcomes unknown;
 - 36 successful, correctly framed operations return the wrong same-length object when identity checking is disabled;
 - a naive adjacent-request rule raises 36/36 false alarms on healthy fsspec constituent reads, while role-aware auditing raises none;
 - exact causal identifiers attribute all 720 concurrent operations and all 2,160 wire attempts; the sequential time-window join falls from 100% exact assignment at concurrency one to 1.6% at concurrency eight (19/1,152 wire attempts);
@@ -80,8 +81,12 @@ python scripts/analyze_observed.py --analysis-mode current \
   --raw "$COMPARE_ROOT/native-policy" \
   --source-snapshot "$COMPARE_ROOT/native-policy/source-snapshot" \
   --out "$COMPARE_ROOT/native-policy-derived"
+python scripts/analyze_migrations.py \
+  --initial-raw "$COMPARE_ROOT/native-policy" \
+  --manifest study/migration-pairs.json --out "$COMPARE_ROOT/migration-derived"
 python scripts/generate_paper.py \
-  --observed-derived "$COMPARE_ROOT/native-policy-derived" --paper-dir ../paper
+  --observed-derived "$COMPARE_ROOT/native-policy-derived" \
+  --migration-derived "$COMPARE_ROOT/migration-derived" --paper-dir ../paper
 ```
 
 Allocate `COMPARE_ROOT` as below before these commands. Paper generation writes
@@ -92,11 +97,10 @@ described below. The retained `results/raw/native-policy/` campaign and its nine
 captured sources are immutable. If the live audit has changed, the current-source
 analyzer must reject that older binding rather than relabel it. The current
 library rejects Boolean/float parent identities and abstains on missing or
-non-mapping causes. Offline replay of all 1,068 retained native records preserves
-their audit decisions without constituting a new native collection.
-The default historical policy analyzer and generator paths remain available
-for the retained migration-pair evidence, not as the source of the current
-primary policy table.
+non-mapping causes. Current-source replay checks all 1,068 native records and
+their captured sources before selecting the 54 initial-phase pairs.
+The default historical policy analyzer remains available for archived
+observations, separately from the current primary policy and paired tables.
 
 Run these commands from `artifact/` in a prepared environment. Allocate a fresh comparison root outside the project; each analyzer creates its own new subdirectory. Do not delete or reuse the retained raw or derived directories. The following Bash example uses an externally owned temporary directory:
 

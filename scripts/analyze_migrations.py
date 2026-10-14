@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 import csv
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -12,6 +13,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "scripts"))
 from retryscope.audit import AuditIntent, from_legacy
 from retryscope.migration import compare_migration
 
@@ -29,6 +31,14 @@ def load_sources(initial_raw: Path | None) -> dict[str, list[dict[str, Any]]]:
             row["_file"] = name
             row["_observed_initial"] = initial_raw is not None
             initial.append(row)
+    if initial_raw is not None and any(row.get("analysis_mode") == "current" for row in initial):
+        # A newly collected matrix must pass the same complete source/trace
+        # checks as the policy analysis before any pair is selected from it.
+        from analyze_observed import validate
+        freeze = json.loads((base / "freeze.json").read_text())
+        seeds = [int(value) for value in freeze["seeds"].split(",")]
+        validate(initial, base, seeds, analysis_mode="current",
+                 source_snapshot=base / "source-snapshot")
     return {
         "initial": initial,
         "extension": read_jsonl(ROOT / "results/raw/extension/records.jsonl"),
@@ -189,7 +199,20 @@ def main() -> None:
         "structural_change_observations": sum(r["structural_changes"] for r in pair_rows),
         "scope": "paired reanalysis of already executed immutable operations; controls are not additional independent cases",
         "initial_source": "client-witnessed rerun" if args.initial_raw else "legacy server-only conversion",
+        "phase_sources": {
+            phase: {
+                "pair_observations": sum(row["n"] for row in pair_rows if row["phase"] == phase),
+                "collection": "current" if phase == "initial" and sources[phase]
+                    and all(row.get("analysis_mode") == "current" for row in sources[phase]) else "retained",
+            }
+            for phase in sorted({row["phase"] for row in pair_rows})
+        },
     }
+    if args.initial_raw is not None:
+        summary["initial_raw_sha256"] = {
+            name: hashlib.sha256((args.initial_raw / name).read_bytes()).hexdigest()
+            for name in ("false.jsonl", "true.jsonl", "freeze.json")
+        }
     (args.out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
 
     # Compact LaTeX rows for the manuscript.
