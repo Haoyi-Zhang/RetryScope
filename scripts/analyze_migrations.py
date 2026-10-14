@@ -36,7 +36,7 @@ def load_sources(initial_raw: Path | None) -> dict[str, list[dict[str, Any]]]:
     }
 
 
-def key(row: dict[str, Any], phase: str) -> Any:
+def key(row: dict[str, Any], phase: str) -> int:
     """Return the replicate identifier shared by both sides of a pair.
 
     Operation ids intentionally differ across migration phases, so they cannot be
@@ -44,8 +44,8 @@ def key(row: dict[str, Any], phase: str) -> Any:
     immutable replicate identifier.
     """
     seed = row.get("seed")
-    if seed is None:
-        raise ValueError(f"record {row.get('id')} has no pairing seed")
+    if type(seed) is not int:
+        raise ValueError(f"record {row.get('id')} pairing seed must be an integer")
     return seed
 
 
@@ -68,11 +68,22 @@ def select(rows: list[dict[str, Any]], selector: dict[str, Any], phase: str) -> 
             continue
         if "file" in selector and row.get("_file") != selector["file"]:
             continue
+        seed = key(row, phase)
+        if seed in picked:
+            raise ValueError(f"duplicate pairing seed {seed} for {phase}/{selector['id']}")
         normalized = normalize(row, phase)
         for field, value in selector.get("mutate", {}).items():
             normalized[field] = value
-        picked[key(row, phase)] = normalized
+        picked[seed] = normalized
     return picked
+
+
+def paired_seeds(before: dict, after: dict, pair_id: str) -> list[int]:
+    """Select the first six shared replicates of the declared pair design."""
+    common = sorted(set(before) & set(after))
+    if len(common) < 6:
+        raise ValueError(f"{pair_id} requires at least six shared pairing seeds; found {len(common)}")
+    return common[:6]
 
 
 def coarse(category: str) -> str:
@@ -123,11 +134,7 @@ def main() -> None:
         phase = spec["phase"]
         before = select(sources[phase], spec["before"], phase)
         after = select(sources[phase], spec["after"], phase)
-        common = sorted(set(before) & set(after))
-        if not common:
-            raise RuntimeError(f"no paired records for {spec['id']}")
-        # Balance all pair types to six executed pair observations.
-        common = common[:6]
+        common = paired_seeds(before, after, spec["id"])
         intent = AuditIntent(**spec["intent"])
         categories = Counter()
         expected = spec["expected"]
