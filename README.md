@@ -63,6 +63,14 @@ These are bounded local results, not estimates of production prevalence or outag
 
 Python 3.11 or newer is required. Exact evaluated package versions are recorded in `requirements/locked.txt` and environment evidence in `evidence/`.
 
+The test extra below is sufficient for the portable repository tests; it is not
+the complete study environment. For new collection in the compatible POSIX
+runtime, install `python -m pip install -r requirements/locked.txt` for the
+policy matrix, or `python -m pip install -r requirements/extension.txt` for the
+extension and boundary studies. The extension file includes the base pins and
+adds Pooch, aiohttp and the other evaluated extension dependencies. Retained
+offline analysis does not need those clients to be installed.
+
 ```bash
 python -m pip install -e '.[test]'
 python -m pytest -q
