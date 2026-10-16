@@ -204,6 +204,18 @@ policy processes share a 15-minute limit, and a stopped partial batch is not a
 complete matrix. This mode does not modify retained records or reconstruct their
 missing worker. Omitting `--run-mode current` delegates the historical runner.
 
+## Paper workflow diagram
+
+`plots/draw_workflow.py` produces the paper's workflow schematic directly as a
+font-embedded vector PDF using Matplotlib and its bundled STIX fonts. It retains
+the shared intent, two execution audits, paired classifier and release report.
+The sibling `paper/build.py` regenerates it before the isolated TeX build;
+other published figure scripts continue to use the retained measurements.
+
+```bash
+python plots/draw_workflow.py --output-dir ../paper/figures
+```
+
 ## Repository map
 
 - `src/retryscope/`: checker, paired classifier, causal witness ledger/join, fixtures, and CLIs.
