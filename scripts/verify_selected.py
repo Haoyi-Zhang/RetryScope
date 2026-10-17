@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only OFFLINE check of P114's adopted current selection, NOT all history.
+"""Read-only OFFLINE check of RetryScope's adopted current selection, NOT all history.
 
 Run with --root ARTIFACT; optionally --paper-dir PAPER checks published count
 macros too. No collectors, analyzer mains, plots, benchmarks or generators run.
@@ -436,4 +436,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
