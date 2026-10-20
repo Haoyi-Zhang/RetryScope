@@ -246,6 +246,10 @@ timing samples. To collect another independent output directory, run
 `python -B scripts/capture_causal_study.py --output <new-directory>` with the
 documented local client dependencies. New extension freezes also include the
 ordinary identity-check helper; historical freeze maps are left unchanged.
+Campaign selections must be nonempty, supported and duplicate-free in every
+dimension. An invalid selection is rejected before raw output is created; the
+captured-source entry point records the rejected run as failed, not as a
+successful zero-case campaign.
 
 Check all entries in the observed, extension, asynchronous and synchronous freezes without writing outputs:
 

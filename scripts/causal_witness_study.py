@@ -467,14 +467,24 @@ def main() -> None:
     parser.add_argument("--concurrency", default=",".join(map(str, CONCURRENCIES)))
     parser.add_argument("--seeds", default=",".join(map(str, SEEDS)))
     args = parser.parse_args()
-    stacks = tuple(item for item in args.stacks.split(",") if item)
-    scenarios = tuple(item for item in args.scenarios.split(",") if item)
-    levels = tuple(int(item) for item in args.concurrency.split(",") if item)
-    seeds = tuple(int(item) for item in args.seeds.split(",") if item)
-    if any(stack not in STACKS for stack in stacks) or any(scenario not in SCENARIOS for scenario in scenarios):
-        raise SystemExit("unsupported stack or scenario")
-    if any(level not in CONCURRENCIES for level in levels) or any(seed not in SEEDS for seed in seeds):
-        raise SystemExit("unsupported concurrency or seed")
+    def selection(value, allowed, label, convert=str):
+        fields = tuple(item.strip() for item in value.split(","))
+        if not fields or any(not item for item in fields):
+            parser.error(f"{label} must be a nonempty comma-separated selection")
+        try:
+            selected = tuple(convert(item) for item in fields)
+        except ValueError:
+            parser.error(f"invalid {label} value")
+        if any(item not in allowed for item in selected):
+            parser.error(f"unsupported {label}")
+        if len(set(selected)) != len(selected):
+            parser.error(f"duplicate {label} entries")
+        return selected
+
+    stacks = selection(args.stacks, STACKS, "stack")
+    scenarios = selection(args.scenarios, SCENARIOS, "scenario")
+    levels = selection(args.concurrency, CONCURRENCIES, "concurrency", int)
+    seeds = selection(args.seeds, SEEDS, "seed", int)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8") as stream:
         for stack in stacks:
