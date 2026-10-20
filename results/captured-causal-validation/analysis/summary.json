@@ -1,0 +1,46 @@
+{
+  "assignment_accuracy": {
+    "causal_token": 1.0,
+    "timestamp_window": 0.10324074074074074
+  },
+  "audit_verdicts": {
+    "mismatch": 0,
+    "pass": 720,
+    "unknown": 0
+  },
+  "causal_joins_complete": 720,
+  "cells": 192,
+  "edge_metrics": {
+    "causal_token": {
+      "expected": 1080,
+      "f1": 1.0,
+      "precision": 1.0,
+      "predicted": 1080,
+      "recall": 1.0,
+      "true_positive": 1080
+    },
+    "timestamp_window": {
+      "expected": 1080,
+      "f1": 0.11998016856717898,
+      "precision": 0.12913553895410887,
+      "predicted": 937,
+      "recall": 0.11203703703703703,
+      "true_positive": 121
+    }
+  },
+  "elapsed_ms": {
+    "maximum": 78.00000003771856,
+    "median": 16.00000000325963
+  },
+  "operations": 720,
+  "owner_accuracy": {
+    "causal_token": 1.0,
+    "timestamp_window": 0.5375
+  },
+  "role_accuracy": {
+    "adjacency": 0.6666666666666666,
+    "causal_token": 1.0,
+    "timestamp_window": 0.5263888888888889
+  },
+  "wire_attempts": 2160
+}

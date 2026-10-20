@@ -228,6 +228,25 @@ python plots/draw_workflow.py --output-dir ../paper/figures
 
 ## Frozen source relocation
 
+The manuscript generator defaults to `results/native-policy-derived`, matching
+the current paired migration analysis. Before creating any manuscript files it
+requires both raw policy identities and the collection mode to agree with the
+migration summary. `python -B scripts/generate_paper.py --check-only` checks this
+selection and the fixed phase totals without writing output. An explicit older
+policy collection must be paired with its own compatible migration analysis;
+equal row counts alone are insufficient.
+
+A separate current Windows causal validation is in
+`results/captured-causal-validation/`. It executes the captured driver and local
+module tree, retains the actual interpreter/OS/dependency environment, and binds
+the 192 batches, 720 operations and 2,160 wire requests to the captured bytes.
+The accompanying reanalysis re-derives the joins and verdicts from the raw events.
+It is a new execution, not a reconstruction of the older Linux campaign or its
+timing samples. To collect another independent output directory, run
+`python -B scripts/capture_causal_study.py --output <new-directory>` with the
+documented local client dependencies. New extension freezes also include the
+ordinary identity-check helper; historical freeze maps are left unchanged.
+
 Check all entries in the observed, extension, asynchronous and synchronous freezes without writing outputs:
 
 ```bash

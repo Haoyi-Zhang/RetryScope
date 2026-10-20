@@ -34,6 +34,24 @@ def collected_tests() -> int:
     return int(match.group(1))
 
 
+def validate_policy_pair_sources(observed: dict, migration: dict) -> None:
+    """Reject mixing policy observations with pairs derived from another collection."""
+    policy = observed.get('raw_sha256', {})
+    paired = migration.get('initial_raw_sha256', {})
+    required = {'false.jsonl', 'true.jsonl'}
+    if not required.issubset(policy) or not required.issubset(paired):
+        raise ValueError('Policy and migration summaries must identify both raw policy inputs.')
+    if any(policy[name] != paired[name] for name in required):
+        raise ValueError('Policy and migration pairs refer to different raw observations.')
+    mode = observed.get('analysis_mode', 'historical')
+    if mode not in ('current', 'historical'):
+        raise ValueError('Unsupported policy analysis mode.')
+    collection = migration.get('phase_sources', {}).get('initial', {}).get('collection')
+    expected = 'current' if mode == 'current' else 'retained'
+    if collection != expected:
+        raise ValueError('Policy analysis mode and migration initial collection disagree.')
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--paper-dir", type=Path, default=DEFAULT_PAPER)
@@ -41,15 +59,18 @@ def main() -> None:
                         help="explicitly select the validated policy matrix used by the manuscript")
     parser.add_argument("--migration-derived", type=Path,
                         help="explicitly select the paired analysis and its phase-source accounting")
+    parser.add_argument('--check-only', action='store_true',
+                        help='validate selected result sources and scientific totals without writing manuscript inputs')
     args = parser.parse_args()
 
-    observed_dir = args.observed_derived or ROOT / "results/observed-derived"
+    observed_dir = args.observed_derived or ROOT / "results/native-policy-derived"
     observed = load(observed_dir / "summary.json")
     extension = load(ROOT / "results/extension-derived/summary.json")
     async_summary = load(ROOT / "results/async-derived/summary.json")
     sync_summary = load(ROOT / "results/sync-derived/summary.json")
     migration_dir = args.migration_derived or ROOT / "results/migration-derived"
     migration = load(migration_dir / "summary.json")
+    validate_policy_pair_sources(observed, migration)
     causal = load(ROOT / "results/causal-derived/summary.json")
     with (ROOT / "results/causal-derived/cells.csv").open(newline="") as handle:
         causal_configurations = len(list(csv.DictReader(handle)))
@@ -85,7 +106,16 @@ def main() -> None:
     assert causal["causal_joins_complete"] == causal["operations"] == 720
     assert causal["assignment_accuracy"]["causal_token"] == 1.0
     assert causal["edge_metrics"]["causal_token"]["f1"] == 1.0
-    assert migration["initial_source"] == "client-witnessed rerun"
+    if observed.get('analysis_mode', 'historical') == 'current':
+        assert migration["initial_source"] == "client-witnessed rerun"
+
+    if args.check_only:
+        print(json.dumps({'policy_matrix': str(observed_dir),
+                          'migration_pairs': str(migration_dir),
+                          'raw_policy_inputs_match': True,
+                          'totals': [total_cells, total_ops, total_wires, max_wires],
+                          'manuscript_files_written': 0}))
+        return
 
     generated = args.paper_dir / "generated"
     figures = args.paper_dir / "figures"

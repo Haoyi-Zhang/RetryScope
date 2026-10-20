@@ -174,7 +174,7 @@ def main():
     a.out.mkdir(parents=True,exist_ok=False)
     cases=matrix();seeds=[401] if a.pilot else [601] if a.smoke else list(range(501,507))
     if a.smoke:cases=[c for c in cases if c['id'] in ('pooch_hash1_corrupt_once','requests_old_length_corrupt_once','smart_range_3_31','fsspec_metadata_17')]
-    freeze={'utc':datetime.datetime.now(datetime.UTC).isoformat(),'phase':'pilot' if a.pilot else 'smoke' if a.smoke else 'evaluation','cases':cases,'seeds':seeds,'versions':{p:md.version(p) for p in ('pooch','fsspec','aiohttp','requests','urllib3','boto3','botocore','smart_open','pip')},'sources':{str(p.relative_to(ROOT)):sha(p) for p in [Path(__file__),ROOT/'src/retryscope/audit.py',ROOT/'src/retryscope/range_fixture.py',ROOT/'study/extension-protocol.md']}}
+    freeze={'utc':datetime.datetime.now(datetime.UTC).isoformat(),'phase':'pilot' if a.pilot else 'smoke' if a.smoke else 'evaluation','cases':cases,'seeds':seeds,'versions':{p:md.version(p) for p in ('pooch','fsspec','aiohttp','requests','urllib3','boto3','botocore','smart_open','pip')},'sources':{str(p.relative_to(ROOT)):sha(p) for p in [Path(__file__),ROOT/'src/retryscope/audit.py',ROOT/'src/retryscope/range_fixture.py',ROOT/'src/retryscope/ordinary.py',ROOT/'study/extension-protocol.md']}}
     (a.out/'freeze.json').write_text(json.dumps(freeze,indent=2)+'\n')
     def timeout(*_):raise RuntimeError('bounded operation watchdog fired')
     signal.signal(signal.SIGALRM,timeout)

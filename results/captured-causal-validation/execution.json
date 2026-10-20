@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "started_utc": "2026-10-20T12:17:21.997791+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "implementation": "CPython",
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+    "logical_cpus": 20,
+    "dependencies": {
+      "requests": "2.34.2",
+      "urllib3": "2.8.0"
+    }
+  },
+  "sources": {
+    "scripts/causal_witness_study.py": "e45cc92251370ca5b48fc438b7280d19ceaf27a14c1062d0d18ad7d52737df91",
+    "scripts/capture_causal_study.py": "50bf88a102cfbb3ead1d4454fde2ea74b0432d596cf097d5d35121df03d0fd64",
+    "src/retryscope/__init__.py": "6cbbfb132aa09563f50063071dd059503462d4faa381e345732a3b95c60fee4a",
+    "src/retryscope/audit.py": "94e6d041fe1903011e80997b1d39d7ac12ab259d4bd192a38b20a4611cc3cc33",
+    "src/retryscope/causal.py": "9b2ce3cfbbd10234b60dd21a4f87fd3867342f79347d32ec496537ff3c6ec05e",
+    "src/retryscope/causal_cli.py": "4ce9185bbab8c1e9720de5ea39e2be1234f3cbd8040a358eb7c3a4e3e7014e4a",
+    "src/retryscope/causal_fixture.py": "8fa733bf1850c16936ce8770232435f086905c90620a397a200d9cd7132df4fd",
+    "src/retryscope/checker.py": "6180ce1e90b4e6deb39c3533f307c46096e4a31a3e25ecb0578b7589f3d4f731",
+    "src/retryscope/cli.py": "307cfc0a236cc9d8d61cdd50d688d44e03127cfd5cf72599554649a2175817eb",
+    "src/retryscope/migration.py": "2c790bfd0c02c405fd83d957637ebfd401646e8a842e5c8e109b096c09b13a03",
+    "src/retryscope/observation.py": "b8615660a106e9ab79b88bf923a04986fcec8170d2fcb3d8d6d11f3a7174d11c",
+    "src/retryscope/observed_worker.py": "39abf0047665926dcc491c5e92268e813d0b911a551948e8628206ccb7d526c9",
+    "src/retryscope/ordinary.py": "5d64aa078ad8408b7b2789babab7993ce36ae62e433b1d4eea91c7a7c1460c53",
+    "src/retryscope/range_fixture.py": "d93167dbfc7c7959358baac966459a8c2a5fac14d685b2fd645599802946ee94",
+    "src/retryscope/responder.py": "3c7ea3ac6d38e8e12fe0de492a99aceb1b3b0f0d1f508e3b0da61b00bed9e84e",
+    "src/retryscope/retained.py": "557ca165867e504835dd57dda40aefe1a70d1ba1093fa73ff2112865b1e00920",
+    "src/retryscope/worker.py": "c7028972ecc4cec9d4069a2e2e8896302a7dae79c37b1f0f14f77f7340cf8fca"
+  },
+  "executed_from_captured_tree": true,
+  "parameters": {
+    "stacks": "requests,urllib3",
+    "scenarios": "retry,nested,constituent,recovery",
+    "concurrency": "1,2,4,8",
+    "seeds": "11,23,37,53,71,89"
+  },
+  "timeout_seconds": 240,
+  "historical_run_reconstructed": false,
+  "returncode": 0,
+  "finished_utc": "2026-10-20T12:17:26.988881+00:00",
+  "wall_seconds": 4.944679000007454,
+  "raw_sha256": "1fa64b952d74d84a2f79d271a3e4112c9213e52a9447869aef12cf2fb38619ea",
+  "batches": 192,
+  "operations": 720,
+  "wire_requests": 2160
+}
