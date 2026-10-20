@@ -236,13 +236,17 @@ selection and the fixed phase totals without writing output. An explicit older
 policy collection must be paired with its own compatible migration analysis;
 equal row counts alone are insufficient.
 
-A separate current Windows causal validation is in
-`results/captured-causal-validation/`. It executes the captured driver and local
-module tree, retains the actual interpreter/OS/dependency environment, and binds
-the 192 batches, 720 operations and 2,160 wire requests to the captured bytes.
-The accompanying reanalysis re-derives the joins and verdicts from the raw events.
-It is a new execution, not a reconstruction of the older Linux campaign or its
-timing samples. To collect another independent output directory, run
+A separate Windows causal campaign is retained in
+`results/captured-causal-validation/`. Its execution record binds all 17 captured
+source files to the driver and local module tree that ran the 192 batches,
+720 operations and 2,160 wire requests, with the actual interpreter, OS and
+dependencies recorded alongside them. The accompanying reanalysis re-derives
+the joins and verdicts from the raw events. The live causal driver subsequently
+added campaign-parameter validation; this record supports the captured source
+tree, not a rerun of every file in the live tree. Current parameter validation is
+covered by the portable regression tests. The captured campaign is separate from
+the older Linux campaign and its timing samples. To collect another independent
+output directory from the live sources, run
 `python -B scripts/capture_causal_study.py --output <new-directory>` with the
 documented local client dependencies. New extension freezes also include the
 ordinary identity-check helper; historical freeze maps are left unchanged.

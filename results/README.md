@@ -11,6 +11,13 @@
 
 Auxiliary retained records in `raw/evaluation`, `raw/sensitivity`, `raw/challenge`, and `raw/import-state` document calibration, parameter checks, baseline challenges, and environment-state probes. They are not added to the paper's 2,430-operation principal total.
 
+`captured-causal-validation/` is a separate Windows execution of the 17 source
+files preserved in its `source/` tree: 192 batches, 720 operations and 2,160 wire
+requests. Its execution record and reanalysis identify those captured bytes.
+The live causal driver later added campaign-parameter validation, so this record
+does not certify a rerun of the entire live source tree. It is auxiliary
+validation and is not added to the principal operation total.
+
 ## Derived reports
 
 - `observed-derived/`
