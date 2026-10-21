@@ -2,8 +2,8 @@
 
 ## Principal raw records
 
-- `raw/native-policy/`: 1,068 freshly executed client-witnessed policy/HTTP/integration operations, with captured sources and complete current-source replay.
-- `raw/observed/`: the separately retained policy observations used by migration-pair analysis; not added to the principal operation total.
+- `raw/native-policy/`: 1,068 retained client-witnessed policy/HTTP/integration operations from the frozen captured generation. Replay that generation explicitly with `scripts/verify_selected_captured.py`; strict live-source verification with `scripts/verify_selected.py` is separate and rejects a source mismatch. Run these scripts from the artifact root.
+- `raw/observed/`: separately retained historical policy observations, outside the principal operation total. The adopted migration analysis takes its 54 initial-phase pairs from `raw/native-policy/`, alongside 30 retained extension pairs and 12 retained asynchronous pairs.
 - `raw/extension/`: 402 object-identity, range-recovery, and constituent-read operations.
 - `raw/async-boundary/`: 144 cooperative async boundary operations.
 - `raw/sync-enforcement/`: 96 thread/process boundary operations.
