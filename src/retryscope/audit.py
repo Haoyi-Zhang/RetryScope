@@ -31,6 +31,9 @@ class AuditIntent:
     provenance: str = 'explicit local probe, not an upstream defect oracle'
 
     def __post_init__(self) -> None:
+        for name in ('allow_body_recovery', 'allow_transport_retry', 'allow_integrity_retry'):
+            if type(getattr(self, name)) is not bool:
+                raise ValueError(name + ' must be boolean')
         if self.max_wire_attempts is not None and (isinstance(self.max_wire_attempts, bool) or not isinstance(self.max_wire_attempts, int) or not 1 <= self.max_wire_attempts <= 16):
             raise ValueError('max_wire_attempts must be an integer in 1..16')
         if self.retryable_statuses is not None and any(isinstance(s, bool) or not isinstance(s, int) or not 100 <= s <= 599 for s in self.retryable_statuses):
@@ -101,18 +104,47 @@ def audit(record: Mapping[str, Any], intent: AuditIntent) -> dict[str, Any]:
         reasons: list[dict[str, Any]] = []
         if not valid_arrivals:
             states.append('unknown')
-        else:
-            ids = {a['id'] for a in arrivals}
+        if isinstance(arrivals, list):
+            # Index every well-typed identity, even on an otherwise malformed
+            # row. Never pick a first/last owner for a duplicated identity.
+            by_id: dict[int, dict[str, Any]] = {}
+            duplicates: set[int] = set()
             for a in arrivals:
+                if isinstance(a, dict) and type(a.get('id')) is int and a['id'] > 0:
+                    if a['id'] in by_id:
+                        duplicates.add(a['id'])
+                    by_id[a['id']] = a
+            for identity in duplicates:
+                by_id.pop(identity)
+
+            # Strictly decreasing parent ids allow an iterative, order-independent
+            # chain check. A known chain need not have a permitted cause: that is
+            # the separate classification decision below.
+            known_chain: set[int] = set()
+            for identity, a in sorted(by_id.items()):
                 role = a.get('role')
-                if role in ('initial', 'constituent') and a.get('attribution_witness'):
-                    states.append('pass')
-                elif (role in ('retry', 'recovery') and a.get('attribution_witness')
+                if not a.get('attribution_witness'):
+                    continue
+                if role in ('initial', 'constituent') and a.get('retry_of') is None:
+                    known_chain.add(identity)
+                elif (role in ('retry', 'recovery')
                       and isinstance(a.get('owner'), str) and a['owner'].strip()
                       and len(a['owner']) <= 128
                       and type(a.get('retry_of')) is int
-                      and a['retry_of'] in ids and a['retry_of'] < a['id']
+                      and a['retry_of'] < identity and a['retry_of'] in known_chain
                       and isinstance(a.get('cause'), Mapping)):
+                    known_chain.add(identity)
+
+            for a in arrivals:
+                if not isinstance(a, dict):
+                    states.append('unknown')
+                    continue
+                role = a.get('role')
+                identity = a.get('id')
+                local_known = type(identity) is int and identity in known_chain
+                if local_known and role in ('initial', 'constituent'):
+                    states.append('pass')
+                elif local_known and role in ('retry', 'recovery'):
                     cause = a.get('cause', {})
                     kind = cause.get('kind')
                     if kind == 'status' and type(cause.get('received_status')) is int and 100 <= cause['received_status'] <= 599:
@@ -127,7 +159,7 @@ def audit(record: Mapping[str, Any], intent: AuditIntent) -> dict[str, Any]:
                         states.append('unknown')
                 else:
                     states.append('unknown')
-                reasons.append({'id': a['id'], 'verdict': states[-1], 'role': role,
+                reasons.append({'id': identity, 'verdict': states[-1], 'role': role,
                                 'owner': a.get('owner'), 'retry_of': a.get('retry_of'), 'cause': a.get('cause')})
         if record.get('arrival_stream_complete') is not True or record.get('retry_attribution_complete') is not True:
             states.append('unknown')

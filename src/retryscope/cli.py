@@ -7,8 +7,8 @@ from typing import Any
 from .audit import audit,AuditIntent
 from .migration import compare_migration
 
-def strict_load(path: Path) -> Any:
-    if path.stat().st_size>16*1024*1024:raise ValueError('JSON input exceeds 16 MiB')
+def strict_loads(text: str) -> Any:
+    """One strict JSON policy for documents and individual JSONL events."""
     def pairs(xs):
         out={}
         for k,v in xs:
@@ -16,7 +16,15 @@ def strict_load(path: Path) -> Any:
             out[k]=v
         return out
     def bad_constant(s):raise ValueError('non-finite JSON number: '+s)
-    return json.loads(path.read_text(encoding='utf8'),object_pairs_hook=pairs,parse_constant=bad_constant)
+    def finite_float(s):
+        value=float(s)
+        if not math.isfinite(value):raise ValueError('non-finite JSON number: '+s)
+        return value
+    return json.loads(text,object_pairs_hook=pairs,parse_constant=bad_constant,parse_float=finite_float)
+
+def strict_load(path: Path) -> Any:
+    if path.stat().st_size>16*1024*1024:raise ValueError('JSON input exceeds 16 MiB')
+    return strict_loads(path.read_text(encoding='utf8'))
 
 def validate_trace(r):
     if not isinstance(r,dict):raise ValueError('trace must be a JSON object')

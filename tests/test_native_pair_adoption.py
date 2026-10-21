@@ -1,4 +1,8 @@
-"""Current-source selection and explicit paired-phase accounting."""
+"""Captured-generation selection and explicit paired-phase accounting.
+
+The collection's persisted 'current' label is not today's live source tree.
+All four original controls run in an actually matching full captured copy.
+"""
 import importlib.util
 import json
 from pathlib import Path
@@ -9,9 +13,19 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('_native_pair_adoption', ROOT / 'scripts/analyze_migrations.py')
 analyzer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(analyzer)
+import verify_selected_captured as captured
+
+INPUT_ROOT = ROOT
 
 
 class NativePairAdoption(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        replay, _ = cls.enterClassContext(captured.captured_artifact(INPUT_ROOT, temp_parent=INPUT_ROOT.parent))
+        _, replay_analyzer, _, _ = cls.enterClassContext(captured.selected.helpers(replay))
+        cls.enterClassContext(patch(__name__ + '.ROOT', replay))
+        cls.enterClassContext(patch(__name__ + '.analyzer', replay_analyzer))
+
     def test_selected_native_matrix_revalidates_current_source(self):
         sources = analyzer.load_sources(ROOT / 'results/raw/native-policy')
         self.assertEqual(len(sources['initial']), 1068)

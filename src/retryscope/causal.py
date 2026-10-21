@@ -254,6 +254,7 @@ def parse_wire_headers(headers: Mapping[str, Any]) -> dict[str, Any]:
 
 def _admissions(events: Iterable[Mapping[str, Any]]) -> tuple[dict[tuple[str, str], dict[str, Any]], list[str]]:
     admissions: dict[tuple[str, str], dict[str, Any]] = {}
+    seen: set[tuple[str, str]] = set()
     errors: list[str] = []
     for raw in events:
         if raw.get("kind") != "admission":
@@ -265,9 +266,11 @@ def _admissions(events: Iterable[Mapping[str, Any]]) -> tuple[dict[tuple[str, st
         if not _valid_trace_id(operation_id) or not _valid_span_id(attempt_id):
             errors.append("malformed client admission identifier")
             continue
-        if key in admissions:
+        if key in seen:
             errors.append(f"duplicate client admission {operation_id}/{attempt_id}")
+            admissions.pop(key, None)
             continue
+        seen.add(key)
         if event.get("role") not in _ALLOWED_ROLES:
             errors.append(f"invalid role for {operation_id}/{attempt_id}")
             continue
@@ -290,7 +293,7 @@ def _admissions(events: Iterable[Mapping[str, Any]]) -> tuple[dict[tuple[str, st
 
 def _wire_arrivals(events: Iterable[Mapping[str, Any]]) -> tuple[dict[tuple[str, str], dict[str, Any]], list[str]]:
     arrivals: dict[tuple[str, str], dict[str, Any]] = {}
-    ambiguous: set[tuple[str, str]] = set()
+    seen: set[tuple[str, str]] = set()
     errors: list[str] = []
     for raw in events:
         if raw.get("kind") != "arrival":
@@ -302,13 +305,13 @@ def _wire_arrivals(events: Iterable[Mapping[str, Any]]) -> tuple[dict[tuple[str,
         if not _valid_trace_id(operation_id) or not _valid_span_id(attempt_id):
             errors.append("wire arrival lacks valid witness identifiers")
             continue
-        if event.get("witness_valid") is not True:
-            errors.append(f"wire witness validation failed for {operation_id}/{attempt_id}")
-            continue
-        if key in arrivals or key in ambiguous:
+        if key in seen:
             errors.append(f"duplicate wire arrival {operation_id}/{attempt_id}")
             arrivals.pop(key, None)
-            ambiguous.add(key)
+            continue
+        seen.add(key)
+        if event.get("witness_valid") is not True:
+            errors.append(f"wire witness validation failed for {operation_id}/{attempt_id}")
             continue
         arrivals[key] = event
     return arrivals, errors
@@ -379,6 +382,7 @@ def join_causal_trace(
     observed_wire = [event for event in wire_records
                      if event.get("kind") == "arrival" and event.get("operation_id") == operation_id]
     inventory: dict[int, dict[str, Any]] = {}
+    conflicting_physical: set[int] = set()
     inventory_complete = True
     for event in observed_wire:
         physical_id = event.get('global_index')
@@ -387,9 +391,13 @@ def join_causal_trace(
             continue
         if physical_id in inventory and inventory[physical_id] != event:
             inventory_complete = False
+            conflicting_physical.add(physical_id)
         else:
             inventory[physical_id] = event
-    scoped_wire = list(inventory.values())
+    # Exact log replay is one arrival. Conflicting contents for one physical
+    # identity cannot supply a trustworthy token/ordinal for attribution.
+    scoped_wire = [event for physical_id, event in inventory.items()
+                   if physical_id not in conflicting_physical]
     admissions, client_errors = _admissions(
         event for event in client_records if event.get("operation_id") == operation_id
     )
@@ -437,7 +445,8 @@ def join_causal_trace(
             "t": wire.get("t"),
             "role": role,
             "owner": admission.get("owner"),
-            "attribution_witness": "exact client/wire operation-and-attempt token join",
+            "attribution_witness": ("exact client/wire operation-and-attempt token join"
+                                    if wire.get('ordinal') == admission['ordinal'] else None),
         }
         if parent_ordinal is not None:
             row["retry_of"] = parent_ordinal

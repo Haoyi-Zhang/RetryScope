@@ -8,7 +8,7 @@ import sys
 from typing import Any
 
 from .causal import join_causal_trace
-from .cli import strict_load
+from .cli import strict_load, strict_loads
 
 
 def _load_events(path: Path) -> list[dict[str, Any]]:
@@ -19,7 +19,10 @@ def _load_events(path: Path) -> list[dict[str, Any]]:
         for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
             if not line.strip():
                 continue
-            value = json.loads(line)
+            try:
+                value = strict_loads(line)
+            except ValueError as exc:
+                raise ValueError(f"line {number}: {exc}") from exc
             if not isinstance(value, dict):
                 raise ValueError(f"line {number} is not an object")
             rows.append(value)

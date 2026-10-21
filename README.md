@@ -26,13 +26,14 @@ premise, not a closure inferred by the join.
 The primary policy matrix is a source-bound 89-configuration, 1,068-operation native
 execution in `results/raw/native-policy/`, with nine captured instrumenting
 sources and per-record source binding. It records 1,704 requests, 1,728 client
-events, and 636 retry arrivals. Current-source replay reports 756 pass, 300
+events, and 636 retry arrivals. Captured-generation replay reports 756 pass, 300
 mismatch, and 12 unknown; removing client witnesses gives 288 mismatch and 780
 unknown. The checker supplied with the same complete observations gives the
 same verdicts. The recorded environment is Ubuntu x86-64, CPython 3.13.5 and
 an AMD EPYC 7763 virtual CPU allocation; exact packages are in
 `evidence/native-policy/`. Collection and replay passed in the repository's
-native-replay job. The 96 migration pairs combine 54 pairs from this current-source
+native-replay job for that captured generation, not today's live sources. The
+96 migration pairs combine 54 pairs from this captured policy
 matrix with 30 retained extension pairs and 12 retained asynchronous pairs;
 `results/migration-derived/summary.json` records this phase accounting.
 
@@ -49,7 +50,7 @@ The separate paired analysis reuses 96 executed before/after trace pairs; it is 
 
 Key retained findings are generated from the records, not hard-coded in the paper:
 
-- client witnesses make all 1,056 requested retry-classification decisions in the fresh sequential matrix decidable; deleting those witnesses leaves 780 aggregate outcomes unknown;
+- client witnesses make all 1,056 requested retry-classification decisions in the captured sequential matrix decidable; deleting those witnesses leaves 780 aggregate outcomes unknown;
 - 36 successful, correctly framed operations return the wrong same-length object when identity checking is disabled;
 - a naive adjacent-request rule raises 36/36 false alarms on healthy fsspec constituent reads, while role-aware auditing raises none;
 - exact causal identifiers attribute all 720 concurrent operations and all 2,160 wire attempts; the sequential time-window join falls from 100% exact assignment at concurrency one to 1.6% at concurrency eight (19/1,152 wire attempts);
@@ -76,18 +77,52 @@ python -m pip install -e '.[test]'
 python -m pytest -q
 ```
 
-The adopted input selection has a read-only offline check:
+The adopted input selection has an explicit captured-source-generation offline
+replay. Run these commands from `artifact/`:
 
 ```bash
-python scripts/verify_selected.py
-python scripts/verify_selected.py --paper-dir ../paper
+python -B scripts/verify_selected_captured.py
+python -B scripts/verify_selected_captured.py --paper-dir ../paper
 ```
 
 The second command also checks the generated manuscript count macros. The
-standalone command needs no sibling paper. Both check the current policy
-matrix, the selected paired analysis, retained phase source bindings and input
-counts; they do not certify every archived campaign. Git attributes preserve
+standalone command needs no sibling paper. Before importing captured code, both
+commands check that the native-policy snapshot contains exactly the nine declared
+files and that every byte digest matches `results/raw/native-policy/freeze.json`.
+They copy the complete artifact to a disposable temporary directory, overlay only
+those nine captured source files, then call the unchanged `verify_selected`
+checks there: all 1,068 records and complete trace/audit outputs, all 96 paired
+observations/details, all selected summary/paper-data fields, retained phase
+source bindings, input counts/hashes and named count macros. The original files,
+freezes, snapshots, records and derived results are not written. Temporary copies
+are removed on success or failure; `--temp-parent <existing-directory>` optionally
+places them outside the input artifact in a chosen directory.
+
+The JSON report explicitly identifies the captured generation by collection UTC,
+freeze SHA-256 and all nine source digests. This is not native recollection and
+not execution of today's live native-policy sources. Other verifier/migration
+helpers come from the supplied artifact copy; the nine-file freeze does not attest
+their historical execution. The persisted `analysis_mode: current`,
+`observed-current` and `collection: current` labels name the fixed collection
+queue/mode, not a continuing claim that today's source files produced those old
+records. Neither route certifies every archived campaign or recovers the missing
+historical observed worker described below. Git attributes preserve
 recorded source and evidence bytes on both Windows and POSIX checkouts.
+
+The strict live-source entry remains `python -B scripts/verify_selected.py` (with
+the same optional `--paper-dir`). It requires the selected capture to match the
+live nine-file source tree, and deliberately returns a nonzero `hold` when, for
+example, repaired live `audit.py` differs from the capture. It never automatically
+falls back to captured replay. A passing captured report or CI does not establish
+a passing live-source binding.
+
+`tests/test_selected_sources.py` runs its original positives and every in-memory
+mutation inside an actually matching captured copy, including optional manuscript
+count checks (a count-only fixture when no sibling paper is supplied). Separate
+regressions require live mismatch rejection, captured success, each of the nine
+snapshots' tamper/missing rejection, unchanged original bytes and offline operation;
+they do not bypass the live guard to make the suite green.
+The four native-pair adoption controls use the same matching captured context.
 
 Obtain the current suite size with `python -B -m pytest --collect-only -q -p no:cacheprovider`; the count changes when regressions are added. The retained study identifies its historical sources in freeze metadata, subject to the observed-worker limitation below. Tests of the current implementation do not validate the worker bytes used by an older run. New Windows study validation is kept separately in `results/local-validation/`.
 
@@ -118,10 +153,13 @@ described below. The retained `results/raw/native-policy/` campaign and its nine
 captured sources are immutable. If the live audit has changed, the current-source
 analyzer must reject that older binding rather than relabel it. The current
 library rejects Boolean/float parent identities and abstains on missing or
-non-mapping causes. Current-source replay checks all 1,068 native records and
-their captured sources before selecting the 54 initial-phase pairs.
+non-mapping causes. Strict live-source analysis checks all 1,068 native records
+and their source equality before selecting the 54 initial-phase pairs. To replay
+the delivered older capture after live sources change, use the explicit captured
+command above; do not change the freeze, relabel records, or substitute new source
+bytes for the recorded execution.
 The default historical policy analyzer remains available for archived
-observations, separately from the current primary policy and paired tables.
+observations, separately from the adopted captured policy and paired tables.
 
 Run these commands from `artifact/` in a prepared environment. Allocate a fresh comparison root outside the project; each analyzer creates its own new subdirectory. Do not delete or reuse the retained raw or derived directories. The following Bash example uses an externally owned temporary directory:
 
@@ -229,7 +267,7 @@ python plots/draw_workflow.py --output-dir ../paper/figures
 ## Frozen source relocation
 
 The manuscript generator defaults to `results/native-policy-derived`, matching
-the current paired migration analysis. Before creating any manuscript files it
+the adopted paired migration analysis. Before creating any manuscript files it
 requires both raw policy identities and the collection mode to agree with the
 migration summary. `python -B scripts/generate_paper.py --check-only` checks this
 selection and the fixed phase totals without writing output. An explicit older
