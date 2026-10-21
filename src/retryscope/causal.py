@@ -433,7 +433,9 @@ def join_causal_trace(
                 }
             )
             continue
-        if wire.get('ordinal') != admission['ordinal']:
+        wire_ordinal = wire.get('ordinal')
+        ordinal_matches = type(wire_ordinal) is int and wire_ordinal == admission['ordinal']
+        if not ordinal_matches:
             join_errors.append(f"conflicting ordinal for {op}/{attempt_id}")
         matched_attempt_ids.add(attempt_id)
         parent = admission.get("parent_attempt_id")
@@ -446,7 +448,7 @@ def join_causal_trace(
             "role": role,
             "owner": admission.get("owner"),
             "attribution_witness": ("exact client/wire operation-and-attempt token join"
-                                    if wire.get('ordinal') == admission['ordinal'] else None),
+                                    if ordinal_matches else None),
         }
         if parent_ordinal is not None:
             row["retry_of"] = parent_ordinal

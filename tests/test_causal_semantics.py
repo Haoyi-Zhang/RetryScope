@@ -11,7 +11,7 @@ def fixture():
     first = ledger.admit(role='initial', owner='client')
     second = ledger.admit(role='retry', owner='policy', parent=first,
                           cause={'kind': 'status', 'received_status': 503, 'detail': {'labels': ['a']}})
-    wire = [dict(kind='arrival', global_index=t.ordinal, operation_index=t.ordinal,
+    wire = [dict(kind='arrival', global_index=t.ordinal, operation_index=t.ordinal, ordinal=t.ordinal,
                  operation_id=t.operation_id, attempt_id=t.attempt_id, witness_valid=True, t_ns=t.ordinal)
             for t in (first, second)]
     return ledger, first, second, wire
@@ -75,3 +75,17 @@ def test_scoring_uses_prediction_not_reference(monkeypatch):
     actual = module._score_batch([result], wire, 'retry')
     assert actual['owner_accuracy']['causal_token'] == .5
     assert actual['edge_metrics']['causal_token']['f1'] == 0
+
+
+@pytest.mark.parametrize('ordinal', [None, True, 1.0, '1', 0, 17])
+def test_wire_ordinal_requires_an_exact_integer_witness(ordinal):
+    ledger, _, _, wire = fixture()
+    wire[0]['ordinal'] = ordinal
+    trace = join_causal_trace(ledger.events, wire, operation_id=ledger.operation_id)
+    assert trace['causal_join_complete'] is False
+    assert trace['arrivals'][0]['attribution_witness'] is None
+    assert trace['wire_attempts_observed'] == 2
+    checked = audit(trace, AuditIntent(max_wire_attempts=2, retryable_statuses=(503,)))
+    assert checked['dimensions']['attempts']['verdict'] == 'pass'
+    assert checked['dimensions']['classification']['verdict'] == 'unknown'
+    assert checked['verdict'] == 'unknown'
