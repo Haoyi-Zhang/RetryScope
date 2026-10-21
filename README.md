@@ -21,6 +21,13 @@ Without closure, a below-cap count is unknown; an observed over-cap prefix still
 proves mismatch. The library's `stream_complete` argument is a caller-supplied
 premise, not a closure inferred by the join.
 
+Distinct observed request identities are a lower bound on wire attempts. A
+smaller explicit `wire_attempts_observed` count cannot erase a witnessed cap
+violation; below the cap, that contradiction makes the count unknown rather
+than passing. A physical inventory may exceed the causally attributed
+projection. The audit CLI rejects non-integer or negative explicit counts as
+bad input.
+
 ## Study evidence
 
 The primary policy matrix is a source-bound 89-configuration, 1,068-operation native

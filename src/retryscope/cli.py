@@ -28,6 +28,8 @@ def strict_load(path: Path) -> Any:
 
 def validate_trace(r):
     if not isinstance(r,dict):raise ValueError('trace must be a JSON object')
+    if 'wire_attempts_observed' in r and (type(r['wire_attempts_observed']) is not int or r['wire_attempts_observed'] < 0):
+        raise ValueError('wire_attempts_observed must be a nonnegative integer')
     for flag in ['arrival_stream_complete','retry_attribution_complete','payload_complete','body_complete','headers_complete','cleanup_complete','admissions_complete']:
         if flag in r and type(r[flag]) is not bool:raise ValueError(flag+' must be boolean')
     if 'arrivals' in r:

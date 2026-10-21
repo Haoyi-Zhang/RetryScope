@@ -70,12 +70,23 @@ def audit(record: Mapping[str, Any], intent: AuditIntent) -> dict[str, Any]:
     if valid_arrivals:
         valid_arrivals = len({a['id'] for a in arrivals}) == len(arrivals)
     if intent.max_wire_attempts is not None:
-        observed = record.get('wire_attempts_observed', len(arrivals) if valid_arrivals else None)
-        count_valid = type(observed) is int and observed >= 0
-        if count_valid and observed > intent.max_wire_attempts:
+        # Joined request identities provide a lower bound even when an explicit
+        # inventory count or another row is malformed. Duplicate log identities
+        # are not extra requests. A physical inventory can legitimately exceed
+        # this projection when some requests lack causal attribution.
+        arrival_lower_bound = len({a['id'] for a in arrivals
+                                   if isinstance(a, dict) and type(a.get('id')) is int
+                                   and a['id'] > 0}) if isinstance(arrivals, list) else 0
+        reported = record.get('wire_attempts_observed', len(arrivals) if valid_arrivals else None)
+        count_valid = type(reported) is int and reported >= 0
+        observed = max(reported, arrival_lower_bound) if count_valid else arrival_lower_bound
+        if observed > intent.max_wire_attempts:
             put('attempts', 'mismatch', 'observed prefix already exceeds cap', observed=observed, limit=intent.max_wire_attempts)
         elif not count_valid:
             put('attempts', 'unknown', 'missing or malformed request inventory')
+        elif reported < arrival_lower_bound:
+            put('attempts', 'unknown', 'reported inventory count is below observed request lower bound',
+                observed=observed, reported=reported)
         elif record.get('arrival_stream_complete') is not True:
             put('attempts', 'unknown', 'request inventory is only a prefix', observed=observed)
         else:
