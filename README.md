@@ -300,6 +300,12 @@ dimension. An invalid selection is rejected before raw output is created; the
 captured-source entry point records the rejected run as failed, not as a
 successful zero-case campaign.
 
+The current causal responder preserves the parsed start and end in finite-range
+response headers. Focused GET and HEAD regressions check finite, single-byte,
+open-ended and clamped intervals against the returned payload and declared
+length. The retained causal campaign uses open-ended intervals; these regressions
+do not replace or relabel its captured execution.
+
 Check all entries in the observed, extension, asynchronous and synchronous freezes without writing outputs:
 
 ```bash

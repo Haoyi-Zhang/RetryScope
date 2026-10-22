@@ -145,8 +145,7 @@ class CausalResponder:
                     self.send_header("Content-Type", "application/octet-stream")
                     self.send_header("Accept-Ranges", "bytes")
                     if status == 206:
-                        start = len(PAYLOAD) - len(body)
-                        self.send_header("Content-Range", f"bytes {start}-{len(PAYLOAD)-1}/{len(PAYLOAD)}")
+                        self.send_header("Content-Range", f"bytes {start}-{end}/{len(PAYLOAD)}")
                     self.end_headers()
                     if send_body:
                         if truncate:
