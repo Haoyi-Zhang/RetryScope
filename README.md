@@ -4,7 +4,11 @@ RetryScope audits retry and timeout behavior across dependency changes against o
 
 ## Principal contribution
 
-The causal witness protocol records an isolated admission snapshot before each wire action:
+The decision object is a paired migration under one frozen operation intent;
+conformance, structural changes and evidence loss remain separate. Established
+causal tracing supplies association, while the request protocol records the
+owner/parent/cause facts needed by that audit. It records an isolated admission
+snapshot before each wire action:
 
 - a 128-bit logical-operation identifier;
 - a 64-bit attempt identifier and ordinal;
@@ -66,6 +70,35 @@ Key retained findings are generated from the records, not hard-coded in the pape
 - cooperative async timeout and process isolation cover different execution boundaries; the package reports completion and cleanup rather than only timeout notification.
 
 These are bounded local results, not estimates of production prevalence or outage reduction.
+
+## Uniform current-checker migration reanalysis
+
+`results/current-migration-derived/` applies one live audit/paired checker to all
+96 retained pairs and the unchanged manifest intents. It is offline reanalysis,
+not collection from today's native workers or reconstruction of old execution.
+It changes no category: 54 policy, 30 extension and 12 async pairs retain their
+challenge classifications. The per-pair records retain before/after dimensions,
+old categories and current categories; source and raw-input identities are bound.
+
+That agreement does not repair missing historical owner evidence. All 54 policy
+pairs request retry classification, while none of the 30 extension pairs does;
+the latter request outcome/payload and, in 18 pairs, count. The 12 async pairs
+request time only. The separate 402-record extension cause audit therefore still
+has its 228 current unknowns. The six unknown paired after-states are the
+declared evidence-removal control. No owner is backfilled from fixture plans,
+outcomes, timestamps or the previous verdict.
+
+From the artifact root:
+
+```sh
+python scripts/analyze_current_migrations.py --out results/current-migration-new
+python scripts/current_migration_receipt.py --check-only
+```
+
+The first command requires a new result directory. The second reads the selected
+records, rederives every pair with the live code and checks the bound summary,
+without writing or running clients. The paper builder uses this gate before
+exporting the three phase rows inside its isolated build.
 
 ## Install and test
 
@@ -254,7 +287,9 @@ missing worker. Omitting `--run-mode current` delegates the historical runner.
 `plots/draw_workflow.py` produces the paper's workflow schematic directly as a
 font-embedded vector PDF using Matplotlib and its bundled STIX fonts. It retains
 the shared intent, two execution audits, paired classifier and release report.
-The sibling `paper/build.py` regenerates it before the isolated TeX build;
+The sibling `paper/build.py` validates the selected current reanalysis and
+regenerates the diagram inside the isolated TeX build; a failed receipt,
+renderer or compiler leaves the retained figures and manuscript PDF untouched;
 other published figure scripts continue to use the retained measurements.
 
 ```bash

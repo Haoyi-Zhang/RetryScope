@@ -1,0 +1,226 @@
+{
+  "started_at_utc": "2026-10-23T13:19:54.042630+00:00",
+  "completed_at_utc": "2026-10-23T13:19:54.117054+00:00",
+  "source_and_input_bindings": {
+    "study/migration-pairs.json": {
+      "bytes": 9446,
+      "sha256": "39360575d259be7b5c9b6e4dde0fd0b5b736b4197e41bc50491441a8a844e147"
+    },
+    "results/raw/native-policy/false.jsonl": {
+      "bytes": 460923,
+      "sha256": "c660a188dc8d9348d45ec74531ca672b26369146d02c72b09178ec2709e0b3fb"
+    },
+    "results/raw/native-policy/true.jsonl": {
+      "bytes": 4626620,
+      "sha256": "5ff52350bdee5a7716eb6b45afb6f49d811d2e27af185a1a7fcdcc79226b83db"
+    },
+    "results/raw/native-policy/freeze.json": {
+      "bytes": 1119,
+      "sha256": "54ebe727bd58f9d60a1d0ebd8c17166f22d4d8a598fa8947a4710c62230bbaa4"
+    },
+    "results/raw/extension/records.jsonl": {
+      "bytes": 1347726,
+      "sha256": "3e87bc6b697fcaefb0063fb133a83ca2d939da064e73e9a99ebd0aaa1a071521"
+    },
+    "results/raw/async-boundary/records.jsonl": {
+      "bytes": 298014,
+      "sha256": "70f2b86ede2a7d594d247fba4ef8bef5c6d5a93b109837885480ede50047abaa"
+    },
+    "results/migration-derived/pairs.jsonl": {
+      "bytes": 474466,
+      "sha256": "b8077e0c9ae280449f30358d9a338bb36c1f80998c741421878369b7a70cb64c"
+    },
+    "results/migration-derived/summary.json": {
+      "bytes": 1291,
+      "sha256": "4222743256799b35b45c7bd6ab972b04c6e722db180773236784ebf14ba2a20b"
+    },
+    "src/retryscope/audit.py": {
+      "bytes": 12870,
+      "sha256": "421664e62bd40257073e4be8c38a19f561049a0146e08c66cc49ed9501eda1ec"
+    },
+    "src/retryscope/migration.py": {
+      "bytes": 7881,
+      "sha256": "2c790bfd0c02c405fd83d957637ebfd401646e8a842e5c8e109b096c09b13a03"
+    },
+    "scripts/analyze_migrations.py": {
+      "bytes": 12829,
+      "sha256": "8718f45a70cd5a9824a34a488e18bd513ba3c5a062f835e0340c7a4cdb877a65"
+    },
+    "scripts/analyze_current_migrations.py": {
+      "bytes": 7040,
+      "sha256": "1ea836d39d9701410e720812cddb41f6ebc34d1b3f1ce734ddda8101f6253b3a"
+    }
+  },
+  "pair_types": 16,
+  "pair_observations": 96,
+  "phase_strata": {
+    "initial": {
+      "pairs": 54,
+      "retained_categories": {
+        "regression": 6,
+        "repair": 36,
+        "stable_conformant": 6,
+        "stable_nonconformant": 6
+      },
+      "current_categories": {
+        "regression": 6,
+        "repair": 36,
+        "stable_conformant": 6,
+        "stable_nonconformant": 6
+      },
+      "current_before_verdicts": {
+        "mismatch": 42,
+        "pass": 12
+      },
+      "current_after_verdicts": {
+        "mismatch": 12,
+        "pass": 42
+      },
+      "category_changed": 0,
+      "current_matches_retained_expected": 54,
+      "requested_dimensions": {
+        "attempts": {
+          "requested_pairs": 54,
+          "before": {
+            "mismatch": 30,
+            "pass": 24
+          },
+          "after": {
+            "mismatch": 6,
+            "pass": 48
+          }
+        },
+        "classification": {
+          "requested_pairs": 54,
+          "before": {
+            "mismatch": 6,
+            "pass": 48
+          },
+          "after": {
+            "mismatch": 6,
+            "pass": 48
+          }
+        },
+        "outcome": {
+          "requested_pairs": 54,
+          "before": {
+            "pass": 54
+          },
+          "after": {
+            "mismatch": 6,
+            "pass": 48
+          }
+        },
+        "payload": {
+          "requested_pairs": 12,
+          "before": {
+            "mismatch": 12
+          },
+          "after": {
+            "pass": 12
+          }
+        }
+      }
+    },
+    "extension": {
+      "pairs": 30,
+      "retained_categories": {
+        "evidence_loss": 6,
+        "repair": 12,
+        "stable_conformant": 12
+      },
+      "current_categories": {
+        "evidence_loss": 6,
+        "repair": 12,
+        "stable_conformant": 12
+      },
+      "current_before_verdicts": {
+        "mismatch": 12,
+        "pass": 18
+      },
+      "current_after_verdicts": {
+        "pass": 24,
+        "unknown": 6
+      },
+      "category_changed": 0,
+      "current_matches_retained_expected": 30,
+      "requested_dimensions": {
+        "attempts": {
+          "requested_pairs": 18,
+          "before": {
+            "pass": 18
+          },
+          "after": {
+            "pass": 12,
+            "unknown": 6
+          }
+        },
+        "outcome": {
+          "requested_pairs": 30,
+          "before": {
+            "pass": 30
+          },
+          "after": {
+            "pass": 30
+          }
+        },
+        "payload": {
+          "requested_pairs": 30,
+          "before": {
+            "mismatch": 12,
+            "pass": 18
+          },
+          "after": {
+            "pass": 30
+          }
+        }
+      }
+    },
+    "async": {
+      "pairs": 12,
+      "retained_categories": {
+        "repair": 12
+      },
+      "current_categories": {
+        "repair": 12
+      },
+      "current_before_verdicts": {
+        "mismatch": 12
+      },
+      "current_after_verdicts": {
+        "pass": 12
+      },
+      "category_changed": 0,
+      "current_matches_retained_expected": 12,
+      "requested_dimensions": {
+        "time": {
+          "requested_pairs": 12,
+          "before": {
+            "mismatch": 12
+          },
+          "after": {
+            "pass": 12
+          }
+        }
+      }
+    }
+  },
+  "retained_categories": {
+    "evidence_loss": 6,
+    "regression": 6,
+    "repair": 60,
+    "stable_conformant": 18,
+    "stable_nonconformant": 6
+  },
+  "current_categories": {
+    "evidence_loss": 6,
+    "regression": 6,
+    "repair": 60,
+    "stable_conformant": 18,
+    "stable_nonconformant": 6
+  },
+  "category_changed": 0,
+  "scope": "One live audit/paired checker applied to all unchanged retained phase inputs under the same manifest intents. Offline reanalysis, not new collection, recovered historical instrumentation or independent release decisions.",
+  "historical_owner_backfilled": false,
+  "network_io_or_native_recollection": false
+}
